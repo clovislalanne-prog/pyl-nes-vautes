@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Simulation 3D · Projet de pylône 5G</title>
 <script src="https://cdn.jsdelivr.net/npm/cesium@1.123.0/Build/Cesium/Cesium.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/cesium@1.123.0/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
@@ -84,14 +84,25 @@
   #ctrl { right: 16px; bottom: 300px; width: 290px; padding: 12px 14px; font-size: 12.5px; display: none; z-index: 6; --bg: rgba(22,24,29,.7); }
   #ctrl.show { display: block; }
   #ctrl .ch { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 13.5px; }
-  #ctrl .ch button { padding: 3px 8px; border-radius: 99px; }
+  #ctrl .ch button { width: 34px; height: 34px; padding: 0; border-radius: 50%; font-size: 15px; font-weight: 700; flex: none; }
   #ctrl .it { display: flex; gap: 10px; padding: 5px 0; border-top: 1px solid rgba(255,255,255,.08); line-height: 1.35; }
-  #ctrl .it .k { flex: none; width: 118px; font-weight: 600; color: var(--txt); }
+  #ctrl .it .k { flex: none; width: 128px; font-weight: 600; color: var(--txt); }
   #ctrl .it span:last-child { color: #d6dbe2; }
   #ctrl .ft { margin-top: 8px; font-size: 11.5px; color: var(--mute); }
   #ctrl .touch { display: none; }
   body.isTouch #ctrl .touch { display: block; } body.isTouch #ctrl .mouse { display: none; }
   @media (max-width: 700px) { #ctrl { right: 10px; left: 10px; width: auto; bottom: 270px; } }
+  #shot { position: fixed; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(5,6,8,.6); }
+  #shot.show { display: flex; }
+  #shot .card { position: relative; max-width: 720px; width: 100%; padding: 14px; --bg: rgba(22,24,29,.85); }
+  #shot .sh { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14.5px; }
+  #shot .sh button { border-radius: 99px; padding: 4px 9px; }
+  #shot img { width: 100%; max-height: 55vh; object-fit: contain; border-radius: 12px; display: block; background: #000; }
+  #shot .sb { margin-top: 12px; gap: 8px; }
+  #shot .btn { flex: 1; text-align: center; text-decoration: none; font: 700 14px Inter, sans-serif; padding: 12px; border-radius: 12px; }
+  #shot .btn.cap { background: var(--acc); color: #111; }
+  #shot .sb button { padding: 12px 16px; font-size: 14px; font-weight: 600; border-radius: 12px; }
+  #shot .note { margin-top: 10px; font-size: 11.5px; color: var(--mute); line-height: 1.5; }
   #measure { color: var(--mute); font-size: 12px; line-height: 1.45; }
   #measure b { color: var(--txt); font-size: 14px; }
 
@@ -128,6 +139,9 @@
   #pad .zoom button { flex: 1; font-size: 15px; height: 32px; padding: 0; border-radius: 16px; }
   #sign { bottom: 34px; right: 16px; padding: 9px 14px; font-size: 12px; text-align: right; }
   #sign span { color: var(--mute); }
+  #sign .who { display: inline-block; margin-top: 4px; padding: 3px 10px; border-radius: 99px; background: var(--acc); color: #111; font-weight: 700; text-decoration: none; text-shadow: none; }
+  #sign .who:hover { filter: brightness(1.1); }
+  #intro .who { display: inline-block; margin-left: 6px; padding: 2px 10px; border-radius: 99px; background: rgba(226,145,51,.18); border: 1px solid rgba(226,145,51,.5); color: var(--txt); text-decoration: none; font-weight: 600; }
   #disc a { color: var(--acc); text-decoration: none; white-space: nowrap; }
   #disc { bottom: 34px; left: 16px; max-width: 330px; max-height: 45%; overflow: auto; padding: 8px 12px; font-size: 10.5px; color: var(--mute); line-height: 1.4; }
   #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .35s; }
@@ -151,6 +165,10 @@
   #intro .choices .d { width: 12px; height: 12px; border-radius: 50%; }
   #intro .go { width: 100%; padding: 14px; font-size: 15.5px; font-weight: 700; background: var(--acc); color: #111; border: none; border-radius: 12px; }
   #intro .go:disabled { background: #444; color: #aaa; }
+  #intro .more-link { display: block; text-align: center; margin-top: 12px; padding: 11px; border-radius: 12px; border: 1px solid var(--line); color: var(--txt); text-decoration: none; font-weight: 600; font-size: 13.5px; background: rgba(255,255,255,.05); }
+  #intro .more-link:hover { background: rgba(255,255,255,.1); }
+  .morelink { display: block; margin-top: 10px; padding: 11px 12px; border-radius: 14px; text-decoration: none; color: var(--txt); font-weight: 700; font-size: 13.5px; background: rgba(226,145,51,.14); border: 1px solid rgba(226,145,51,.45); }
+  .morelink small { display: block; font-weight: 400; font-size: 11.5px; color: #d6dbe2; margin-top: 2px; }
   #intro .foot { margin-top: 14px; font-size: 11.5px; color: var(--mute); text-align: center; line-height: 1.5; }
   #help { position: absolute; z-index: 5; }
   @media (max-width: 700px) { #intro .card { padding: 22px 18px 18px; } #intro h2 { font-size: 21px; } }
@@ -163,17 +181,33 @@
   .cesium-credit-textContainer, .cesium-credit-textContainer a, .cesium-credit-expand-link { color: #d6dbe2 !important; font: 400 10.5px Inter, sans-serif !important; }
   .cesium-credit-logoContainer img { height: 14px !important; vertical-align: middle; }
   .cesium-viewer-bottom { max-width: calc(100% - 24px); }
+  #mbar, #mrot { display: none; }
   @media (max-width: 700px) {
-    #info { right: 12px; left: 12px; top: 60px; width: auto; max-height: calc(100% - 260px); }
-    #capture { top: auto; bottom: 28px; left: 12px; right: auto; }
-    #tabs { top: 10px; left: 10px; right: 10px; transform: none; max-width: none; }
-    #orbitBar, #pickHint { top: 62px; left: 10px; transform: none; }
-    #info { top: 108px !important; max-height: calc(100% - 300px) !important; }
-    #disc { display: none; }
-    #pad { right: 10px; bottom: 74px; grid-template-columns: repeat(3, 40px); padding: 7px; }
-    #pad .k { width: 40px; height: 40px; }
-    #sign { right: 10px; bottom: 28px; font-size: 10.5px; padding: 6px 10px; }
+    #pad, #orbitBar, #sign, #disc, #capture, #toggle, #bHelp { display: none !important; }
+    #tabs { top: max(8px, env(safe-area-inset-top)); left: 8px; right: 8px; transform: none; max-width: none; padding: 4px; justify-content: space-between; }
+    #tabs button { flex: 1; justify-content: center; padding: 8px 6px; font-size: 12.5px; gap: 5px; }
+    #tabs button .lg { display: none; }
+    #pickHint { top: 58px; left: 8px; right: 8px; transform: none; text-align: center; }
+    #mrot { display: flex; position: absolute; right: 10px; top: 58px; width: 42px; height: 42px; border-radius: 50%; align-items: center; justify-content: center; font-size: 17px; padding: 0; z-index: 4; }
+    #mrot.on { background: var(--acc); color: #111; }
+    #mbar { display: flex; position: absolute; left: 8px; right: 8px; bottom: max(8px, env(safe-area-inset-bottom)); padding: 6px; gap: 6px; border-radius: 22px; z-index: 6; }
+    #mbar button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 7px 4px; font-size: 11px; font-weight: 600; border-radius: 16px; background: transparent; border-color: transparent; box-shadow: none; }
+    #mbar button .i { font-size: 19px; line-height: 1; }
+    #mbar button.cap { background: var(--acc); color: #111; text-shadow: none; }
+    #mbar button.sel { background: rgba(255,255,255,.2); }
+    .cesium-viewer-bottom { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 70px) !important; transform: translateX(-50%) scale(.85); }
+    #info { top: auto !important; left: 8px !important; right: 8px !important; width: auto !important; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 70px);
+            max-height: 58vh !important; transform: translateY(calc(100% + 120px)); transition: transform .3s ease; z-index: 5; --bg: rgba(22,24,29,.78); }
+    #info.open { transform: none; }
+    #info .hd { padding: 10px 14px 8px 16px; }
+    #info .hd h1 { font-size: 14.5px; }
+    #info .hd .close { display: inline-block; }
+    #info.closed .body { display: block; }
+    #ctrl { left: 8px; right: 8px; width: auto; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 70px); }
+    #toast { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); max-width: calc(100% - 40px); white-space: normal; text-align: center; }
+    #shot { padding: 10px; }
   }
+  #info .hd .close { display: none; padding: 4px 9px; border-radius: 99px; }
 </style>
 </head>
 <body>
@@ -196,12 +230,14 @@
     <div class="ask">Quelle option voulez-vous voir ?</div>
     <div class="choices" id="iChoices"></div>
     <button class="go" id="iGo" disabled>Chargement de la 3D…</button>
+    <a class="more-link" href="dossier.html">📋 Où en est le dossier ? Rejoindre l’association · réponse avant le 15 novembre</a>
+    <a class="more-link" href="en-savoir-plus.html">📖 Pour aller plus loin : qui construit ce pylône, et pourquoi ?</a>
     <div class="foot" id="iFoot"></div>
   </div>
 </div>
 
 <div id="info" class="panel">
-  <div class="hd"><h1>Projet de pylône 5G</h1><button id="bHelp" title="Revoir l’explication">?</button><button id="toggle">Réduire</button></div>
+  <div class="hd"><h1>Projet de pylône 5G</h1><button id="bHelp" title="Revoir l’explication">?</button><button id="toggle">Réduire</button><button class="close" id="mClose">✕</button></div>
   <div class="body">
     <div class="lbl" style="margin-top:4px">Votre image pour le courrier <button class="q" data-tip="Suivez les étapes dans l’ordre : votre nom, votre maison sur la carte, le cadrage, l’éclairage, puis la capture. Seule la vue 3D est enregistrée : les menus et panneaux n’apparaissent pas sur l’image. Elle comporte votre nom, la distance au pylône et la signature de la simulation.">?</button></div>
     <div class="steps2">
@@ -214,6 +250,10 @@
     </div>
 
 
+    <a class="morelink" href="dossier.html">📋 Où en est le dossier ?<small>Notre position, l’association de riverains, la réponse commune avant le 15 novembre.</small></a>
+    <a class="morelink" href="en-savoir-plus.html">📖 Pour aller plus loin<small>Qui construit ce pylône, et pourquoi ? Nos droits de riverains.</small></a>
+    <a class="morelink" href="a-propos.html" style="background:rgba(255,255,255,.06);border-color:var(--line)">✍︎ Qui a fait cette simulation ?<small>Un mot de Clovis Lalanne, l’auteur.</small></a>
+
     <details class="more">
       <summary><span class="ic">🧭</span><span class="tx">Explorer davantage<small>Vue du dessus, à hauteur d’yeux, cercles de distance, mesure…</small></span><span class="ch">›</span></summary>
       <div class="lbl">Vues <button class="q" data-tip="Vue d’ensemble : tous les emplacements. Vue du dessus : comme un plan. À hauteur d’yeux : comme depuis la rue. Tourner autour d’un point : cliquez ensuite sur la carte.">?</button></div>
@@ -223,11 +263,12 @@
         <button id="vWalk">À hauteur d’yeux</button>
         <button id="bPick">Tourner autour d’un point…</button>
       </div>
-      <div class="lbl">Affichage <button class="q" data-tip="Masquez les noms, les cercles de 50 à 300 m ou la ligne de distance de votre maison, par exemple pour une capture plus épurée.">?</button></div>
+      <div class="lbl">Affichage <button class="q" data-tip="Masquez les noms, les cercles de 50 à 300 m, la distance au sol ou l’axe des antennes vers votre maison, par exemple pour une capture plus épurée. L’axe relie les antennes à votre toit : il indique la distance directe, l’angle de vue et s’il y a un obstacle (arbres, bâti) sur le trajet, d’après le relief 3D de Google. Il ne représente pas l’orientation réelle des antennes ni les ondes émises.">?</button></div>
       <div class="row">
         <button id="bLabels" class="on">Noms des options</button>
         <button id="bRings" class="on">Cercles de distance</button>
-        <button id="bHomeDist" class="on">Distance maison</button>
+        <button id="bHomeDist" class="on">Distance au sol</button>
+      <button id="bAxis" class="on">Axe des antennes</button>
       </div>
       <div class="lbl">Mesurer une distance <button class="q" data-tip="Activez « Mesurer », puis cliquez sur un endroit : sa distance au pied du pylône le plus proche et aux antennes du sommet s’affiche.">?</button></div>
       <div class="row" style="margin-bottom:8px"><button id="bMeasure">📏 Mesurer</button><button id="bMeasureDel" disabled>Effacer la mesure</button></div>
@@ -262,17 +303,35 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><span>Novembre 2026 · v22</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v33</span></div>
 <div id="toast" class="panel"></div>
 <div id="tip" class="panel"></div>
+<button id="mrot" class="panel" aria-label="Rotation automatique">⟳</button>
+<div id="mbar" class="panel">
+  <button id="mHome"><span class="i">📍</span>Notre maison</button>
+  <button id="mCap" class="cap"><span class="i">📷</span>Capturer</button>
+  <button id="mMore"><span class="i">☰</span>Plus</button>
+  <button id="mHelp"><span class="i">?</span>Aide</button>
+</div>
+<div id="shot">
+  <div class="card panel">
+    <div class="sh"><b>Votre image est prête</b><button id="shotX">✕</button></div>
+    <img id="shotImg" alt="Aperçu de la capture">
+    <div class="row sb">
+      <a id="shotSave" class="btn cap" download>⬇ Enregistrer l’image</a>
+      <button id="shotShare" style="display:none">↗ Partager</button>
+    </div>
+    <div class="note" id="shotNote">L’image sera enregistrée dans le dossier « Téléchargements » de votre ordinateur. Aucune donnée n’est envoyée : tout se passe dans votre navigateur.</div>
+  </div>
+</div>
 <div id="ctrl" class="panel">
-  <div class="ch"><b>Comment se déplacer</b><button id="ctrlX">✕</button></div>
+  <div class="ch"><b>Comment se déplacer</b><button id="ctrlX" aria-label="Fermer">✕</button></div>
   <div class="grp mouse">
     <div class="it"><span class="k">🖱 Glisser</span><span>se déplacer sur la carte</span></div>
     <div class="it"><span class="k">🖱 Molette</span><span>zoomer, dézoomer</span></div>
-    <div class="it"><span class="k">⇧ Shift + glisser</span><span>tourner et incliner la vue</span></div>
+    <div class="it"><span class="k">⇧ Shift + clic gauche + glisser</span><span>déplacer la carte, sans changer l’angle de vue</span></div>
     <div class="it"><span class="k">Clic droit + glisser</span><span>incliner (aussi Ctrl + glisser)</span></div>
-    <div class="it"><span class="k">Trackpad</span><span>deux doigts pour zoomer, ⇧ Shift + glisser pour tourner</span></div>
+    <div class="it"><span class="k">Trackpad</span><span>deux doigts pour zoomer, ⇧ Shift + clic + glisser pour déplacer la carte</span></div>
     <div class="it"><span class="k">← → ↑ ↓</span><span>flèches du clavier, comme le pavé</span></div>
   </div>
   <div class="grp touch">
@@ -281,7 +340,7 @@
     <div class="it"><span class="k">✌︎ Tourner 2 doigts</span><span>faire pivoter la vue</span></div>
     <div class="it"><span class="k">✌︎ Glisser 2 doigts</span><span>incliner la vue (haut / bas)</span></div>
   </div>
-  <div class="ft">Perdu ? Touchez un onglet en haut pour revenir autour d’une option.</div>
+  <div class="ft">Perdu ? Touchez un onglet en haut pour revenir autour d’une option. Fermez cette aide avec ✕ ; le bouton « ? » permet de la rouvrir.</div>
 </div>
 
 <script>
@@ -306,7 +365,7 @@
   $("iText1").textContent = "Un projet d’antenne-relais, sur un pylône de 18 à 36 m selon l’option, avec son parc technique, est à l’étude à " + INTRO.commune +
     ". Plusieurs emplacements sont envisagés. Cette simulation en 3D permet à chacun de voir concrètement où il se situerait par rapport à son logement.";
   $("iText2").textContent = "Nous constituons une association de riverains. Pour que chaque foyer concerné puisse montrer qu’il est bien présent et comment il est touché, nous vous proposons de localiser votre maison, puis de joindre une capture de la vue à votre courrier.";
-  $("iFoot").innerHTML = "Simulation réalisée par Clovis Lalanne · novembre 2026 · non contractuelle" + (INTRO.contact.startsWith("[") ? "" : "<br>Contact : " + INTRO.contact);
+  $("iFoot").innerHTML = "Simulation réalisée par Clovis Lalanne <a class=\"who\" href=\"a-propos.html\">Qui suis-je ? ›</a><br>Novembre 2026 · simulation non contractuelle" + (INTRO.contact.startsWith("[") ? "" : "<br>Contact : " + INTRO.contact);
 
   Cesium.Ion.defaultAccessToken = TOKEN;
   const viewer = new Cesium.Viewer("map", {
@@ -332,7 +391,7 @@
     // Là où il n'y a ni arbre ni bâtiment, l'écart est minimal : on en déduit le décalage
     // entre les deux, puis on l'applique au relief nu exactement sous le pylône (tient compte de la pente).
     const pts = [];
-    for (let e = -25; e <= 25; e += 2.5) for (let n = -25; n <= 25; n += 2.5)
+    for (let e = -25; e <= 25; e += 5) for (let n = -25; n <= 25; n += 5)
       pts.push(Cesium.Cartographic.fromDegrees(lon + e / (6378137 * Math.cos(lat * Math.PI / 180)) * 180 / Math.PI, lat + n / 6378137 * 180 / Math.PI));
     let H = null, T = null, T0 = null;
     try { H = (await scene.sampleHeightMostDetailed(pts.map(p => p.clone()))).map(p => p.height); } catch (e) { console.warn(e); }
@@ -358,8 +417,20 @@
   // ---------- Construction des emplacements (pylône + parc technique = un seul ensemble) ----------
   const active = SITES.filter(s => s.lon != null);
   let showLabels = true, showRings = true;
+  // Chargement en parallèle : calage du sol des 3 sites + modèles 3D en même temps
+  const s0v = active[0];
+  cam.setView({ destination: Cesium.Cartesian3.fromDegrees(s0v.lon - 0.0008, s0v.lat - 0.0035, 260), orientation: { heading: Cesium.Math.toRadians(10), pitch: Cesium.Math.toRadians(-30), roll: 0 } });
+  let done = 0; const total = active.length * 2;
+  const tick = () => { done++; $("iGo").textContent = "Chargement de la 3D… " + Math.round(done / total * 100) + " %"; };
+  const [grounds, loaded] = await Promise.all([
+    Promise.all(active.map(s => groundAt(s.lon, s.lat).then(g => { tick(); return g; }))),
+    Promise.all(active.map(s => Promise.all([
+      Cesium.Model.fromGltfAsync({ url: s.pylone, backFaceCulling: false }),
+      Cesium.Model.fromGltfAsync({ url: s.parc, backFaceCulling: false })
+    ]).then(m => { tick(); return m; })))
+  ]);
+  active.forEach((s, i) => { s.ground = grounds[i] + s.offset; s.models = loaded[i]; });
   for (const s of active) {
-    s.ground = (await groundAt(s.lon, s.lat)) + s.offset;
     s.frame = Cesium.Transforms.headingPitchRollToFixedFrame(Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground),
                new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(s.heading), 0, 0));
     s.enu = Cesium.Transforms.eastNorthUpToFixedFrame(Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground));
@@ -368,11 +439,7 @@
     s.top = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height);
     s.visible = true;
     const col = Cesium.Color.fromCssColorString(s.color);
-    s.models = [
-      await Cesium.Model.fromGltfAsync({ url: s.pylone, modelMatrix: s.frame, backFaceCulling: false }),
-      await Cesium.Model.fromGltfAsync({ url: s.parc, modelMatrix: s.frame, backFaceCulling: false })
-    ];
-    s.models.forEach(m => scene.primitives.add(m));
+    s.models.forEach(m => { m.modelMatrix = s.frame; scene.primitives.add(m); });
     s.label = viewer.entities.add({
       position: Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height + 4),
       label: { text: s.name.toUpperCase() + "  |  " + s.height + " m", font: "600 14px Inter, sans-serif", fillColor: Cesium.Color.WHITE,
@@ -390,7 +457,7 @@
                  style: Cesium.LabelStyle.FILL_AND_OUTLINE, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     });
   }
-  let lightK = .55, showHomeDist = true;
+  let lightK = .55, showHomeDist = true, showAxis = true;
   function applyLight() {
     active.forEach(s => s.models.forEach((m, i) => {
       const L = 1 + lightK * 7; m.lightColor = new Cesium.Cartesian3(L, L, L);
@@ -413,9 +480,9 @@
     b.innerHTML = (color ? `<span class="d" style="background:${color}"></span>` : "") + label + (sub ? `<small>${sub}</small>` : "");
     return b;
   }
-  const tabAll = makeBtn("Toutes les options"); tabAll.dataset.id = "all"; $("tabs").appendChild(tabAll);
+  const tabAll = makeBtn("Toutes<span class=\"lg\"> les options</span>"); tabAll.dataset.id = "all"; $("tabs").appendChild(tabAll);
   SITES.forEach(s => {
-    const b = makeBtn(s.name + (s.height ? " · " + s.height + " m" : ""), s.color);
+    const b = makeBtn("<span class=\"lg\">" + s.name + " · </span>" + (s.height ? s.height + " m" : s.name), s.color);
     b.dataset.id = s.id; if (s.lon == null) { b.disabled = true; b.title = "Coordonnées à venir"; }
     $("tabs").appendChild(b);
   });
@@ -518,7 +585,31 @@
     active.filter(s => s.visible).forEach(s => {
       const l = Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.inverse(s.enu, new Cesium.Matrix4()), home, new Cesium.Cartesian3());
       const d = Math.round(Math.hypot(l.x, l.y)), col = Cesium.Color.fromCssColorString(s.color);
-      lines.push(`${s.name} : <b>${d} m</b>`);
+      // Axe antennes -> maison
+      const hc0 = Cesium.Cartographic.fromCartesian(home);
+      const ant = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height - 1.5);
+      const roof = Cesium.Cartesian3.fromRadians(hc0.longitude, hc0.latitude, hc0.height + 0.5);
+      const dAnt = Math.round(Cesium.Cartesian3.distance(ant, roof));
+      const drop = (s.ground + s.height - 1.5) - (hc0.height + 0.5);
+      const angle = Math.round(Cesium.Math.toDegrees(Math.atan2(drop, Math.max(1, Math.hypot(l.x, l.y)))));
+      let clear = null;
+      try {
+        const dir = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(roof, ant, new Cesium.Cartesian3()), new Cesium.Cartesian3());
+        const hit = scene.pickFromRay(new Cesium.Ray(ant, dir), active.flatMap(x => x.models).concat(homeEnts));
+        if (hit && hit.position) clear = Cesium.Cartesian3.distance(ant, hit.position) >= dAnt - 4;
+        else clear = true;
+      } catch (e) { clear = null; }
+      lines.push(`${s.name} : <b>${d} m</b> au sol · <b>${dAnt} m</b> des antennes` + (clear === null ? "" : clear ? " · vue dégagée" : " · obstacle sur l’axe"));
+      if (showAxis) {
+        homeEnts.push(viewer.entities.add({ polyline: { positions: [ant, roof], width: clear === false ? 3 : 7,
+          material: clear === false ? new Cesium.PolylineDashMaterialProperty({ color: col, dashLength: 10 }) : new Cesium.PolylineArrowMaterialProperty(col),
+          depthFailMaterial: new Cesium.PolylineDashMaterialProperty({ color: col.withAlpha(.55), dashLength: 10 }) } }));
+        const lp = Cesium.Cartesian3.lerp(ant, roof, .3, new Cesium.Cartesian3());
+        homeEnts.push(viewer.entities.add({ position: lp,
+          label: { text: "↘ " + dAnt + " m · " + angle + "°", font: "700 13px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
+                   backgroundColor: Cesium.Color.fromCssColorString("#1c1e24").withAlpha(.85), backgroundPadding: new Cesium.Cartesian2(7, 4),
+                   disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      }
       if (!showHomeDist) return;
       const a = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + 2), hc = Cesium.Cartographic.fromCartesian(home);
       const b = Cesium.Cartesian3.fromRadians(hc.longitude, hc.latitude, hc.height + 1);
@@ -529,7 +620,7 @@
         label: { text: d + " m", font: "700 15px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
                  backgroundColor: col.withAlpha(.92), backgroundPadding: new Cesium.Cartesian2(7, 4), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     });
-    $("homeInfo").innerHTML = `<b>${homeLabel()}</b> · distance au pied du pylône<br>` + (lines.join("<br>") || "Aucune option affichée") +
+    $("homeInfo").innerHTML = `<b>${homeLabel()}</b><br>` + (lines.join("<br>") || "Aucune option affichée") +
       ``;
   }
   $("homeName").addEventListener("input", () => { if (home) drawHome(); });
@@ -558,6 +649,7 @@
     cam.flyTo({ destination: p, orientation: { direction: dir, up: Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(p, new Cesium.Cartesian3()) }, duration: 1.8 });
     toast("À hauteur d’yeux : ▲▼ pour avancer, ◀ ▶ pour pivoter", 4000); };
   $("light").addEventListener("input", e => { lightK = e.target.value / 100; applyLight(); });
+  $("bAxis").onclick = () => { showAxis = !showAxis; $("bAxis").classList.toggle("on", showAxis); drawHome(); };
   $("bHomeDist").onclick = () => { showHomeDist = !showHomeDist; $("bHomeDist").classList.toggle("on", showHomeDist); drawHome(); };
   $("bLabels").onclick = () => { showLabels = !showLabels; $("bLabels").classList.toggle("on", showLabels); refresh(); };
   $("bRings").onclick = () => { showRings = !showRings; $("bRings").classList.toggle("on", showRings); refresh(); };
@@ -568,7 +660,7 @@
   new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
     const pos = scene.pickPosition(ev.position);
     if (!Cesium.defined(pos)) return;
-    if (picking === "home") { setPicking(null); home = pos; drawHome(); toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); return; }
+    if (picking === "home") { setPicking(null); home = pos; drawHome(); toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
     if (picking) { setPicking(null); startOrbit(pos, "le point choisi", Math.min(400, Math.max(80, Cesium.Cartesian3.distance(cam.positionWC, pos))), -25); return; }
     if (!measuring) return;
     const vis = active.filter(s => s.visible); if (!vis.length) return;
@@ -658,28 +750,47 @@
       g.fillStyle = "#c8ccd2"; g.font = `400 ${11 * k}px Inter, sans-serif`; g.textAlign = "right";
       g.fillText("Simulation non contractuelle · Données 3D © Google", W - 14 * k, H - bh / 2);
       c.toBlob(b => {
-        const a = document.createElement("a"); a.href = URL.createObjectURL(b);
-        a.download = "simulation-pylone-" + new Date().toISOString().slice(0, 19).replace(/[T:]/g, "-") + ".png";
-        document.body.appendChild(a); a.click(); a.remove();
         const f = $("flash"); f.style.opacity = .7; setTimeout(() => f.style.opacity = 0, 120);
-        toast("Image enregistrée dans vos téléchargements");
-      }, "image/png");
+        openShot(b);
+      }, "image/jpeg", 0.92);
     });
     scene.requestRender();
   };
 
   // ---------- Démarrage : rotation lente autour du premier emplacement ----------
-  if (innerWidth < 700) $("toggle").click();
+  const isPhone = () => innerWidth < 700;
+  function sheet(open, section) {
+    $("info").classList.toggle("open", open);
+    $("mHome").classList.toggle("sel", open && section === "home"); $("mMore").classList.toggle("sel", open && section === "more");
+    if (!open) return;
+    const sec = section === "more" ? document.querySelector("details.more") : document.querySelector(".steps2");
+    if (section === "more") sec.open = true;
+    setTimeout(() => sec.scrollIntoView({ block: "start", behavior: "smooth" }), 320);
+  }
+  $("mHome").onclick = () => sheet(!($("info").classList.contains("open") && $("mHome").classList.contains("sel")), "home");
+  $("mMore").onclick = () => sheet(!($("info").classList.contains("open") && $("mMore").classList.contains("sel")), "more");
+  $("mClose").onclick = () => sheet(false);
+  $("mCap").onclick = () => { sheet(false); $("capture").click(); };
+  $("mHelp").onclick = () => { sheet(false); showCtrl(!$("ctrl").classList.contains("show")); };
+  $("mrot").onclick = () => $("pPlay").click();
+  setInterval(() => $("mrot").classList.toggle("on", !!(orbit && orbit.auto)), 400);
+  // Sur téléphone : on referme le panneau pendant qu'on vise la carte, puis on le rouvre
+  $("bHome").addEventListener("click", () => { if (isPhone() && picking === "home") { sheet(false); } });
+  $("bPick").addEventListener("click", () => { if (isPhone() && picking) sheet(false); });
+  $("bFrame").addEventListener("click", () => { if (isPhone()) sheet(false); });
+  ["vAll", "vTop", "vWalk"].forEach(id => $(id).addEventListener("click", () => { if (isPhone()) sheet(false); }));
   const s0 = active[0];
   cam.setView({ destination: local(s0.enu, -60, -330, 190), orientation: { heading: Cesium.Math.toRadians(10), pitch: Cesium.Math.toRadians(-28), roll: 0 } });
   $("loading").style.display = "none";
   $("iGo").disabled = false; $("iGo").textContent = "Les comparer toutes";
   function enter(id) {
     $("intro").classList.add("hide"); selectOption(id);
-    if ($("info").classList.contains("closed")) $("toggle").click();
-    setTimeout(() => { $("homeName").scrollIntoView({ block: "center", behavior: "smooth" }); $("homeName").focus({ preventScroll: true }); }, 300);
-    toast("Étape 1 : tapez votre nom, puis 📍 Placer notre maison", 5000);
-    setTimeout(() => { showCtrl(true); clearTimeout(showCtrl.t); showCtrl.t = setTimeout(() => showCtrl(false), 9000); }, 1800); }
+    if (innerWidth >= 700 && $("info").classList.contains("closed")) $("toggle").click();
+    if (innerWidth >= 700) {
+      setTimeout(() => { $("homeName").scrollIntoView({ block: "center", behavior: "smooth" }); $("homeName").focus({ preventScroll: true }); }, 300);
+      toast("Étape 1 : tapez votre nom, puis 📍 Placer notre maison", 5000);
+    } else toast("Touchez 📍 Notre maison en bas pour placer votre maison", 5000);
+    setTimeout(() => showCtrl(true), 1800); }
   if (matchMedia("(pointer: coarse)").matches) document.body.classList.add("isTouch");
   function showCtrl(on) { $("ctrl").classList.toggle("show", on); $("bCtrl").classList.toggle("on", on); }
   $("bCtrl").onclick = () => { clearTimeout(showCtrl.t); showCtrl(!$("ctrl").classList.contains("show")); };
@@ -698,6 +809,25 @@
     tip.style.left = Math.max(10, Math.min(r.left - 10, innerWidth - w - 10)) + "px";
     tip.style.top = Math.min(r.bottom + 8, innerHeight - tip.offsetHeight - 10) + "px";
   }, true);
+  let shotUrl = null, shotBlob = null;
+  const isTouchDev = matchMedia("(pointer: coarse)").matches;
+  function openShot(b) {
+    if (shotUrl) URL.revokeObjectURL(shotUrl);
+    shotBlob = b; shotUrl = URL.createObjectURL(b);
+    const name = "simulation-pylone-" + new Date().toISOString().slice(0, 16).replace(/[T:]/g, "-") + ".jpg";
+    $("shotImg").src = shotUrl; $("shotSave").href = shotUrl; $("shotSave").download = name;
+    const file = new File([b], name, { type: "image/jpeg" });
+    const canShare = navigator.canShare && navigator.canShare({ files: [file] });
+    $("shotShare").style.display = canShare ? "" : "none";
+    $("shotShare").onclick = () => navigator.share({ files: [file], title: "Simulation pylône" }).catch(() => {});
+    $("shotNote").textContent = isTouchDev
+      ? "Sur téléphone ou tablette : touchez « Partager » puis « Enregistrer l’image », ou appuyez longuement sur l’image. Aucune donnée n’est envoyée : tout se passe dans votre navigateur."
+      : "L’image sera enregistrée dans le dossier « Téléchargements » de votre ordinateur. Aucune donnée n’est envoyée : tout se passe dans votre navigateur.";
+    $("shot").classList.add("show");
+  }
+  $("shotX").onclick = () => $("shot").classList.remove("show");
+  $("shot").addEventListener("click", e => { if (e.target.id === "shot") $("shot").classList.remove("show"); });
+  $("shotSave").addEventListener("click", () => setTimeout(() => { $("shot").classList.remove("show"); toast("Image enregistrée dans vos téléchargements"); }, 300));
   $("bHelp").onclick = () => $("intro").classList.remove("hide");
   applyLight();
   selectOption("all");

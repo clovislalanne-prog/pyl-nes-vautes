@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Où en est le dossier ? · Pylône de la rue Paul Valéry, Saint-Gély-du-Fesc</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e1013; --card: rgba(255,255,255,.05); --line: rgba(255,255,255,.12); --txt: #eef0f3; --mute: #a3a9b3; --acc: #e29133;
+          --c0: #2f8f5b; --c1: #9fd88b; --c2: #f0a24a; --c3: #b8362f; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--txt); font-family: Inter, system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+  body { background: radial-gradient(ellipse at top, #1b2230 0%, var(--bg) 55%) fixed; }
+  .topbar { position: sticky; top: 0; z-index: 10; padding: 10px 16px; padding-top: max(10px, env(safe-area-inset-top)); background: rgba(14,16,19,.72);
+            backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--line); display: flex; gap: 8px; flex-wrap: wrap; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: var(--txt); text-decoration: none; font-size: 13.5px; font-weight: 600; padding: 9px 14px; border-radius: 99px; background: rgba(255,255,255,.08); border: 1px solid var(--line); }
+  .back:hover { background: rgba(255,255,255,.14); }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 8px 20px 60px; }
+  .tag { display: inline-block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--acc); border: 1px solid rgba(226,145,51,.5); border-radius: 99px; padding: 5px 11px; margin: 26px 0 12px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 12px; }
+  h2 { font-size: 21px; margin: 44px 0 12px; line-height: 1.3; }
+  h2 .n { color: var(--acc); margin-right: 8px; }
+  p, li { font-size: 15.5px; line-height: 1.7; color: #d4d8de; }
+  .lead { font-size: 17px; color: var(--txt); }
+  strong { color: var(--txt); }
+  .deadline { display: flex; gap: 14px; align-items: center; background: rgba(226,145,51,.12); border: 1px solid rgba(226,145,51,.55); border-radius: 18px; padding: 16px 18px; margin: 18px 0; }
+  .deadline .d { flex: none; text-align: center; background: var(--acc); color: #111; border-radius: 14px; padding: 8px 12px; font-weight: 700; line-height: 1.1; }
+  .deadline .d b { display: block; font-size: 26px; }
+  .deadline p { margin: 0; font-size: 14.5px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin: 18px 0; }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p:last-child, .card ul:last-child, .card ol:last-child { margin-bottom: 0; }
+  .tl { border-left: 2px solid var(--line); margin: 14px 0 0 6px; padding-left: 18px; }
+  .tl div { position: relative; margin-bottom: 14px; }
+  .tl div::before { content: ""; position: absolute; left: -25px; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--acc); }
+  .tl div.now::before { background: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,.2); }
+  .tl b { color: var(--txt); }
+  .tl p { margin: 2px 0 0; font-size: 14.5px; }
+  .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+  .opt { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .opt .h { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .opt .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .opt .big { font-size: 28px; font-weight: 700; }
+  .opt .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--mute); padding: 4px 0; border-top: 1px solid rgba(255,255,255,.07); }
+  .opt .row b { color: var(--txt); font-weight: 600; }
+  .tool { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 18px; margin: 18px 0; }
+  .tool label { font-size: 13px; color: var(--mute); display: block; margin-bottom: 6px; }
+  .tool select { width: 100%; font: 600 16px Inter, sans-serif; color: var(--txt); background: rgba(0,0,0,.35); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .res { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .r { border-radius: 16px; padding: 14px; color: #111; }
+  .r .o { font-size: 12.5px; font-weight: 600; opacity: .8; }
+  .r .v { font-size: 20px; font-weight: 700; margin: 4px 0 2px; }
+  .r .x { font-size: 12.5px; line-height: 1.45; }
+  .r.k0 { background: var(--c0); color: #fff; } .r.k1 { background: var(--c1); } .r.k2 { background: var(--c2); } .r.k3 { background: var(--c3); color: #fff; }
+  .r.best { outline: 3px solid #fff; outline-offset: -3px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12.5px; color: var(--mute); margin-top: 12px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .bilan { margin-top: 14px; }
+  .bilan .b { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; font-size: 12.5px; margin: 6px 0; }
+  .bilan .bar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; }
+  .bilan .bar div { display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11.5px; color: #111; }
+  .note { font-size: 12px; color: var(--mute); line-height: 1.55; margin-top: 10px; }
+  .prop { counter-reset: q; list-style: none; padding: 0; }
+  .prop li { counter-increment: q; position: relative; padding: 10px 12px 10px 46px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: var(--card); }
+  .prop li::before { content: counter(q); position: absolute; left: 12px; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #111; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .src li { font-size: 13px; line-height: 1.6; }
+  a { color: #8cc4ff; }
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--mute); line-height: 1.6; }
+  .opts.two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 640px) {
+    .opts.two { grid-template-columns: 1fr; }
+    h1 { font-size: 24px; } h2 { font-size: 19px; }
+    .opts, .res { grid-template-columns: 1fr; }
+    .bilan .b { grid-template-columns: 90px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar"><a class="back" href="index.html">‹ Simulation 3D</a><a class="back" href="en-savoir-plus.html">Qui construit ce pylône ? ›</a></div>
+<div class="wrap">
+  <div class="tag">Le dossier</div>
+  <h1>Où en est le projet de pylône de la rue Paul Valéry&nbsp;?</h1>
+  <p class="lead">Un pylône de téléphonie, voulu par Bouygues Telecom et construit par Cellnex, est prévu dans la friche au nord de la rue Paul Valéry. La mairie l’a refusé et a fait appel : <strong>rien n’est joué</strong>. Pour peser, les riverains se regroupent en <strong>association</strong>. Voici les faits, qui y gagne, qui y perd, et ce que nous pouvons faire ensemble.</p>
+
+  <div class="deadline">
+    <div class="d"><b>15</b>nov.</div>
+    <p><strong>Réponse collective avant le 15 novembre 2026.</strong> La mairie demande l’avis des riverains. Une réponse commune, signée par le plus grand nombre, pèse bien plus que des avis isolés : c’est elle qui montrera à la mairie que tout un quartier la soutient. Et rejoignez l’association de riverains en cours de création.</p>
+  </div>
+
+  <h2><span class="n">1</span>Les grandes étapes</h2>
+  <div class="tl">
+    <div><b>22 décembre 2021</b><p>Bouygues Telecom dépose un projet de pylône de 18 m sur l’emplacement n° 1.</p></div>
+    <div><b>Refus de la commune</b><p>La mairie refuse l’autorisation d’urbanisme. Bouygues Telecom conteste ce refus en justice.</p></div>
+    <div><b>20 février 2025</b><p>Le tribunal administratif de Montpellier annule le refus de la commune.</p></div>
+    <div><b>Avril 2025</b><p>La commune fait appel devant la cour administrative d’appel de Toulouse. La procédure est en cours.</p></div>
+    <div><b>13 octobre 2026</b><p>En parallèle, la mairie cherche une solution négociée et propose aux riverains deux emplacements plus éloignés : n° 2 (36 m) et n° 3 (30 m).</p></div>
+    <div class="now"><b>Aujourd’hui</b><p>L’appel est en cours : rien n’est joué. C’est le moment de montrer que les riverains refusent ce projet et soutiennent la commune.</p></div>
+  </div>
+  <p class="note">Depuis la loi ELAN de 2018, les tribunaux donnent souvent raison aux opérateurs dans ce type de litige. C’est justement pour cela que la mobilisation des riverains compte : une commune soutenue par tout un quartier pèse davantage, en justice comme dans la négociation.</p>
+
+  <h2><span class="n">2</span>Les trois emplacements</h2>
+  <p>Selon l’opérateur, plus le pylône s’éloigne des maisons, plus il doit être haut pour couvrir les mêmes zones. Les trois options n’ont donc pas du tout le même impact dans le paysage.</p>
+  <div class="opts">
+    <div class="opt"><div class="h"><span class="dot" style="background:#4aa3ff"></span>Option 1</div><div class="big">18 m</div><div style="font-size:12.5px;color:var(--mute);margin:-2px 0 6px">comme un immeuble de 6 étages</div></div>
+    <div class="opt"><div class="h"><span class="dot" style="background:#e29133"></span>Option 2</div><div class="big">36 m</div><div style="font-size:12.5px;color:var(--mute);margin:-2px 0 6px">comme un immeuble de 12 étages</div></div>
+    <div class="opt"><div class="h"><span class="dot" style="background:#5cc98a"></span>Option 3</div><div class="big">30 m</div><div style="font-size:12.5px;color:var(--mute);margin:-2px 0 6px">comme un immeuble de 10 étages</div></div>
+  </div>
+  <p class="note">Équivalence en étages calculée sur environ 3 m par étage. Les pins de la friche mesurent une quinzaine de mètres : un pylône de 18 m reste à peu près à leur niveau, ceux de 30 et 36 m les dépassent largement.</p>
+
+  <div class="card" style="border-color:rgba(226,145,51,.55);background:rgba(226,145,51,.08)">
+    <h3>Une méthode qui interroge</h3>
+    <p>Au départ, il y avait un seul projet : un pylône de 18 m. Les riverains n’en voulaient pas, la commune l’a refusé. On nous présente aujourd’hui deux autres emplacements, avec des pylônes encore plus hauts : 30 et 36 m.</p>
+    <p>Que ce soit voulu ou non, l’effet est bien connu : le projet de 18 m, refusé hier, passe soudain pour un « moindre mal ». Et les riverains se retrouvent à comparer des options, chacun selon la position de sa maison, au lieu de dire non ensemble.</p>
+    <p><strong>Nous refusons d’entrer dans ce jeu.</strong> Notre réponse est d’abord un refus, et nous restons unis, quelle que soit l’adresse de chacun.</p>
+  </div>
+
+  <h2><span class="n">3</span>Des antennes, il y en a déjà</h2>
+  <p>Saint-Gély-du-Fesc n’est pas une zone blanche. D’après les données publiques de l’ANFR, la commune compte déjà plusieurs supports d’antennes, et Bouygues Telecom y est déjà présent, y compris sur un pylône Cellnex installé en 2021.</p>
+  <div class="card">
+    <ul>
+      <li><strong>Pylône du Puech du Mas du Juge</strong> (chemin du Calvaire), propriété de TDF : il accueille déjà <strong>les quatre opérateurs</strong>, Bouygues Telecom depuis 1997, Orange, SFR et Free.</li>
+      <li><strong>Pylône de La Pinède</strong> (allée des Écureuils), propriété de <strong>Cellnex</strong> : Bouygues Telecom y est installé depuis 2021.</li>
+      <li><strong>60 rue de la Tour</strong> : antennes Free sur un immeuble, depuis 2019.</li>
+      <li><strong>53 allée de Lauzard</strong> : antennes Orange sur un bâtiment, depuis 2008.</li>
+    </ul>
+    <p>Par ailleurs, Cellnex et Bouygues Telecom ont déjà porté devant la justice un autre projet d’antenne dans la commune, place de la Scierie, après l’opposition du maire en 2022.</p>
+    <p style="margin-top:12px"><a class="back" href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/3.8349/43.6779" target="_blank" rel="noopener">Voir toutes les antennes sur la carte officielle de l’ANFR ↗</a></p>
+    <p class="note">Sources : données ANFR consultées via InfraViewer et Ariase (novembre 2026) ; ordonnance du tribunal administratif de Montpellier n° 2301108 du 16 mars 2023. Ces données recensent les supports déclarés ; elles ne disent pas à elles seules si la couverture est suffisante dans chaque rue.</p>
+  </div>
+
+  <h2><span class="n">4</span>Et chez moi&nbsp;?</h2>
+  <div class="card" style="border-color:rgba(229,72,77,.5);background:rgba(229,72,77,.08)">
+    <h3>📍 Placez votre maison dans la simulation 3D</h3>
+    <p>Dans la simulation, touchez « Notre maison », puis votre toit. Vous obtenez la distance exacte entre votre maison et chaque option, l’axe qui relie les antennes à votre toit, et une vue en 3D à capturer pour votre courrier. Les pylônes y sont placés à leurs coordonnées exactes.</p>
+    <p style="margin-top:12px"><a class="back" href="index.html" style="background:#e5484d;border-color:#e5484d">Ouvrir la simulation 3D ›</a></p>
+  </div>
+
+  <h2><span class="n">5</span>Ce que ça coûte, ce que ça rapporte</h2>
+  <div class="opts two">
+    <div class="opt" style="border-color:rgba(92,201,138,.45);background:rgba(92,201,138,.06)"><div class="h">Ceux qui y gagnent</div>
+      <p style="font-size:14px;margin:0"><strong>L’exploitant du pylône</strong> (Cellnex) encaisse un loyer de chaque opérateur installé, sur des contrats de 15 ans ou plus, renouvelables.<br><br><strong>Le propriétaire du terrain</strong> perçoit en général un loyer annuel de l’exploitant.<br><br><strong>Les actionnaires de Cellnex</strong> : un milliard d’euros de dividendes et de rachats d’actions annoncé d’ici fin 2026.</p></div>
+    <div class="opt" style="border-color:rgba(184,54,47,.6);background:rgba(184,54,47,.1)"><div class="h">Ceux qui en supportent le coût</div>
+      <p style="font-size:14px;margin:0"><strong>Les riverains</strong> : un paysage durablement modifié, un cadre de vie dégradé, et une inquiétude légitime pour la valeur de leur maison.<br><br>Tout cela <strong>sans aucune compensation</strong>.</p></div>
+  </div>
+  <div class="card">
+    <h3>Et la valeur des maisons&nbsp;?</h3>
+    <p>Aucune étude française solide n’a mesuré l’effet d’un pylône sur le prix des maisons voisines. À l’étranger, les résultats varient : environ 2 % de baisse près de pylônes en Floride, 3,3 % d’écart en Allemagne entre un logement situé à 50 m et un autre à 100 m d’une antenne, et jusqu’à 20 % environ dans une étude néo-zélandaise ancienne et discutée. D’autres études ne trouvent aucun effet.</p>
+    <p>Ce qui ressort de ces travaux : l’effet, quand il existe, est le plus fort pour les maisons très proches et qui voient le pylône. C’est précisément ce que nous demandons d’éviter.</p>
+  </div>
+  <p>En résumé : <strong>les bénéfices sont privés et durables, les inconvénients sont supportés par les riverains.</strong> Pour en savoir plus sur l’économie des pylônes, voir <a href="en-savoir-plus.html">« Qui construit ce pylône ? »</a>.</p>
+
+  <h2><span class="n">6</span>Notre position</h2>
+  <div class="card" style="border-color:rgba(184,54,47,.6);background:rgba(184,54,47,.12)">
+    <h3>D’abord : nous refusons ce pylône</h3>
+    <p>Nous demandons que ce projet ne se fasse pas, et nous soutenons la commune de Saint-Gély-du-Fesc, qui l’a refusé et poursuit son appel. Nous lui demandons de maintenir ce refus.</p>
+  </div>
+  <p><strong>À défaut seulement</strong>, si un pylône devait malgré tout être imposé, nous ne laisserons pas l’emplacement et les conditions se décider sans nous. Nos exigences minimales seraient alors les suivantes :</p>
+  <ol class="prop">
+    <li><strong>L’emplacement n° 1, avec une hauteur de 18 m maximum</strong>, le plus bas des trois, qui reste à peu près au niveau des pins. Refus de l’emplacement n° 2. L’emplacement n° 3 ne serait envisageable qu’avec une hauteur ramenée à 20 m au plus.</li>
+    <li><strong>Un pylône à habillage paysager</strong> (type « arbre » ou monotube vert ou brun) et la plantation par l’opérateur d’un écran végétal persistant, avec obligation d’entretien.</li>
+    <li><strong>L’engagement écrit de ne pas rehausser le pylône et de ne pas accueillir d’opérateur supplémentaire</strong> sans nouvelle consultation des riverains.</li>
+    <li><strong>Un essai au ballon captif</strong> à 18, 30 et 36 m sur chaque emplacement, photographié depuis plusieurs jardins, avant toute décision.</li>
+    <li><strong>La communication du dossier d’information mairie</strong>, des coordonnées exactes des emplacements et des simulations d’exposition, puis des mesures d’ondes par l’ANFR après la mise en service.</li>
+  </ol>
+
+  <h2><span class="n">7</span>Une association de riverains</h2>
+  <div class="card" style="border-color:rgba(226,145,51,.55);background:rgba(226,145,51,.08)">
+    <h3>Pourquoi nous nous regroupons</h3>
+    <ul>
+      <li><strong>Parler d’une seule voix</strong> face à la mairie, à Bouygues Telecom et à Cellnex, plutôt qu’en avis dispersés.</li>
+      <li><strong>Être un interlocuteur reconnu</strong>, invité aux réunions et destinataire des dossiers d’information.</li>
+      <li><strong>Partager les frais</strong>, notamment ceux d’un avocat pour soutenir l’appel de la commune.</li>
+      <li><strong>Tenir dans la durée.</strong> L’appel peut prendre des mois, et un pylône peut évoluer pendant des années : rehaussement, nouveaux opérateurs, nouvelles antennes. L’association restera vigilante.</li>
+    </ul>
+    <p><strong>Chaque mois compte.</strong> La loi impose à une association d’exister depuis au moins un an pour pouvoir contester un permis de construire. Créée maintenant, la nôtre pourra agir contre toute future demande (rehaussement, nouveau pylône, modification importante). En attendant, ce sont les riverains, individuellement, qui peuvent agir.</p>
+  </div>
+  <div class="card">
+    <h3>Nous rejoindre</h3>
+    <p>Association de riverains <strong>[nom de l’association]</strong>, en cours de création. Contact : <strong>[adresse e-mail ou coordonnées à compléter]</strong>.</p>
+  </div>
+
+  <h2><span class="n">8</span>Ce que nous pouvons faire</h2>
+  <div class="card">
+    <ul>
+      <li><strong>Rejoindre l’association.</strong> Plus nous serons nombreux, plus notre voix comptera, aujourd’hui comme dans les années à venir.</li>
+      <li><strong>Soutenir la mairie.</strong> Elle a refusé le projet et fait appel. Plus nous serons nombreux à signer la réponse commune, plus elle sera fondée à tenir bon.</li>
+      <li><strong>Nous joindre à l’appel.</strong> Des riverains peuvent intervenir devant la cour administrative d’appel de Toulouse pour soutenir la commune (« intervention volontaire », avec un avocat).</li>
+      <li><strong>Contester tout nouveau permis.</strong> Si une nouvelle demande était déposée pour un autre emplacement, chaque riverain concerné pourrait la contester dans les 2 mois suivant l’affichage sur le terrain.</li>
+      <li><strong>Exiger l’information.</strong> Dossier d’information mairie, simulation d’exposition, mesures gratuites de l’ANFR : ce sont des droits (voir <a href="en-savoir-plus.html">« Qui construit ce pylône ? »</a>).</li>
+      <li><strong>Nous faire entendre.</strong> Réunions publiques, élus, presse locale : un quartier uni ne passe pas inaperçu.</li>
+    </ul>
+    <p class="note">Ces informations ne remplacent pas l’avis d’un avocat en droit de l’urbanisme.</p>
+  </div>
+
+  <div class="card">
+    <h3>Comment signer la réponse commune</h3>
+    <p>Signez la réponse commune avant le <strong>15 novembre 2026</strong> : faites-le savoir par courriel ou en déposant un mot à l’une des adresses du collectif : <strong>[contacts du collectif à compléter]</strong>. Un courrier commun sera ensuite adressé à la mairie de Saint-Gély-du-Fesc (service Urbanisme, 04 67 66 86 15).</p>
+  </div>
+
+  <h2>Sources et méthode</h2>
+  <ul class="src">
+    <li>Courrier de la mairie de Saint-Gély-du-Fesc n° 2026D/002778 du 13 octobre 2026 (service Urbanisme).</li>
+    <li>Jugement du tribunal administratif de Montpellier n° 2201367 du 20 février 2025.</li>
+    <li>Positions et hauteurs des pylônes : modélisation de Clovis Lalanne dans Google Earth Pro, à partir des documents du projet (voir la <a href="index.html">simulation 3D</a>).</li>
+    <li>Antennes existantes : <a href="https://infraviewer.net/commune/34255" target="_blank" rel="noopener">InfraViewer, données ANFR pour Saint-Gély-du-Fesc</a> ; <a href="https://www.ariase.com/mobile/couverture/herault-34/saint-gely-du-fesc" target="_blank" rel="noopener">Ariase</a> ; <a href="https://justice.pappers.fr/decision/b54c851bc9a10137f370b69ec39bdd03d93aac78" target="_blank" rel="noopener">TA de Montpellier, 16 mars 2023, n° 2301108</a>.</li>
+    <li>Valeur des biens : <a href="https://prres.net/uploads/1350/1249/14445921.2007.11104223.pdf" target="_blank" rel="noopener">Bond, Nouvelle-Zélande, 2007</a> ; <a href="https://www.prres.org/uploads/796/1558/Bond_Squires_Using_GIS_to_Measure.pdf" target="_blank" rel="noopener">Bond et Squires, Floride</a> ; <a href="https://www.econbiz.de/Record/flat-prices-cell-phone-base-stations-and-network-structure-wirth-benjamin/10011075972" target="_blank" rel="noopener">Wirth, Allemagne</a> ; <a href="https://econpapers.repec.org/paper/arzwpaper/eres2023_5f275.htm" target="_blank" rel="noopener">Mdleleni et Ijasan, Johannesburg, 2023</a> (aucun effet mesuré).</li>
+    <li>Ces informations ne constituent pas un avis juridique.</li>
+  </ul>
+
+  <p style="text-align:center;margin-top:36px"><a class="back" href="index.html">‹ Retour à la simulation 3D</a></p>
+  <div class="foot">Page de l’association de riverains en cours de création. Si vous constatez une erreur, signalez-la-nous : nous la corrigerons.<br>Simulation réalisée par Clovis Lalanne · novembre 2026 · <a href="a-propos.html" style="display:inline-block;padding:2px 10px;border-radius:99px;background:rgba(226,145,51,.18);border:1px solid rgba(226,145,51,.5);color:#eef0f3;text-decoration:none;font-weight:600">Qui suis-je ? ›</a></div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Qui construit ce pylône ? · Pylône 5G de Saint-Gély-du-Fesc</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e1013; --card: rgba(255,255,255,.05); --line: rgba(255,255,255,.12); --txt: #eef0f3; --mute: #a3a9b3; --acc: #e29133; --blue: #4aa3ff; --green: #5cc98a; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--txt); font-family: Inter, system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+  body { background: radial-gradient(ellipse at top, #1b2230 0%, var(--bg) 55%) fixed; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 8px 20px 60px; }
+  .topbar { position: sticky; top: 0; z-index: 10; padding: 10px 16px; padding-top: max(10px, env(safe-area-inset-top)); background: rgba(14,16,19,.72); backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--line); }
+  .topbar .back { max-width: 760px; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: var(--txt); text-decoration: none; font-size: 13.5px; font-weight: 600;
+          padding: 9px 14px; border-radius: 99px; background: rgba(255,255,255,.08); border: 1px solid var(--line); }
+  .back:hover { background: rgba(255,255,255,.14); }
+  .tag { display: inline-block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--acc); border: 1px solid rgba(226,145,51,.5); border-radius: 99px; padding: 5px 11px; margin: 26px 0 12px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 12px; }
+  h2 { font-size: 21px; margin: 44px 0 12px; line-height: 1.3; }
+  h2 .n { color: var(--acc); margin-right: 8px; }
+  p, li { font-size: 15.5px; line-height: 1.7; color: #d4d8de; }
+  .lead { font-size: 17px; color: var(--txt); }
+  strong { color: var(--txt); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin: 18px 0; }
+  .card.acc { border-color: rgba(226,145,51,.45); background: rgba(226,145,51,.07); }
+  .card.green { border-color: rgba(92,201,138,.4); background: rgba(92,201,138,.06); }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p:last-child, .card ul:last-child { margin-bottom: 0; }
+  .card ul { padding-left: 20px; margin: 6px 0; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .kpi b { display: block; font-size: 24px; color: var(--acc); }
+  .kpi span { font-size: 12.5px; color: var(--mute); line-height: 1.45; display: block; margin-top: 4px; }
+  .chart { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 18px 12px; margin: 18px 0; }
+  .chart .t { font-weight: 600; font-size: 14.5px; margin-bottom: 14px; }
+  .bar { display: grid; grid-template-columns: 112px 1fr; align-items: center; gap: 10px; margin: 8px 0; font-size: 12.5px; }
+  .bar .y { color: var(--mute); }
+  .bar .b { height: 26px; border-radius: 7px; background: var(--acc); display: flex; align-items: center; justify-content: flex-end; padding-right: 8px; color: #111; font-weight: 700; min-width: 54px; }
+  .bar .b.goal { background: repeating-linear-gradient(135deg, rgba(226,145,51,.35) 0 6px, rgba(226,145,51,.15) 6px 12px); border: 1px dashed var(--acc); color: var(--txt); }
+  .bar .b small { font-weight: 500; }
+  .note { font-size: 12px; color: var(--mute); line-height: 1.55; margin-top: 10px; }
+  .tl { border-left: 2px solid var(--line); margin: 14px 0 0 6px; padding-left: 18px; }
+  .tl div { position: relative; margin-bottom: 14px; }
+  .tl div::before { content: ""; position: absolute; left: -25px; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--acc); }
+  .tl b { color: var(--txt); }
+  .tl p { margin: 2px 0 0; font-size: 14.5px; }
+  .q { counter-reset: q; list-style: none; padding: 0; }
+  .q li { counter-increment: q; position: relative; padding: 10px 12px 10px 46px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: var(--card); }
+  .q li::before { content: counter(q); position: absolute; left: 12px; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #111; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  a.ext { display: inline-block; margin-top: 4px; padding: 10px 16px; border-radius: 12px; background: rgba(255,255,255,.08); border: 1px solid var(--line); color: var(--txt); text-decoration: none; font-weight: 700; font-size: 14px; }
+  a.ext:hover { background: rgba(255,255,255,.14); }
+  .src { font-size: 13px; }
+  .src li { font-size: 13px; line-height: 1.6; margin-bottom: 6px; }
+  .src a, p a, li a { color: #8cc4ff; }
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--mute); line-height: 1.6; }
+  .cta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+  .cta a { text-decoration: none; font-weight: 700; font-size: 14px; padding: 12px 18px; border-radius: 12px; }
+  .cta .p { background: var(--acc); color: #111; }
+  .cta .s { background: rgba(255,255,255,.08); color: var(--txt); border: 1px solid var(--line); }
+  @media (max-width: 600px) {
+    h1 { font-size: 24px; } h2 { font-size: 19px; }
+    .kpis { grid-template-columns: 1fr; }
+    .bar { grid-template-columns: 86px 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="topbar" style="display:flex;gap:8px;flex-wrap:wrap"><a class="back" href="index.html">‹ Simulation 3D</a><a class="back" href="dossier.html">Où en est le dossier ? ›</a></div>
+<div class="wrap">
+
+  <div class="tag">Pour aller plus loin</div>
+  <h1>Qui construit ce pylône, et pourquoi&nbsp;?</h1>
+  <p class="lead">On parle de « l’antenne Bouygues ». Pourtant, dans la procédure en justice, c’est la société <strong>Cellnex</strong> qui porte la construction du pylône, pour le compte de Bouygues Telecom. Cellnex est une « TowerCo » : son métier est de posséder des pylônes et d’y accueillir le plus d’opérateurs possible. Voici ce qu’il faut savoir, sources à l’appui, pour en parler de façon juste.</p>
+
+  <div class="kpis">
+    <div class="kpi"><b>26 717</b><span>sites exploités par Cellnex en France au 30 septembre 2025, son premier marché en Europe</span></div>
+    <div class="kpi"><b>30 000</b><span>sites visés en France en 2030, avec 2,5 milliards d’euros d’investissement annoncés en mai 2025</span></div>
+    <div class="kpi"><b>1,60</b><span>opérateur en moyenne par site (groupe Cellnex, septembre 2025) : l’indicateur clé de sa rentabilité</span></div>
+  </div>
+
+  <h2><span class="n">1</span>Cellnex, la plus grande « TowerCo » de France</h2>
+  <p>Cellnex est un groupe espagnol coté en bourse, spécialisé dans les infrastructures de télécommunications. On appelle ce type d’entreprise une <strong>TowerCo</strong> : elle ne vend pas de forfaits mobiles. Elle possède ou construit des pylônes, des toits-terrasses et des locaux techniques, puis <strong>loue de la place</strong> aux opérateurs (Bouygues Telecom, Free, SFR, Orange) pour qu’ils y installent leurs antennes.</p>
+  <p>Ses clients signent des contrats très longs. Avec Bouygues Telecom, par exemple, le contrat de 2017 portait sur 15 ans, renouvelable 15 ans de plus.</p>
+  <div class="card">
+    <h3>Pas vraiment « cocorico »</h3>
+    <p>On parle de « l’antenne Bouygues », mais le pylône sera celui d’un groupe espagnol. En 2023, ses principaux actionnaires étaient surtout des investisseurs internationaux : la holding de la famille Benetton (Edizione), le fonds souverain de Singapour (GIC), le fonds souverain norvégien (Norges Bank), BlackRock, JP Morgan, le fonds de pension canadien CPP Investments, CK Hutchison et CriteriaCaixa. Bouygues Telecom, l’opérateur, est bien français ; c’est l’infrastructure, le pylône lui-même, qui passe entre les mains d’un groupe étranger. Rien d’anormal pour une grande entreprise cotée, mais cela rappelle que ce pylône est aussi un placement financier. D’ailleurs, l’investissement de 2025 a été annoncé au sommet Choose France, l’événement organisé par l’État pour attirer les capitaux étrangers.</p>
+  </div>
+
+  <h2><span class="n">2</span>Comment Cellnex est devenu n°1 en France</h2>
+  <p>Cette croissance vient surtout du <strong>rachat de pylônes existants</strong> aux opérateurs, complété par des engagements de construction de nouveaux sites. Elle ne signifie donc pas que des dizaines de milliers de nouveaux pylônes ont été construits.</p>
+
+  <div class="chart">
+    <div class="t">Sites exploités par Cellnex en France</div>
+    <div class="bar"><span class="y">2016</span><div class="b" style="width:4%">500</div></div>
+    <div class="bar"><span class="y">août 2021</span><div class="b" style="width:30%">≈ 9 000</div></div>
+    <div class="bar"><span class="y">sept. 2021</span><div class="b" style="width:38.6%">11 583</div></div>
+    <div class="bar"><span class="y">mars 2025</span><div class="b" style="width:85.8%">25 748</div></div>
+    <div class="bar"><span class="y">sept. 2025</span><div class="b" style="width:89%">26 717</div></div>
+    <div class="bar"><span class="y">2030</span><div class="b goal" style="width:100%">30 000 <small>&nbsp;objectif</small></div></div>
+    <div class="note">Sites en exploitation déclarés par Cellnex et l’Autorité de la concurrence aux dates indiquées. Les années intermédiaires ne sont pas extrapolées. 2030 : objectif annoncé, pas un chiffre constaté.</div>
+  </div>
+
+  <div class="tl">
+    <div><b>2016 · Entrée en France</b><p>Cellnex rachète ses premiers pylônes à Bouygues Telecom (500 sites).</p></div>
+    <div><b>2017 · Accord élargi avec Bouygues Telecom</b><p>Jusqu’à 1 800 sites rachetés et 1 200 sites à construire, pour 854 millions d’euros.</p></div>
+    <div><b>2019 · Accord avec Free (Iliad)</b><p>5 700 sites repris et 2 500 nouveaux sites prévus.</p></div>
+    <div><b>2021 · Rachat de Hivory, les pylônes de SFR</b><p>10 500 sites pour 5,2 milliards d’euros. L’Autorité de la concurrence n’autorise l’opération qu’à condition que Cellnex revende environ 3 200 sites urbains, pour préserver la concurrence.</p></div>
+    <div><b>2025 · Nouvelle accélération</b><p>2,5 milliards d’euros annoncés au sommet Choose France, pour ajouter environ 5 000 sites d’ici 2030.</p></div>
+  </div>
+
+  <h2><span class="n">3</span>Le modèle économique : plus d’opérateurs par pylône</h2>
+  <p>Pour une TowerCo, un pylône coûte à peu près la même chose qu’il accueille un ou trois opérateurs. Chaque opérateur supplémentaire, en revanche, paie un loyer. C’est pourquoi le secteur suit de près le <strong>taux d’occupation</strong> (« tenancy ratio » en anglais) : le nombre moyen d’opérateurs présents sur chaque site.</p>
+  <div class="card acc">
+    <h3>Ce que Cellnex dit lui-même à ses investisseurs</h3>
+    <p>Dans sa présentation de résultats 2016, au moment d’entrer en France, Cellnex indiquait que ses sites français accueillaient en moyenne 1,06 opérateur, contre 1,62 pour la moyenne française, et y voyait un fort potentiel pour augmenter ce taux sur tous ses sites. Fin septembre 2025, le taux moyen du groupe atteignait 1,60.</p>
+    <p>La même année, le groupe a annoncé un milliard d’euros de rémunération pour ses actionnaires d’ici fin 2026 (dividendes et rachats d’actions).</p>
+  </div>
+  <p>Autrement dit, l’intérêt économique de l’exploitant est d’ajouter des clients sur ses pylônes au fil du temps. C’est son métier, et ce n’est ni caché ni illégal. Mais c’est une donnée importante pour les riverains.</p>
+
+  <h2><span class="n">4</span>Ce que cela peut changer pour notre pylône</h2>
+  <p>Un pylône peut être mis en service avec les antennes d’un seul opérateur, puis en accueillir d’autres. Chaque nouvel opérateur peut ajouter des panneaux et des supports au sommet. La « couronne » du pylône, sa partie haute, peut donc devenir plus chargée et plus visible avec le temps.</p>
+  <p>Ce n’est pas automatique : certains opérateurs partagent les mêmes antennes. Mais cette évolution est techniquement possible et correspond à l’intérêt commercial de l’exploitant.</p>
+  <div class="card acc">
+    <h3>Notre demande</h3>
+    <p>Connaître non seulement l’apparence du pylône à sa construction, mais aussi <strong>sa configuration maximale</strong> : combien d’opérateurs il est conçu pour accueillir, et à quoi ressemblerait alors son sommet. Il ne s’agit pas d’imaginer une tour surchargée, mais d’obtenir une représentation réaliste de ce qui pourra effectivement y être installé.</p>
+  </div>
+  <p>Bon à savoir : toute modification importante d’une antenne existante, comme l’ajout d’un opérateur, doit elle aussi faire l’objet d’un dossier d’information transmis à la mairie avant les travaux.</p>
+
+  <h2><span class="n">5</span>Pour être juste : les arguments en faveur du partage</h2>
+  <div class="card green">
+    <ul>
+      <li><strong>Le partage évite la multiplication des pylônes.</strong> Un pylône partagé par trois opérateurs, c’est potentiellement deux pylônes de moins dans le paysage.</li>
+      <li><strong>La loi l’encourage.</strong> Avant de construire un nouveau pylône, un opérateur doit privilégier le partage d’un site existant. Depuis la loi du 15 novembre 2021 sur l’empreinte environnementale du numérique, il doit aussi justifier auprès du maire son choix de ne pas partager.</li>
+      <li><strong>Les besoins en données augmentent.</strong> Les opérateurs et Cellnex justifient la densification du réseau par la hausse de la consommation de données et les besoins de la 5G.</li>
+      <li><strong>Les élus eux-mêmes le reconnaissent :</strong> au Parlement, les TowerCos sont souvent présentées comme favorables au partage, justement parce qu’elles ont intérêt à réunir le plus d’opérateurs possible.</li>
+    </ul>
+  </div>
+  <p>La question n’est donc pas d’être « pour » ou « contre » le partage, mais de savoir <strong>où</strong> le pylône est implanté, <strong>à quoi</strong> il ressemblera à terme, et si les riverains ont été réellement informés et consultés.</p>
+
+  <h2><span class="n">6</span>Nos droits en tant que riverains</h2>
+  <div class="card">
+    <h3>Le dossier d’information mairie (DIM)</h3>
+    <ul>
+      <li>L’opérateur doit transmettre ce dossier au maire <strong>au moins un mois avant</strong> sa demande d’autorisation d’urbanisme (loi « Abeille » de 2015).</li>
+      <li>Le maire dispose de <strong>8 jours</strong> pour demander une simulation de l’exposition aux ondes générée par l’installation.</li>
+      <li>Le dossier, et la simulation si elle a été demandée, doivent être mis à disposition des habitants <strong>dans les 10 jours</strong>.</li>
+      <li>Si le maire décide de recueillir les observations des habitants, celles-ci peuvent être déposées pendant <strong>3 semaines</strong>.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Faire mesurer gratuitement l’exposition aux ondes</h3>
+    <p>Tout particulier peut demander une mesure chez lui, gratuitement : formulaire Cerfa n° 15003 (sur service-public.fr ou mesures.anfr.fr), signé par la mairie ou une association agréée, puis transmis à l’ANFR. Un laboratoire indépendant et accrédité réalise la mesure, financée par une taxe payée par les opérateurs. Les résultats sont publiés sur <a href="https://www.cartoradio.fr" target="_blank" rel="noopener">cartoradio.fr</a>.</p>
+  </div>
+
+  <div class="card">
+    <h3>Voir les antennes déjà installées autour de chez soi</h3>
+    <p>Le site officiel <strong>Cartoradio</strong>, géré par l’ANFR (l’agence de l’État qui contrôle les antennes), montre sur une carte toutes les antennes relais existantes, leur opérateur, leur hauteur, ainsi que les mesures d’ondes déjà réalisées dans le quartier. Le pylône de Saint-Gély n’y apparaîtra qu’une fois autorisé et installé.</p>
+    <p><a class="ext" href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/3.8349/43.6779" target="_blank" rel="noopener">Ouvrir la carte, centrée sur notre quartier ↗</a></p>
+    <p class="note">Si la carte s’ouvre sur toute la France, tapez « rue Paul Valéry, Saint-Gély-du-Fesc » dans sa barre de recherche.</p>
+  </div>
+
+  <h2><span class="n">7</span>Les questions que porte l’association</h2>
+  <p>Ces questions, l’association de riverains en cours de création les posera à la mairie, à Bouygues Telecom et à Cellnex. <a href="dossier.html">Voir comment nous rejoindre</a>.</p>
+  <ol class="q">
+    <li>Quel opérateur sera présent au démarrage, et combien d’opérateurs ce pylône est-il conçu pour accueillir au maximum&nbsp;?</li>
+    <li>À quoi ressemblera le sommet du pylône dans cette configuration maximale (nombre et taille des panneaux, supports)&nbsp;?</li>
+    <li>Pourquoi cet emplacement plutôt qu’un site existant ou plus éloigné des habitations, et quelles alternatives ont été étudiées&nbsp;?</li>
+    <li>Le maire a-t-il demandé la simulation d’exposition prévue par la loi, et peut-elle être rendue publique&nbsp;?</li>
+    <li>Les riverains seront-ils informés et consultés lors de chaque ajout d’opérateur&nbsp;?</li>
+  </ol>
+
+
+  <h2><span class="n">+</span>Annexe : Cellnex en chiffres</h2>
+  <p>Ces graphiques montrent une chose simple : derrière l’implantation des pylônes, il y a une industrie financière en très forte croissance, bâtie en quelques années à coups d’acquisitions et de dette, et qui rémunère ses actionnaires. Ce n’est pas seulement une question de couverture 5G.</p>
+  <div class="chart">
+    <div class="t">Chiffre d’affaires du groupe Cellnex (en milliards d’euros)</div>
+    <div class="bar"><span class="y">2018</span><div class="b" style="width:22.0%">0,90</div></div>
+    <div class="bar"><span class="y">2019</span><div class="b" style="width:25.2%">1,04</div></div>
+    <div class="bar"><span class="y">2021</span><div class="b" style="width:61.9%">2,54</div></div>
+    <div class="bar"><span class="y">2022</span><div class="b" style="width:85.3%">3,50</div></div>
+    <div class="bar"><span class="y">2023</span><div class="b" style="width:98.9%">4,05</div></div>
+    <div class="bar"><span class="y">2024</span><div class="b" style="width:92.4%">3,79</div></div>
+    <div class="bar"><span class="y">2025</span><div class="b goal" style="width:97.6%">≈ 4,0 <small>&nbsp;prévision</small></div></div>
+    <div class="note">Chiffres publiés par Cellnex (2020 non repris ici). 2024 : chiffre « pro forma », hors activités revendues (Irlande, Autriche…), ce qui explique la légère baisse. 2025 : fourchette annoncée par Cellnex, entre 3,95 et 4,05 milliards.</div>
+  </div>
+  <div class="chart">
+    <div class="t">Nombre de sites Cellnex en Europe</div>
+    <div class="bar"><span class="y">2016</span><div class="b" style="width:14.5%">16 100</div></div>
+    <div class="bar"><span class="y">fin 2018</span><div class="b" style="width:21.1%">23 440</div></div>
+    <div class="bar"><span class="y">sept. 2021</span><div class="b" style="width:80.4%">89 327</div></div>
+    <div class="bar"><span class="y">juin 2022</span><div class="b" style="width:93.6%">103 944</div></div>
+    <div class="bar"><span class="y">sept. 2025</span><div class="b" style="width:100.0%">111 064</div></div>
+    <div class="note">Sites en exploitation dans une dizaine de pays européens. Multiplication par près de 7 en neuf ans, essentiellement par rachats aux opérateurs.</div>
+  </div>
+  <div class="chart">
+    <div class="t">Dette financière nette du groupe (en milliards d’euros)</div>
+    <div class="bar"><span class="y">juin 2020</span><div class="b" style="width:27.6%">4,7</div></div>
+    <div class="bar"><span class="y">sept. 2021</span><div class="b" style="width:50.9%">8,6</div></div>
+    <div class="bar"><span class="y">fév. 2023</span><div class="b" style="width:100.0%">16,9</div></div>
+    <div class="bar"><span class="y">mars 2025</span><div class="b" style="width:99.4%">16,8</div></div>
+    <div class="note">Cette croissance a été largement financée par l’emprunt et par des augmentations de capital (3,7 milliards d’euros levés en 2019).</div>
+  </div>
+  <div class="card acc">
+    <h3>Et pour la suite</h3>
+    <ul>
+      <li><strong>En France :</strong> objectif de 30 000 sites en 2030, avec 2,5 milliards d’euros d’investissement annoncés en mai 2025.</li>
+      <li><strong>Pour les actionnaires :</strong> un milliard d’euros de dividendes et de rachats d’actions annoncé d’ici fin 2026.</li>
+      <li><strong>Le moteur de la rentabilité :</strong> augmenter le nombre d’opérateurs par pylône, aujourd’hui 1,60 en moyenne pour le groupe.</li>
+    </ul>
+  </div>
+
+  <h2>Sources</h2>
+  <ul class="src">
+    <li><a href="https://www.cellnex.com/app/uploads/2025/11/20251106-PR-Cellnex-Results-9M2025_EN.pdf" target="_blank" rel="noopener">Cellnex, résultats des 9 premiers mois 2025</a> (6 nov. 2025) : 26 717 sites en France, taux de 1,60, rémunération des actionnaires.</li>
+    <li><a href="https://www.cellnex.com/news/cellnex-achieves-strong-organic-growth-q1-2025/" target="_blank" rel="noopener">Cellnex, résultats du 1er trimestre 2025</a> : 25 748 sites en France.</li>
+    <li><a href="https://www.cellnex.com/gb-en/news/noticia-100/" target="_blank" rel="noopener">Cellnex, résultats 2018</a> : chiffre d’affaires de 901 millions d’euros, 23 440 sites.</li>
+    <li><a href="https://www.cellnex.com/news/cellnex-revenue-exceeds-1-billion/" target="_blank" rel="noopener">Cellnex, résultats 2019</a> : 1,035 milliard d’euros, augmentations de capital de 3,7 milliards.</li>
+    <li><a href="https://www.telecomtv.com/content/access-evolution/cellnex-closes-2022-with-revenues-of-eur-3-5-billion-a-growth-of-38-46819/" target="_blank" rel="noopener">Cellnex, résultats 2022</a> : 3,499 milliards d’euros (2,536 en 2021), dette nette de 16,9 milliards.</li>
+    <li><a href="https://in.marketscreener.com/quote/stock/CELLNEX-TELECOM-S-A-22148947/news/Cellnex-Telecom-S-A-Reports-Earnings-Results-for-the-Full-Year-Ended-December-31-2023-46070896/" target="_blank" rel="noopener">MarketScreener, résultats 2023</a> : 4,053 milliards d’euros.</li>
+    <li><a href="https://forbes.es/empresas/72679/cellnex-aprueba-sus-cuentas-anuales-del-ejercicio-2019-mas-de-mil-millones-de-ingresos/" target="_blank" rel="noopener">Forbes España, 2020</a> : dette nette de 4,669 milliards d’euros au 1er semestre 2020.</li>
+    <li><a href="https://www.cellnex.com/app/uploads/2022/07/20220728-PR-Cellnex-1H-2022-Results_FR.pdf" target="_blank" rel="noopener">Cellnex, résultats du 1er semestre 2022</a> : 103 944 sites en Europe.</li>
+    <li><a href="https://www.cellnex.com/news/noticia47/" target="_blank" rel="noopener">Cellnex, septembre 2016</a> : plus de 16 100 sites en Europe.</li>
+    <li><a href="https://www.journaldunet.com/business/1541865-cellnex-injecte-2-5-milliards-pour-muscler-la-couverture-mobile-francaise/" target="_blank" rel="noopener">Journal du Net, mai 2025</a> : 2,5 milliards d’euros, de 25 000 à 30 000 sites d’ici 2030.</li>
+    <li><a href="https://www.autoritedelaconcurrence.fr/fr/communiques-de-presse/infrastructures-de-telephonie-mobile-lautorite-autorise-sous-conditions-le" target="_blank" rel="noopener">Autorité de la concurrence, 25 oct. 2021</a> : rachat de Hivory autorisé sous conditions, environ 9 000 sites Cellnex avant l’opération.</li>
+    <li><a href="https://capacitymedia.com/article/29tguvmaqy9h43b5aicxs/cellnex-closes-on-hivory-ahead-of-financial-results" target="_blank" rel="noopener">Capacity Media, nov. 2021</a> : 11 583 sites en France au 30 sept. 2021.</li>
+    <li><a href="https://www.cellnex.com/app/uploads/2023/09/20230906-CP-Cellnex-va-ceder-2-353-sites-en-France_FR.pdf" target="_blank" rel="noopener">Cellnex, communiqué du 6 sept. 2023</a> : cession de sites imposée par l’Autorité de la concurrence, liste des actionnaires de référence.</li>
+    <li><a href="https://www.cellnex.com/app/uploads/2015/10/Cellnex-Results-FY-2016.pdf" target="_blank" rel="noopener">Cellnex, présentation des résultats 2016</a> : taux de 1,06 en France contre 1,62 en moyenne.</li>
+    <li><a href="https://www.universfreebox.com/?p=37907" target="_blank" rel="noopener">Univers Freebox, 2017</a> : accord Bouygues Telecom et Cellnex (3 000 sites, 854 millions d’euros, contrat de 15 ans).</li>
+    <li><a href="https://towerxchange.com/article/2blg205wbc788bwg493wg/europe-news" target="_blank" rel="noopener">TowerXchange, mai 2019</a> : accord avec Free (5 700 sites).</li>
+    <li><a href="https://www.telecomtv.com/content/access-evolution/cellnex-splashes-5-2-billion-on-altice-s-french-towers-40778/amp/" target="_blank" rel="noopener">TelecomTV, fév. 2021</a> : rachat de Hivory pour 5,2 milliards d’euros.</li>
+    <li><a href="https://www.senat.fr/questions/base/2024/qSEQ24051268S.html" target="_blank" rel="noopener">Sénat, question écrite de mai 2024</a> : mutualisation, TowerCos et loi de 2021.</li>
+    <li><a href="https://maire-info.com/antennes-relais-le-dossier-devra-etre-mis-%EF%BF%BD-dispositiondu-public-sous-dix-jours-article2-19904" target="_blank" rel="noopener">Maire Info, sept. 2016</a> et <a href="https://www.baumann-avocats.com/CPCE/article-r20-29-du-code-des-postes-et-des-communications-electroniques.php" target="_blank" rel="noopener">article R. 20-29 du CPCE</a> : délais du dossier d’information mairie.</li>
+    <li><a href="https://www.economie.gouv.fr/particuliers/numerique-et-cybersecurite/ondes-electromagnetiques-mesurez-votre-exposition" target="_blank" rel="noopener">economie.gouv.fr</a> : mesure gratuite de l’exposition aux ondes.</li>
+  </ul>
+
+  <p style="text-align:center;margin-top:36px"><a class="back" href="index.html">‹ Retour à la simulation 3D</a></p>
+  <div class="foot">Page rédigée par l’association de riverains en cours de création, à partir de sources publiques citées ci-dessus. Elle vise à informer, pas à mettre en cause les entreprises citées. Si vous constatez une erreur, signalez-la-nous : nous la corrigerons.<br>Simulation réalisée par Clovis Lalanne · novembre 2026 · <a href="a-propos.html" style="display:inline-block;padding:2px 10px;border-radius:99px;background:rgba(226,145,51,.18);border:1px solid rgba(226,145,51,.5);color:#eef0f3;text-decoration:none;font-weight:600">Qui suis-je ? ›</a></div>
+</div>
+</body>
+</html>

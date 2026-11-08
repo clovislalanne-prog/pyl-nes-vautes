@@ -1,11 +1,12 @@
-# Simulation 3D des options de pylône 5G à Saint-Gély-du-Fesc
+# Pylône de la rue Paul Valéry, Saint-Gély-du-Fesc
 
-Simulation interactive des trois emplacements envisagés pour un pylône de téléphonie mobile (18 m, 30 m et 36 m), avec leurs parcs techniques.
+Simulation 3D et dossier d'information sur le projet de pylône de téléphonie mobile (Bouygues Telecom, construit par Cellnex) envisagé près des Vautes, à Saint-Gély-du-Fesc.
 
-**Voir la simulation : https://clovislalanne-prog.github.io/pyl-nes-vautes/**
+**Voir le site : https://clovislalanne-prog.github.io/pyl-nes-vautes/**
 
-Chaque riverain peut choisir une option ou les comparer, placer sa maison pour connaître sa distance au pylône et enregistrer une image à joindre à son courrier.
+- `index.html` : simulation 3D des trois options (18 m, 30 m, 36 m), épingle « Notre maison », capture d'image pour les courriers.
+- `dossier.html` : où en est le dossier, notre position, ce que nous pouvons faire.
+- `en-savoir-plus.html` : qui construit ce pylône, et pourquoi (Cellnex, modèle économique, droits des riverains).
+- `a-propos.html` : un mot de l'auteur.
 
-Simulation fidèle, non contractuelle. Pylônes et antennes reproduits à l'échelle d'après les photos, dimensions et plans communiqués par Bouygues Telecom ; parcs techniques reconstitués d'après les configurations standard (orientation interprétée) ; positionnement avec Google Earth et cartes.gouv.fr. Données 3D © Google.
-
-Simulation réalisée par Clovis Lalanne, novembre 2026.
+Simulation fidèle, non contractuelle. Données 3D © Google. Réalisée par Clovis Lalanne, novembre 2026.

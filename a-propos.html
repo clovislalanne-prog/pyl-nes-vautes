@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pourquoi j’ai fait cette simulation · Clovis Lalanne</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0e1013; --card: rgba(255,255,255,.05); --line: rgba(255,255,255,.12); --txt: #eef0f3; --mute: #a3a9b3; --acc: #e29133;
+          --c0: #2f8f5b; --c1: #9fd88b; --c2: #f0a24a; --c3: #b8362f; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--txt); font-family: Inter, system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+  body { background: radial-gradient(ellipse at top, #1b2230 0%, var(--bg) 55%) fixed; }
+  .topbar { position: sticky; top: 0; z-index: 10; padding: 10px 16px; padding-top: max(10px, env(safe-area-inset-top)); background: rgba(14,16,19,.72);
+            backdrop-filter: blur(18px) saturate(160%); -webkit-backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--line); display: flex; gap: 8px; flex-wrap: wrap; }
+  .back { display: inline-flex; align-items: center; gap: 8px; color: var(--txt); text-decoration: none; font-size: 13.5px; font-weight: 600; padding: 9px 14px; border-radius: 99px; background: rgba(255,255,255,.08); border: 1px solid var(--line); }
+  .back:hover { background: rgba(255,255,255,.14); }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 8px 20px 60px; }
+  .tag { display: inline-block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--acc); border: 1px solid rgba(226,145,51,.5); border-radius: 99px; padding: 5px 11px; margin: 26px 0 12px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 12px; }
+  h2 { font-size: 21px; margin: 44px 0 12px; line-height: 1.3; }
+  h2 .n { color: var(--acc); margin-right: 8px; }
+  p, li { font-size: 15.5px; line-height: 1.7; color: #d4d8de; }
+  .lead { font-size: 17px; color: var(--txt); }
+  strong { color: var(--txt); }
+  .deadline { display: flex; gap: 14px; align-items: center; background: rgba(226,145,51,.12); border: 1px solid rgba(226,145,51,.55); border-radius: 18px; padding: 16px 18px; margin: 18px 0; }
+  .deadline .d { flex: none; text-align: center; background: var(--acc); color: #111; border-radius: 14px; padding: 8px 12px; font-weight: 700; line-height: 1.1; }
+  .deadline .d b { display: block; font-size: 26px; }
+  .deadline p { margin: 0; font-size: 14.5px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin: 18px 0; }
+  .card h3 { margin: 0 0 8px; font-size: 16px; }
+  .card p:last-child, .card ul:last-child, .card ol:last-child { margin-bottom: 0; }
+  .tl { border-left: 2px solid var(--line); margin: 14px 0 0 6px; padding-left: 18px; }
+  .tl div { position: relative; margin-bottom: 14px; }
+  .tl div::before { content: ""; position: absolute; left: -25px; top: 7px; width: 11px; height: 11px; border-radius: 50%; background: var(--acc); }
+  .tl div.now::before { background: #fff; box-shadow: 0 0 0 4px rgba(255,255,255,.2); }
+  .tl b { color: var(--txt); }
+  .tl p { margin: 2px 0 0; font-size: 14.5px; }
+  .opts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+  .opt { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px; }
+  .opt .h { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; margin-bottom: 8px; }
+  .opt .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .opt .big { font-size: 28px; font-weight: 700; }
+  .opt .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--mute); padding: 4px 0; border-top: 1px solid rgba(255,255,255,.07); }
+  .opt .row b { color: var(--txt); font-weight: 600; }
+  .tool { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 18px; margin: 18px 0; }
+  .tool label { font-size: 13px; color: var(--mute); display: block; margin-bottom: 6px; }
+  .tool select { width: 100%; font: 600 16px Inter, sans-serif; color: var(--txt); background: rgba(0,0,0,.35); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+  .res { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+  .r { border-radius: 16px; padding: 14px; color: #111; }
+  .r .o { font-size: 12.5px; font-weight: 600; opacity: .8; }
+  .r .v { font-size: 20px; font-weight: 700; margin: 4px 0 2px; }
+  .r .x { font-size: 12.5px; line-height: 1.45; }
+  .r.k0 { background: var(--c0); color: #fff; } .r.k1 { background: var(--c1); } .r.k2 { background: var(--c2); } .r.k3 { background: var(--c3); color: #fff; }
+  .r.best { outline: 3px solid #fff; outline-offset: -3px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 14px; font-size: 12.5px; color: var(--mute); margin-top: 12px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .bilan { margin-top: 14px; }
+  .bilan .b { display: grid; grid-template-columns: 120px 1fr; gap: 10px; align-items: center; font-size: 12.5px; margin: 6px 0; }
+  .bilan .bar { display: flex; height: 22px; border-radius: 6px; overflow: hidden; }
+  .bilan .bar div { display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11.5px; color: #111; }
+  .note { font-size: 12px; color: var(--mute); line-height: 1.55; margin-top: 10px; }
+  .prop { counter-reset: q; list-style: none; padding: 0; }
+  .prop li { counter-increment: q; position: relative; padding: 10px 12px 10px 46px; border: 1px solid var(--line); border-radius: 12px; margin-bottom: 8px; background: var(--card); }
+  .prop li::before { content: counter(q); position: absolute; left: 12px; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--acc); color: #111; font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+  .src li { font-size: 13px; line-height: 1.6; }
+  a { color: #8cc4ff; }
+  .foot { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12.5px; color: var(--mute); line-height: 1.6; }
+  @media (max-width: 640px) {
+    h1 { font-size: 24px; } h2 { font-size: 19px; }
+    .opts, .res { grid-template-columns: 1fr; }
+    .bilan .b { grid-template-columns: 90px 1fr; }
+  }
+
+  .quote { font-size: 26px; font-weight: 700; line-height: 1.25; color: var(--txt); margin: 30px 0 10px; }
+  .quote span { color: var(--acc); }
+</style>
+</head>
+<body>
+<div class="topbar"><a class="back" href="index.html">‹ Simulation 3D</a><a class="back" href="dossier.html">Où en est le dossier ? ›</a></div>
+<div class="wrap">
+  <div class="tag">Qui a fait cette simulation&nbsp;?</div>
+  <h1>Un mot de l’auteur</h1>
+  <p class="lead">Je m’appelle Clovis Lalanne, je suis photographe et vidéaste. Je n’habite ni ce quartier, ni la région : <strong>je n’ai aucun intérêt personnel ni financier dans cette affaire.</strong></p>
+  <p>Je viens ici rendre visite à des amis. J’agis pour eux, pour leurs voisins et pour cette nature. J’ai mis mon savoir-faire au service de l’association de riverains qu’ils sont en train de créer, pour que chacun puisse voir ce que ce projet changerait dans son paysage.</p>
+  <p>J’aime la technologie, c’est moi qui ai construit cette simulation. Et j’aime la nature. Les deux sont compatibles : on peut être bien connecté sans planter, au milieu d’une pinède, un pylône de la hauteur d’un immeuble de 12 étages.</p>
+  <p class="quote">Pas une <span>verrue</span> de plus.</p>
+  <p style="color:var(--mute);margin-top:4px">Clovis Lalanne · novembre 2026</p>
+  <div class="card" style="margin-top:28px"><p class="note" style="margin:0">Ce texte exprime mon avis personnel. Les autres pages de ce site s’en tiennent aux faits, avec leurs sources, et la simulation reproduit les pylônes aussi fidèlement que possible.</p></div>
+  <p style="text-align:center;margin-top:36px"><a class="back" href="index.html">‹ Retour à la simulation 3D</a></p>
+</div>
+</body>
+</html>
