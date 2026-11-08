@@ -302,7 +302,7 @@
     </div>
 
 
-    <button id="bAnfr" class="anfrBtn"><span class="ic">📡</span><span class="tx">Antennes autour du projet<small>Les 20 supports de téléphonie dans un rayon de 4 km (ANFR)</small></span><i class="sw"></i></button>
+    <button id="bAnfr" class="anfrBtn"><span class="ic">📡</span><span class="tx">Antennes autour du projet<small>Les 20 supports de téléphonie dans un rayon de 4 km · données ANFR via Cartoradio, au 31/10/2026</small></span><i class="sw"></i></button>
     <a class="morelink" href="dossier.html">📋 Où en est le dossier ?<small>Notre position, l’association de riverains, la réponse commune avant le 15 novembre.</small></a>
     <a class="morelink" href="en-savoir-plus.html">📖 Pour aller plus loin<small>Qui construit ce pylône, et pourquoi ? Nos droits de riverains.</small></a>
     <a class="morelink" href="a-propos.html" style="background:rgba(255,255,255,.06);border-color:var(--line)">✍︎ Qui a fait cette simulation ?<small>Un mot de Clovis Lalanne, l’auteur.</small></a>
@@ -366,7 +366,7 @@
 <div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html#direct" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v43</span></div>
 <div id="toast" class="panel"></div>
 <div id="anfrCard" class="panel"></div>
-<div id="anfrSrc" class="panel">📡 Données ANFR via <a href="https://www.cartoradio.fr" target="_blank" rel="noopener">Cartoradio</a>, situation au 31/10/2026 · inventaire administratif : ni mesure d’exposition, ni preuve de mise en service · touchez un support pour sa fiche</div>
+
 <div id="tip" class="panel"></div>
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
 <div id="mbar" class="panel">
@@ -1017,10 +1017,10 @@
   function anfrShowDir(a) {
     anfrClearDir();
     Object.entries(a.az).forEach(([op, list], j) => list.forEach(deg => {
-      const r = Cesium.Math.toRadians(deg), L = 420, dx = L * Math.sin(r), dy = L * Math.cos(r);
+      const r = Cesium.Math.toRadians(deg), L = 650, dx = L * Math.sin(r), dy = L * Math.cos(r);
       const k = 1 / (111320 * Math.cos(a.lat * Math.PI / 180)), q = 1 / 110570, z = a.g + a.h - 1 + j * 0.6;
       const p0 = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, z), p1 = Cesium.Cartesian3.fromDegrees(a.lon + dx * k, a.lat + dy * q, z);
-      anfrDir.push(viewer.entities.add({ polyline: { positions: [p0, p1], width: 7, material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85)) } }));
+      anfrDir.push(viewer.entities.add({ polyline: { positions: [p0, p1], width: 9, material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85)) } }));
       anfrDir.push(viewer.entities.add({ position: p1, label: { text: deg + "°", font: "600 11px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
         backgroundColor: Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85), backgroundPadding: new Cesium.Cartesian2(4, 2), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     }));
@@ -1036,20 +1036,23 @@
       <div>Orientations déclarées : ${Object.entries(a.az).map(([o, l]) => OPN[o].split(" ")[0] + " " + l.join("°, ") + "°").join(" · ")}</div>
       ${a.since ? `<div>Première mise en service déclarée : ${a.since}</div>`
         : `<div class="warn"><b>Accord d’implantation ANFR le ${a.accord}</b>, aucune mise en service publiée à ce jour. L’absence de date ne prouve pas que le site est inactif, ni qu’il est déjà construit.</div>`}
-      <div class="mute">Support ANFR ${a.id} · <a href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/${a.lon}/${a.lat}" target="_blank" rel="noopener">Voir sur Cartoradio ›</a> · Les flèches indiquent des directions déclarées, pas une portée ni une exposition.</div>`;
+      <div class="mute">Données ANFR (Cartoradio), situation au 31/10/2026, inventaire administratif · support ${a.id} · <a href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/${a.lon}/${a.lat}" target="_blank" rel="noopener">Voir sur Cartoradio ›</a> · Les flèches indiquent des directions déclarées, pas une portée ni une exposition.</div>`;
     $("anfrCard").classList.add("show");
     $("anfrX").onclick = () => { $("anfrCard").classList.remove("show"); anfrClearDir(); anfrSel = null; };
     anfrShowDir(a);
+    if (orbit) stopOrbit(true);
+    const c = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, a.g + a.h);
+    cam.flyToBoundingSphere(new Cesium.BoundingSphere(c, 700), { offset: new Cesium.HeadingPitchRange(cam.heading, Cesium.Math.toRadians(-50), 2300), duration: 1.4 });
   }
   async function setAnfr(on) {
-    anfrOn = on; $("bAnfr").classList.toggle("on", on); $("anfrSrc").classList.toggle("show", on);
+    anfrOn = on; $("bAnfr").classList.toggle("on", on);
     if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); return; }
     toast("Chargement des antennes…", 1500);
     await anfrBuild(); anfrEnts.forEach(e => e.show = true);
     if (typeof stopOrbit === "function" && orbit) stopOrbit(true);
-    cam.flyTo({ destination: Cesium.Cartesian3.fromDegrees(REF.lon, REF.lat - 0.072, 6200), orientation: { heading: 0, pitch: Cesium.Math.toRadians(-52), roll: 0 }, duration: 2 });
+    cam.flyTo({ destination: Cesium.Cartesian3.fromDegrees(REF.lon - (innerWidth >= 700 ? 0.018 : 0), REF.lat - 0.085, 7600), orientation: { heading: 0, pitch: Cesium.Math.toRadians(-55), roll: 0 }, duration: 2 });
     if (isPhone()) sheet(false);
-    toast("20 supports dans un rayon de 4 km · touchez-en un pour sa fiche", 4500);
+    toast("20 supports dans un rayon de 4 km (ANFR) · touchez-en un pour sa fiche", 4500);
   }
   $("bAnfr").onclick = () => setAnfr(!anfrOn);
   new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
