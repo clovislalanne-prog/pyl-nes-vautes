@@ -817,6 +817,7 @@
         one = { x: t.clientX, y: t.clientY };
         if (tStart && Math.hypot(t.clientX - tStart.x, t.clientY - tStart.y) > 10) tStart.moved = true;
         const now = performance.now(), dt = Math.max(1, now - tv.t); tv = { x: .7 * dx / dt + .3 * tv.x, y: .7 * dy / dt + .3 * tv.y, t: now };
+        const sp = Math.hypot(tv.x, tv.y); if (sp > 1.4) { tv.x *= 1.4 / sp; tv.y *= 1.4 / sp; }
       } else if (e.touches.length === 2 && g && orbit) {
         e.preventDefault();
         const n = info(e.touches);
@@ -895,7 +896,8 @@
       if (!drag || e.pointerType !== "mouse") return;
       const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
       if (drag.rot) { if (!orbit) return; orbit.heading -= dx * 0.006; orbit.pitch = Math.max(-1.55, Math.min(-0.05, orbit.pitch - dy * 0.004)); applyOrbit(); }
-      else if (dx || dy) { panPx(dx, dy); const now = performance.now(), dt = Math.max(1, now - vel.t); vel = { x: .7 * dx / dt + .3 * vel.x, y: .7 * dy / dt + .3 * vel.y, t: now }; }
+      else if (dx || dy) { panPx(dx, dy); const now = performance.now(), dt = Math.max(1, now - vel.t); vel = { x: .7 * dx / dt + .3 * vel.x, y: .7 * dy / dt + .3 * vel.y, t: now };
+        const sp = Math.hypot(vel.x, vel.y); if (sp > 1.4) { vel.x *= 1.4 / sp; vel.y *= 1.4 / sp; } }
     });
     addEventListener("pointerup", e => {
       if (!drag || e.pointerType !== "mouse") return;

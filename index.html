@@ -362,6 +362,13 @@
     Cesium.Cartesian3.add(Cesium.Cartesian3.multiplyByScalar(east, mvRight * Math.cos(h) + mvFwd * Math.sin(h), new Cesium.Cartesian3()),
                           Cesium.Cartesian3.multiplyByScalar(north, -mvRight * Math.sin(h) + mvFwd * Math.cos(h), new Cesium.Cartesian3()), off);
     orb.center = Cesium.Cartesian3.add(orb.center, off, new Cesium.Cartesian3());
+    keepOnGround();
+  }
+  // Le point regardé suit le relief : on ne passe jamais sous une colline en se déplaçant
+  function keepOnGround() {
+    const c = Cesium.Cartographic.fromCartesian(orb.center);
+    let h; try { h = scene.sampleHeight(c, SITES.flatMap(s => s.models)); } catch (e) {}
+    if (Number.isFinite(h)) { c.height = h > c.height ? h : c.height + (h - c.height) * .2; orb.center = Cesium.Cartographic.toCartesian(c); }
   }
   // Zoomer vers un point de l'écran (doigts, curseur), comme sur les cartes
   function zoomAt(f, sx, sy) {
@@ -394,6 +401,7 @@
         pan(dx, dy);
         const now = performance.now(), dt = Math.max(1, now - vel.t);
         vel = { x: .7 * dx / dt + .3 * vel.x, y: .7 * dy / dt + .3 * vel.y, t: now };
+        const sp = Math.hypot(vel.x, vel.y); if (sp > 1.4) { vel.x *= 1.4 / sp; vel.y *= 1.4 / sp; }   // élan plafonné
       }
       applyOrb();
     } else if (ptrs.size === 2) {
@@ -421,7 +429,7 @@
       // Élan : la carte continue de glisser puis ralentit, comme sur un téléphone
       let vx = vel.x, vy = vel.y, last = now;
       const g = ts => { const dt = ts - last; last = ts; pan(vx * dt, vy * dt); applyOrb(); const k = Math.exp(-dt / 280); vx *= k; vy *= k;
-        if (Math.hypot(vx, vy) > .02) glide = requestAnimationFrame(g); };
+        if (Math.hypot(vx, vy) > .03) glide = requestAnimationFrame(g); };
       glide = requestAnimationFrame(g);
     }
     if (ptrs.size === 0) down = null;
