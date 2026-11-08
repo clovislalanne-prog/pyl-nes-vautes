@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Simulation 3D · Projet de pylône 5G</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://api.cesium.com" crossorigin>
+<link rel="preconnect" href="https://assets.ion.cesium.com" crossorigin>
+<link rel="preconnect" href="https://tile.googleapis.com" crossorigin>
 <script src="https://cdn.jsdelivr.net/npm/cesium@1.123.0/Build/Cesium/Cesium.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/cesium@1.123.0/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -146,10 +150,10 @@
   #disc { bottom: 34px; left: 16px; max-width: 330px; max-height: 45%; overflow: auto; padding: 8px 12px; font-size: 10.5px; color: var(--mute); line-height: 1.4; }
   #flash { position: absolute; inset: 0; background: #fff; opacity: 0; pointer-events: none; transition: opacity .35s; }
   #toast { left: 50%; bottom: 40px; transform: translateX(-50%); padding: 9px 14px; font-size: 13px; display: none; }
-  #intro { position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 20px;
+  #intro { position: absolute; inset: 0; z-index: 20; display: flex; align-items: flex-start; justify-content: center; padding: max(20px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom)); -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
            background: radial-gradient(ellipse at center, rgba(10,12,15,.72), rgba(5,6,8,.94)); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); overflow: auto; }
   #intro.hide { display: none; }
-  #intro .card { max-width: 640px; width: 100%; background: rgba(18,20,24,.96); border: 1px solid var(--line); border-radius: 20px; padding: 30px 32px 26px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  #intro .card { margin: auto 0; max-width: 640px; width: 100%; background: rgba(18,20,24,.96); border: 1px solid var(--line); border-radius: 20px; padding: 30px 32px 26px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
   #intro .tag { display: inline-block; font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--acc); border: 1px solid rgba(226,145,51,.5); border-radius: 99px; padding: 5px 11px; margin-bottom: 14px; }
   #intro h2 { font-size: 26px; line-height: 1.2; margin: 0 0 12px; font-weight: 700; }
   #intro p { color: #c9cdd3; font-size: 14.5px; line-height: 1.6; margin: 0 0 10px; }
@@ -165,6 +169,11 @@
   #intro .choices .d { width: 12px; height: 12px; border-radius: 50%; }
   #intro .go { width: 100%; padding: 14px; font-size: 15.5px; font-weight: 700; background: var(--acc); color: #111; border: none; border-radius: 12px; }
   #intro .go:disabled { background: #444; color: #aaa; }
+  #intro .ibar { height: 4px; border-radius: 99px; background: rgba(255,255,255,.1); overflow: hidden; margin-top: 8px; }
+  #intro .ibar div { height: 100%; width: 3%; background: var(--acc); transition: width .4s; }
+  #intro .iwait { font-size: 12px; color: var(--mute); text-align: center; margin-top: 8px; }
+  #intro.ready .ibar, #intro.ready .iwait { display: none; }
+  #intro .choices button:disabled { opacity: .45; }
   #intro .more-link { display: block; text-align: center; margin-top: 12px; padding: 11px; border-radius: 12px; border: 1px solid var(--line); color: var(--txt); text-decoration: none; font-weight: 600; font-size: 13.5px; background: rgba(255,255,255,.05); }
   #intro .more-link:hover { background: rgba(255,255,255,.1); }
   .morelink { display: block; margin-top: 10px; padding: 11px 12px; border-radius: 14px; text-decoration: none; color: var(--txt); font-weight: 700; font-size: 13.5px; background: rgba(226,145,51,.14); border: 1px solid rgba(226,145,51,.45); }
@@ -188,7 +197,10 @@
     #tabs button { flex: 1; justify-content: center; padding: 8px 6px; font-size: 12.5px; gap: 5px; }
     #tabs button .lg { display: none; }
     #pickHint { top: 58px; left: 8px; right: 8px; transform: none; text-align: center; }
-    #mrot { display: flex; position: absolute; right: 10px; top: 58px; width: 42px; height: 42px; border-radius: 50%; align-items: center; justify-content: center; font-size: 17px; padding: 0; z-index: 4; }
+    #mrot { display: flex; position: absolute; right: 10px; top: 58px; height: 38px; border-radius: 99px; align-items: center; gap: 6px; padding: 0 12px 0 10px; font-size: 12.5px; font-weight: 700; z-index: 4; }
+    #mrot .cam { font-size: 16px; display: inline-block; }
+    #mrot.on .cam { animation: camspin 2.4s linear infinite; }
+    @keyframes camspin { 0% { transform: rotate(0) } 100% { transform: rotate(360deg) } }
     #mrot.on { background: var(--acc); color: #111; }
     #mbar { display: flex; position: absolute; left: 8px; right: 8px; bottom: max(8px, env(safe-area-inset-bottom)); padding: 6px; gap: 6px; border-radius: 22px; z-index: 6; }
     #mbar button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 7px 4px; font-size: 11px; font-weight: 600; border-radius: 16px; background: transparent; border-color: transparent; box-shadow: none; }
@@ -229,7 +241,9 @@
     </div>
     <div class="ask">Quelle option voulez-vous voir ?</div>
     <div class="choices" id="iChoices"></div>
-    <button class="go" id="iGo" disabled>Chargement de la 3D…</button>
+    <button class="go" id="iGo" disabled>Préparation de la 3D…</button>
+    <div class="ibar"><div id="iBar"></div></div>
+    <div class="iwait" id="iWait">La 3D se prépare en arrière-plan (quelques secondes). Vous pouvez lire la présentation en attendant : les boutons s’activent tout seuls.</div>
     <a class="more-link" href="dossier.html">📋 Où en est le dossier ? Rejoindre l’association · réponse avant le 15 novembre</a>
     <a class="more-link" href="en-savoir-plus.html">📖 Pour aller plus loin : qui construit ce pylône, et pourquoi ?</a>
     <div class="foot" id="iFoot"></div>
@@ -303,10 +317,10 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v33</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v36</span></div>
 <div id="toast" class="panel"></div>
 <div id="tip" class="panel"></div>
-<button id="mrot" class="panel" aria-label="Rotation automatique">⟳</button>
+<button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
 <div id="mbar" class="panel">
   <button id="mHome"><span class="i">📍</span>Notre maison</button>
   <button id="mCap" class="cap"><span class="i">📷</span>Capturer</button>
@@ -335,10 +349,11 @@
     <div class="it"><span class="k">← → ↑ ↓</span><span>flèches du clavier, comme le pavé</span></div>
   </div>
   <div class="grp touch">
-    <div class="it"><span class="k">☝︎ 1 doigt</span><span>se déplacer sur la carte</span></div>
+    <div class="it"><span class="k">✌︎ Glisser 2 doigts</span><span>déplacer la carte, avancer, reculer</span></div>
     <div class="it"><span class="k">✌︎ Pincer</span><span>zoomer, dézoomer</span></div>
     <div class="it"><span class="k">✌︎ Tourner 2 doigts</span><span>faire pivoter la vue</span></div>
-    <div class="it"><span class="k">✌︎ Glisser 2 doigts</span><span>incliner la vue (haut / bas)</span></div>
+    <div class="it"><span class="k">☝︎ 1 doigt</span><span>tourner autour et incliner la vue</span></div>
+    <div class="it"><span class="k">🎥 Rotation</span><span>lancer ou arrêter la rotation automatique</span></div>
   </div>
   <div class="ft">Perdu ? Touchez un onglet en haut pour revenir autour d’une option. Fermez cette aide avec ✕ ; le bouton « ? » permet de la rouvrir.</div>
 </div>
@@ -372,13 +387,18 @@
     globe: false, skyAtmosphere: new Cesium.SkyAtmosphere(),
     baseLayerPicker: false, geocoder: false, homeButton: false, sceneModePicker: false,
     navigationHelpButton: false, animation: false, timeline: false, fullscreenButton: false,
-    infoBox: false, selectionIndicator: false, useBrowserRecommendedResolution: false
+    infoBox: false, selectionIndicator: false, useBrowserRecommendedResolution: matchMedia("(pointer: coarse)").matches
   });
   const scene = viewer.scene, cam = viewer.camera;
   viewer.clock.currentTime = Cesium.JulianDate.fromIso8601("2026-06-21T10:30:00Z");
   viewer.clock.shouldAnimate = false;
 
-  try { scene.primitives.add(await Cesium.createGooglePhotorealistic3DTileset()); }
+  const TOUCH = matchMedia("(pointer: coarse)").matches;
+  try {
+    const ts = await Cesium.createGooglePhotorealistic3DTileset();
+    if (TOUCH) { ts.maximumScreenSpaceError = 28; ts.cacheBytes = 192 * 1024 * 1024; ts.maximumCacheOverflowBytes = 64 * 1024 * 1024; }
+    scene.primitives.add(ts);
+  }
   catch (e) { $("iGo").textContent = "Impossible de charger la 3D, réessayez plus tard"; console.error(e); return; }
 
   const toast = (msg, ms) => { const t = $("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(toast.t); toast.t = setTimeout(() => t.style.display = "none", ms || 2500); };
@@ -417,29 +437,34 @@
   // ---------- Construction des emplacements (pylône + parc technique = un seul ensemble) ----------
   const active = SITES.filter(s => s.lon != null);
   let showLabels = true, showRings = true;
-  // Chargement en parallèle : calage du sol des 3 sites + modèles 3D en même temps
+  // Chargement rapide : relief simple d'abord (immédiat), calage fin sur le décor 3D ensuite, en arrière-plan
   const s0v = active[0];
   cam.setView({ destination: Cesium.Cartesian3.fromDegrees(s0v.lon - 0.0008, s0v.lat - 0.0035, 260), orientation: { heading: Cesium.Math.toRadians(10), pitch: Cesium.Math.toRadians(-30), roll: 0 } });
   let done = 0; const total = active.length * 2;
-  const tick = () => { done++; $("iGo").textContent = "Chargement de la 3D… " + Math.round(done / total * 100) + " %"; };
+  const tick = () => { done++; const p = Math.round(done / total * 100); $("iGo").textContent = "Préparation de la 3D… " + p + " %"; $("iBar").style.width = p + "%"; };
+  async function quickGround(lon, lat) {
+    try { terrainP = terrainP || Cesium.createWorldTerrainAsync(); const terr = await terrainP;
+      return (await Cesium.sampleTerrainMostDetailed(terr, [Cesium.Cartographic.fromDegrees(lon, lat)]))[0].height; }
+    catch (e) { return 0; }
+  }
   const [grounds, loaded] = await Promise.all([
-    Promise.all(active.map(s => groundAt(s.lon, s.lat).then(g => { tick(); return g; }))),
+    Promise.all(active.map(s => quickGround(s.lon, s.lat).then(g => { tick(); return g; }))),
     Promise.all(active.map(s => Promise.all([
       Cesium.Model.fromGltfAsync({ url: s.pylone, backFaceCulling: false }),
       Cesium.Model.fromGltfAsync({ url: s.parc, backFaceCulling: false })
     ]).then(m => { tick(); return m; })))
   ]);
-  active.forEach((s, i) => { s.ground = grounds[i] + s.offset; s.models = loaded[i]; });
-  for (const s of active) {
+  active.forEach((s, i) => { s.ground = grounds[i] + s.offset; s.models = loaded[i]; s.visible = true; s.models.forEach(m => scene.primitives.add(m)); });
+  function placeSite(s) {
+    (s.rings || []).forEach(r => viewer.entities.remove(r)); if (s.label) viewer.entities.remove(s.label);
     s.frame = Cesium.Transforms.headingPitchRollToFixedFrame(Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground),
                new Cesium.HeadingPitchRoll(Cesium.Math.toRadians(s.heading), 0, 0));
     s.enu = Cesium.Transforms.eastNorthUpToFixedFrame(Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground));
     s.base = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground);
     s.mid = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height * 0.5);
     s.top = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height);
-    s.visible = true;
     const col = Cesium.Color.fromCssColorString(s.color);
-    s.models.forEach(m => { m.modelMatrix = s.frame; scene.primitives.add(m); });
+    s.models.forEach(m => { m.modelMatrix = s.frame; });
     s.label = viewer.entities.add({
       position: Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height + 4),
       label: { text: s.name.toUpperCase() + "  |  " + s.height + " m", font: "600 14px Inter, sans-serif", fillColor: Cesium.Color.WHITE,
@@ -456,6 +481,20 @@
         label: { text: r + " m", font: "600 11.5px Inter, sans-serif", fillColor: col, outlineColor: Cesium.Color.BLACK, outlineWidth: 3,
                  style: Cesium.LabelStyle.FILL_AND_OUTLINE, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     });
+  }
+  active.forEach(placeSite);
+  // Calage fin en arrière-plan : on repose chaque pylône exactement sur le sol du décor 3D
+  async function refineGrounds() {
+    for (const s of active) {
+      try {
+        const g = (await groundAt(s.lon, s.lat)) + s.offset;
+        if (Number.isFinite(g) && Math.abs(g - s.ground) > 0.2) {
+          const wasOrbit = orbit && orbit.center === s.mid;
+          s.ground = g; placeSite(s); refresh();
+          if (wasOrbit) { orbit.center = s.mid; }
+        }
+      } catch (e) { console.warn(e); }
+    }
   }
   let lightK = .55, showHomeDist = true, showAxis = true;
   function applyLight() {
@@ -733,6 +772,44 @@
   ctl.zoomEventTypes = [Cesium.CameraEventType.WHEEL, Cesium.CameraEventType.PINCH];
   ctl.minimumZoomDistance = 1.5;
 
+  // ---------- Tactile : 2 doigts = déplacer la carte, pincer = zoomer, tourner = pivoter ----------
+  if (TOUCH) {
+    ctl.zoomEventTypes = [Cesium.CameraEventType.WHEEL];
+    ctl.tiltEventTypes = [Cesium.CameraEventType.MIDDLE_DRAG, Cesium.CameraEventType.RIGHT_DRAG];
+    const cv = scene.canvas;
+    let g = null;
+    const info = ts => {
+      const [a, b] = [ts[0], ts[1]];
+      return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2,
+               d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), ang: Math.atan2(b.clientY - a.clientY, b.clientX - a.clientX) };
+    };
+    cv.addEventListener("touchstart", e => {
+      if (e.touches.length === 2) {
+        e.preventDefault(); e.stopPropagation();
+        if (orbit) stopOrbit();
+        g = info(e.touches);
+      }
+    }, { passive: false, capture: true });
+    cv.addEventListener("touchmove", e => {
+      if (!g || e.touches.length !== 2) return;
+      e.preventDefault(); e.stopPropagation();
+      const n = info(e.touches);
+      const nrm = Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(cam.positionWC, new Cesium.Cartesian3());
+      const h = Math.max(3, Cesium.Cartographic.fromCartesian(cam.positionWC).height - active[0].ground);
+      const D = h / Math.max(0.2, Math.sin(Math.abs(cam.pitch)));
+      const mpp = 1.15 * D / cv.clientHeight;
+      const right = horiz(cam.rightWC), fwd = horiz(cam.directionWC);
+      cam.move(right, -(n.x - g.x) * mpp);
+      cam.move(fwd, (n.y - g.y) * mpp);
+      if (g.d > 0 && n.d > 0) cam.move(cam.directionWC, D * (1 - g.d / n.d));
+      cam.look(nrm, -(n.ang - g.ang));
+      g = n;
+    }, { passive: false, capture: true });
+    const end = e => { if (e.touches.length < 2) g = null; };
+    cv.addEventListener("touchend", end, { capture: true });
+    cv.addEventListener("touchcancel", end, { capture: true });
+  }
+
   // ---------- Capture d'écran téléchargeable ----------
   $("capture").onclick = () => {
     const rm = scene.postRender.addEventListener(() => {
@@ -797,6 +874,7 @@
   $("ctrlX").onclick = () => { clearTimeout(showCtrl.t); showCtrl(false); };
   $("iGo").onclick = () => enter("all");
   active.forEach(s => { const b = makeBtn(s.name, s.color, "pylône " + s.height + " m"); b.onclick = () => enter(s.id); $("iChoices").appendChild(b); });
+  $("intro").classList.add("ready");
   $("discMore").onclick = e => { e.preventDefault(); const f = $("discFull"), o = f.style.display === "none"; f.style.display = o ? "block" : "none"; $("discMore").textContent = o ? "Réduire ▴" : "ⓘ Méthode"; };
   $("bCap2").onclick = () => $("capture").click();
   document.addEventListener("click", e => {
@@ -831,6 +909,7 @@
   $("bHelp").onclick = () => $("intro").classList.remove("hide");
   applyLight();
   selectOption("all");
+  setTimeout(refineGrounds, 300);
 })();
 </script>
 </body>
