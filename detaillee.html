@@ -516,6 +516,40 @@
     #disc { display: none !important; }
     #pickHint.follow { bottom: calc(max(6px, env(safe-area-inset-bottom)) + 54px) !important; left: 50% !important; right: auto !important; transform: translateX(-50%) !important; width: auto; }
   }
+
+  /* ===== v48 ===== */
+  /* Crédits Google / Cesium : une seule ligne, discrète et plus transparente */
+  .cesium-viewer-bottom { background: rgba(255,255,255,.32) !important; border: none !important; box-shadow: none !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+    opacity: .85; padding: 1px 10px !important; white-space: nowrap; max-width: none !important; }
+  .cesium-viewer-bottom * { white-space: nowrap !important; }
+  .cesium-viewer-bottom .cesium-credit-logoContainer, .cesium-viewer-bottom .cesium-credit-textContainer { display: inline !important; }
+  /* Un seul bouton « Capturer » partout : pastille bleue, appareil photo dessiné */
+  #mCap { display: inline-flex !important; }
+  @media (min-width: 701px) and (min-height: 501px) { #capture { display: inline-flex !important; } }
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) { #capture { display: none !important; } }
+  #capture, #mCap { flex-direction: row !important; align-items: center; justify-content: center; gap: 8px !important;
+    background: var(--acc) !important; color: #fff !important; font: 600 15px Inter, sans-serif !important; border: none !important; border-radius: 99px !important;
+    box-shadow: 0 6px 18px rgba(10,122,255,.35) !important; }
+  #capture svg, #mCap svg { display: block !important; width: 20px; height: 20px; flex: none; }
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
+    /* Barre du bas relevée, crédits en une ligne juste en dessous */
+    #mbar { bottom: calc(max(4px, env(safe-area-inset-bottom)) + 20px) !important; }
+    .cesium-viewer-bottom { bottom: max(2px, env(safe-area-inset-bottom)) !important; transform: translateX(-50%) scale(.68) !important; transform-origin: bottom center !important; }
+    #mCap { flex: 1.3 !important; align-self: center; height: 46px; padding: 0 8px !important; font-size: 14.5px !important; }
+    #info { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 88px) !important; }
+    #info:not(.open) { visibility: hidden; transition: transform .35s, visibility 0s .35s; }
+    #pickHint.follow, #anfrQ, #anfrCard { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 92px) !important; }
+    /* L'œil dit ce qu'il fait */
+    #tabs .eye { width: auto !important; height: 30px !important; padding: 0 9px !important; gap: 5px !important; flex-direction: row !important; background: var(--soft) !important; border-radius: 99px !important; }
+    #tabs .eye svg { width: 18px !important; height: 18px !important; }
+    #tabs .eye .el { display: inline !important; font-size: 12.5px; font-weight: 700; }
+  }
+  @media (max-height: 500px) and (orientation: landscape) {
+    #mbar { bottom: calc(max(4px, env(safe-area-inset-bottom)) + 16px) !important; }
+    #info { bottom: 8px !important; }
+    #mCap { height: 36px; }
+    #pickHint.follow { bottom: calc(max(6px, env(safe-area-inset-bottom)) + 70px) !important; }
+  }
 </style>
 </head>
 <body>
@@ -555,7 +589,7 @@
   <div class="body">
     <div class="card">
       <div class="ct"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.5 2.5-2.1-.6-.6-2.1 2.5-2.5Z"/></svg><div><b>Outils de simulation</b><small>Configurer et explorer la simulation</small></div></div>
-      <label class="field"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><input id="homeName" maxlength="40" placeholder="Nom du lieu (ex. : Bekara)" value=""></label>
+      <label class="field"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><input id="homeName" maxlength="40" placeholder="Nom du lieu (ex. : Martin)" value=""></label>
       <button id="bHome" class="place">📍 Placer ma maison sur la carte</button>
       <div class="pinhint">Touchez l’épingle sur la carte pour la déplacer.</div>
       <a class="newaddr" href="index.html#adresse">Chercher une autre adresse ›</a>
@@ -640,7 +674,7 @@
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><svg class="pl" viewBox="0 0 24 24" width="18" height="18"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg><svg class="pa" viewBox="0 0 24 24" width="18" height="18"><rect x="6.5" y="5.5" width="4" height="13" rx="1.2" fill="#fff"/><rect x="13.5" y="5.5" width="4" height="13" rx="1.2" fill="#fff"/></svg></button>
 <div id="mbar" class="panel">
   <button id="mHome"><span class="i">📍</span>Notre maison</button>
-  <button id="mCap" class="cap"><span class="i">📷</span>Capturer</button>
+  <button id="mCap" class="cap"><svg class="camic" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3Z"/><circle cx="12" cy="13" r="3.6"/></svg>Capturer</button>
   <button id="mMore"><span class="i">☰</span>Plus</button>
   <button id="mHelp"><span class="i">?</span>Aide</button>
 </div>
@@ -1024,7 +1058,16 @@
   function allSphere() { return Cesium.BoundingSphere.fromPoints(active.map(s => s.mid)); }
   $("vAll").onclick = () => selectOption("all");
   $("vTop").onclick = () => { stopOrbit(); const b = allSphere(); cam.flyToBoundingSphere(new Cesium.BoundingSphere(b.center, 1), { offset: new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-89.9), Math.max(500, b.radius * 4)), duration: 1.6 }); };
-  $("vWalk").onclick = () => { stopOrbit(); setMode("walk"); const s = active[0];
+  $("vWalk").onclick = () => { stopOrbit(); setMode("walk");
+    if (home) {   // à hauteur d'yeux depuis l'épingle, regard vers le pylône choisi (ou le plus proche)
+      const vis = active.filter(s => s.visible); let s = vis[0] || active[0], bd = 1e12;
+      (vis.length ? vis : active).forEach(v => { const d = Cesium.Cartesian3.distance(v.base, home); if (d < bd) { bd = d; s = v; } });
+      const hc = Cesium.Cartographic.fromCartesian(home), p = Cesium.Cartesian3.fromRadians(hc.longitude, hc.latitude, hc.height + 1.6);
+      const dir = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(s.mid, p, new Cesium.Cartesian3()), new Cesium.Cartesian3());
+      cam.flyTo({ destination: p, orientation: { direction: dir, up: Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(p, new Cesium.Cartesian3()) }, duration: 1.8 });
+      toast("Vue depuis votre épingle, vers " + s.name, 3500); return;
+    }
+    const s = active[0];
     const p = local(s.enu, -40, -150, 1.7); const dir = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(s.mid, p, new Cesium.Cartesian3()), new Cesium.Cartesian3());
     cam.flyTo({ destination: p, orientation: { direction: dir, up: Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(p, new Cesium.Cartesian3()) }, duration: 1.8 });
     toast("À hauteur d’yeux : ▲▼ pour avancer, ◀ ▶ pour pivoter", 4000); };
@@ -1039,7 +1082,7 @@
   let mLine, mPoint;
   new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
     // L'épingle est cliquable : un clic dessus permet de la déplacer
-    if (!picking && !measuring && homeEnts.length) { const pk = scene.pick(ev.position); if (pk && pk.id && pk.id.billboard && homeEnts.includes(pk.id)) { setPicking("home"); return; } }
+    if (!picking && !measuring && homeEnts.length) { const pk = scene.pick(ev.position); if (pk && pk.id && pk.id.billboard && homeEnts.includes(pk.id)) { if (isPhone()) sheet(false); setPicking("home"); return; } }
     const pos = scene.pickPosition(ev.position);
     if (!Cesium.defined(pos)) return;
     if (picking === "home") { setPicking(null); home = pos; drawHome();
