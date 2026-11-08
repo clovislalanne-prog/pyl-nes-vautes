@@ -11,7 +11,8 @@
 <link href="https://cdn.jsdelivr.net/npm/cesium@1.123.0/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root { --acc: #e29133; --txt: #f4f5f7; --mute: #b3b8c0; --card: rgba(22,24,29,.88); }
+  :root { --acc: #e29133; --txt: #f4f5f7; --mute: #b3b8c0; --card: rgba(30,32,38,.5); --glass: linear-gradient(160deg, rgba(255,255,255,.2), rgba(255,255,255,.05) 40%, rgba(255,255,255,.02)); }
+  #top, #bottom, #setPanel, #pickBar { backdrop-filter: blur(30px) saturate(190%); -webkit-backdrop-filter: blur(30px) saturate(190%); background-image: var(--glass) !important; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
   * { box-sizing: border-box; }
   html, body { margin: 0; height: 100%; background: #0d0f12; font-family: Inter, system-ui, sans-serif; color: var(--txt); overflow: hidden; -webkit-text-size-adjust: 100%; }
   #map { position: absolute; inset: 0; touch-action: none; }
@@ -73,7 +74,7 @@
   #welcome label { font-size: 16.5px !important; }
   /* ---------- Bandeau du haut ---------- */
   #top { position: absolute; z-index: 5; top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; margin: 0 auto; max-width: 620px;
-         background: var(--card); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 12px 14px; box-shadow: 0 8px 28px rgba(0,0,0,.35); }
+         background: var(--card); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 30px rgba(0,0,0,.3); }
   #top .l1 { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
   #top .l1 span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #top .l1 button { flex: none; font-size: 14px; font-weight: 600; color: var(--acc); background: none; border: none; padding: 4px 2px; }
@@ -88,9 +89,9 @@
 
   /* ---------- Barre du bas ---------- */
   #bottom { position: absolute; z-index: 5; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); margin: 0 auto; max-width: 620px;
-            background: var(--card); border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 10px; box-shadow: 0 8px 28px rgba(0,0,0,.35); }
+            background: var(--card); border: 1px solid rgba(255,255,255,.14); border-radius: 20px; padding: 10px; box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 30px rgba(0,0,0,.3); }
   #opts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
-  #opts button { padding: 10px 4px; border-radius: 13px; font-size: 15px; font-weight: 700; color: var(--txt);
+  #opts button { padding: 10px 4px; border-radius: 13px; font-size: 15px; font-weight: 700; color: var(--txt); box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 2px 8px rgba(0,0,0,.18);
                  background: rgba(255,255,255,.08); border: 2px solid transparent; line-height: 1.2; }
   #opts button small { display: block; font-size: 13px; font-weight: 600; color: var(--mute); margin-top: 2px; }
   #opts button.on { border-color: var(--c, var(--acc)); background: rgba(255,255,255,.16); }
@@ -102,7 +103,7 @@
   /* ---------- Panneau Affichage ---------- */
   #side { position: absolute; z-index: 6; right: 10px; display: flex; flex-direction: column; gap: 10px; }
   #side button, #photo { width: 46px; height: 46px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;
-          background: rgba(20,22,27,.5); border: 1px solid rgba(255,255,255,.28); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+          background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.08)), rgba(30,32,38,.34); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(24px) saturate(190%); -webkit-backdrop-filter: blur(24px) saturate(190%);
           box-shadow: 0 4px 16px rgba(0,0,0,.3); }
   #side button.on { background: rgba(255,255,255,.28); }
   #side button, #photo { position: relative; }
@@ -172,6 +173,7 @@
     <div class="menu">
       <a href="dossier.html"><span>📋</span><b>Où en est le dossier ?</b><i>›</i></a>
       <a href="en-savoir-plus.html"><span>📖</span><b>Qui construit ce pylône, et pourquoi ?</b><i>›</i></a>
+      <a href="dossier.html#antennes"><span>📡</span><b>Les antennes déjà autour de nous</b><i>›</i></a>
       <a href="a-propos.html"><span>✍︎</span><b>Qui a fait cette simulation ?</b><i>›</i></a>
     </div>
     <div class="choose">Voir le projet en 3D</div>
@@ -183,7 +185,7 @@
       <button id="resume" class="hide"></button>
       <button id="onMap">Je préfère montrer ma maison sur la carte</button>
     </div>
-    <a class="mode alt" href="detaillee.html">
+    <a class="mode alt" href="detaillee.html#direct">
       <div class="mh"><b>Vue détaillée</b><small>pour tout explorer · idéale sur ordinateur et tablette</small></div>
       <ul class="perks">
         <li><span>⚖︎</span>Comparer les 3 emplacements côte à côte</li>
@@ -198,14 +200,14 @@
 </div>
 
 <div id="top" class="hide">
-  <div class="seg" aria-label="Version"><b aria-current="page">Vue rapide</b><a href="detaillee.html">Vue détaillée</a></div>
+  <div class="seg" aria-label="Version"><b aria-current="page">Vue rapide</b><a href="detaillee.html#direct">Vue détaillée</a></div>
   <div class="l1"><span id="where">📍 Chez vous</span><button id="change">Changer</button></div>
   <div id="dist"></div>
 </div>
 
 <div id="bottom" class="hide">
   <div id="opts"></div>
-  <div class="who">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · <a href="a-propos.html">Qui suis-je ? ›</a> · <a href="detaillee.html">Vue détaillée ›</a></div>
+  <div class="who">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · <a href="a-propos.html">Qui suis-je ? ›</a> · <a href="detaillee.html#direct">Vue détaillée ›</a></div>
 </div>
 
 <div id="side" class="hide"><button id="play" aria-label="Lancer la rotation"><span class="tip">Faire le tour</span><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></button><button id="recBtn" aria-label="Recentrer la vue"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.8" fill="#fff"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg><span class="tip">Recentrer</span></button><button id="setBtn" aria-label="Options d’affichage"><span class="tip">Réglages</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.3"/><circle cx="9" cy="17" r="2.3"/></svg></button></div>
@@ -412,14 +414,24 @@
     Cesium.Cartesian3.add(Cesium.Cartesian3.multiplyByScalar(east, mvRight * Math.cos(h) + mvFwd * Math.sin(h), new Cesium.Cartesian3()),
                           Cesium.Cartesian3.multiplyByScalar(north, -mvRight * Math.sin(h) + mvFwd * Math.cos(h), new Cesium.Cartesian3()), off);
     orb.center = Cesium.Cartesian3.add(orb.center, off, new Cesium.Cartesian3());
-    keepOnGround();
+    clearTimeout(settleT); settleT = setTimeout(keepOnGround, 180);
   }
+  let settleT = 0;
   // Le point regardé suit le relief : on ne passe jamais sous une colline en se déplaçant
   function keepOnGround() {
+    // Après le geste : si le point regardé est passé sous le relief, il remonte en douceur
+    if (ptrs.size) return;
     const c = Cesium.Cartographic.fromCartesian(orb.center);
-    let h; try { h = scene.sampleHeight(c, SITES.flatMap(s => s.models)); } catch (e) {}
-    if (Number.isFinite(h)) { c.height = h > c.height ? h : c.height + (h - c.height) * .2; orb.center = Cesium.Cartographic.toCartesian(c); }
+    terrainAt(Cesium.Math.toDegrees(c.longitude), Cesium.Math.toDegrees(c.latitude)).then(h => {
+      if (!Number.isFinite(h) || h < c.height + 2) return;   // on ne fait que remonter si le point passe sous le relief
+      const h0 = c.height, t0 = performance.now();
+      const st = now => { const k = Math.min(1, (now - t0) / 500), e = k * k * (3 - 2 * k);
+        const cc = Cesium.Cartographic.fromCartesian(orb.center); cc.height = h0 + (h - h0) * e; orb.center = Cesium.Cartographic.toCartesian(cc); applyOrb();
+        if (k < 1) requestAnimationFrame(st); };
+      requestAnimationFrame(st);
+    });
   }
+
   // Zoomer vers un point de l'écran (doigts, curseur), comme sur les cartes
   function zoomAt(f, sx, sy) {
     const nr = Math.max(25, Math.min(1500, orb.range * f));
@@ -657,6 +669,9 @@
   }
 
   // Adresse déjà choisie lors d'une visite précédente, ou choisie pendant le chargement
+  if (location.hash === "#direct" && !pending) {
+    try { const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null"); if (sv && Number.isFinite(sv.lon)) pending = { lon: sv.lon, lat: sv.lat, label: sv.label }; } catch (e) {}
+  }
   if (pending === "map") startPick();
   else if (pending) setHome(pending.lon, pending.lat, pending.label);
 

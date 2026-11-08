@@ -12,25 +12,26 @@
 <link href="https://cdn.jsdelivr.net/npm/cesium@1.123.0/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg: rgba(28,30,36,.42); --line: rgba(255,255,255,.18); --txt: #f2f3f5; --mute: #a3a9b3; --acc: #e29133; }
+  :root { --bg: rgba(34,36,42,.34); --line: rgba(255,255,255,.18); --txt: #f2f3f5; --mute: #a3a9b3; --acc: #e29133; }
   html, body { margin: 0; height: 100%; background: #000; font-family: Inter, system-ui, sans-serif; color: var(--txt); overflow: hidden; }
   #map { position: absolute; inset: 0; }
   #map.picking canvas { cursor: crosshair !important; }
-  .panel { position: absolute; background: linear-gradient(160deg, rgba(255,255,255,.16), rgba(255,255,255,.04) 45%), var(--bg);
-           backdrop-filter: blur(26px) saturate(180%); -webkit-backdrop-filter: blur(26px) saturate(180%);
+  .panel { position: absolute; background: linear-gradient(160deg, rgba(255,255,255,.22), rgba(255,255,255,.06) 40%, rgba(255,255,255,.02)), var(--bg);
+           backdrop-filter: blur(30px) saturate(190%); -webkit-backdrop-filter: blur(30px) saturate(190%);
            border: 1px solid var(--line); border-radius: 20px;
            box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 -1px 0 rgba(0,0,0,.15), 0 10px 34px rgba(0,0,0,.28);
            text-shadow: 0 1px 2px rgba(0,0,0,.35); }
-  button { font: 500 12.5px Inter, sans-serif; color: var(--txt); background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16);
-           border-radius: 11px; padding: 7px 11px; cursor: pointer; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); text-shadow: inherit;
+  button { font: 500 12.5px Inter, sans-serif; color: var(--txt); background: linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,.08));
+           border: 1px solid rgba(255,255,255,.22); border-radius: 11px; padding: 7px 11px; cursor: pointer; text-shadow: inherit;
+           box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.18);
            transition: background .15s, transform .1s; }
-  button:hover { background: rgba(255,255,255,.22); }
+  button:hover { background: linear-gradient(180deg, rgba(255,255,255,.32), rgba(255,255,255,.14)); }
   button:active { transform: scale(.96); }
   button.on { text-shadow: none; }
-  button.on { background: var(--acc); border-color: var(--acc); color: #111; }
+  button.on { background: linear-gradient(180deg, #f0a94f, #d9822a); border-color: rgba(255,210,150,.7); color: #111; box-shadow: inset 0 1px 0 rgba(255,255,255,.45), 0 3px 10px rgba(226,145,51,.35); }
   button:disabled { opacity: .4; cursor: default; }
 
-  #info { --bg: rgba(22,24,29,.62); top: 16px; left: 16px; width: 310px; padding: 0; max-height: calc(100% - 130px); overflow: auto; }
+  #info { --bg: rgba(26,28,34,.46); top: 16px; left: 16px; width: 310px; padding: 0; max-height: calc(100% - 130px); overflow: auto; }
   #info .hd { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 13px 14px 10px 16px; background: rgba(30,32,38,.82); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 20px 20px 0 0; border-bottom: 1px solid var(--line); margin-bottom: 10px; }
   #info .body { padding: 0 16px 14px; }
   #info.closed .hd { border-radius: 20px; margin-bottom: 0; border-bottom: none; }
@@ -85,12 +86,12 @@
   #tip { position: fixed; z-index: 30; max-width: 280px; padding: 11px 13px; font-size: 12.5px; line-height: 1.5; color: var(--txt); display: none; --bg: rgba(22,24,29,.8); }
   #tip.show { display: block; }
   #homeInfo:empty, #measure:empty { display: none; }
-  #ctrl { right: 16px; bottom: 300px; width: 290px; padding: 12px 14px; font-size: 12.5px; display: none; z-index: 6; --bg: rgba(22,24,29,.7); }
+  #ctrl { right: 76px; bottom: 96px; width: 270px; padding: 10px 12px; font-size: 12px; display: none; z-index: 6; --bg: rgba(22,24,29,.7); }
   #ctrl.show { display: block; }
   #ctrl .ch { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; font-size: 13.5px; }
   #ctrl .ch button { width: 34px; height: 34px; padding: 0; border-radius: 50%; font-size: 15px; font-weight: 700; flex: none; }
   #ctrl .it { display: flex; gap: 10px; padding: 5px 0; border-top: 1px solid rgba(255,255,255,.08); line-height: 1.35; }
-  #ctrl .it .k { flex: none; width: 128px; font-weight: 600; color: var(--txt); }
+  #ctrl .it .k { flex: none; width: 104px; font-weight: 600; color: var(--txt); }
   #ctrl .it span:last-child { color: #d6dbe2; }
   #ctrl .ft { margin-top: 8px; font-size: 11.5px; color: var(--mute); }
   #ctrl .touch { display: none; }
@@ -140,7 +141,7 @@
   #pickHint.show { display: block; }
 
   #capture { border-radius: 99px; right: 16px; top: 16px; padding: 10px 16px; font-size: 13.5px; font-weight: 600; background: var(--acc); color: #111; border: none; border-radius: 12px; }
-  #pad { --bg: rgba(28,30,36,.22); right: 16px; bottom: 92px; padding: 8px; display: grid; grid-template-columns: repeat(3, 44px); grid-auto-rows: auto; gap: 5px; border-radius: 24px;
+  #pad { display: none !important; --bg: rgba(28,30,36,.22); right: 16px; bottom: 92px; padding: 8px; display: grid; grid-template-columns: repeat(3, 44px); grid-auto-rows: auto; gap: 5px; border-radius: 24px;
          user-select: none; -webkit-user-select: none; touch-action: none; }
   #pad .mode { grid-column: 1 / 4; display: flex; gap: 4px; }
   #pad .mode button { flex: 1; padding: 5px 2px; font-size: 11px; border-radius: 14px; }
@@ -148,7 +149,7 @@
   #pad .zoom { grid-column: 1 / 4; display: flex; gap: 6px; }
   #pad .k.on, #pad .mode button.on { background: var(--acc); }
   #pad .zoom button { flex: 1; font-size: 15px; height: 32px; padding: 0; border-radius: 16px; }
-  #modeSeg { top: 66px; left: 50%; transform: translateX(-50%); display: flex; padding: 3px; border-radius: 12px; z-index: 4; }
+  #modeSeg { top: 64px; right: 16px; display: flex; padding: 3px; border-radius: 12px; z-index: 4; }
   #modeSeg a, #modeSeg b { font: 600 13px Inter, sans-serif; padding: 6px 14px; border-radius: 9px; text-decoration: none; color: #e8eaed; white-space: nowrap; text-shadow: none; }
   #modeSeg b { background: #fff; color: #111; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
   #modeSeg a:hover { background: rgba(255,255,255,.14); }
@@ -190,7 +191,31 @@
   .morelink { display: block; margin-top: 10px; padding: 11px 12px; border-radius: 14px; text-decoration: none; color: var(--txt); font-weight: 700; font-size: 13.5px; background: rgba(226,145,51,.14); border: 1px solid rgba(226,145,51,.45); }
   .morelink small { display: block; font-weight: 400; font-size: 11.5px; color: #d6dbe2; margin-top: 2px; }
   #intro .foot { margin-top: 14px; font-size: 11.5px; color: var(--mute); text-align: center; line-height: 1.5; }
+  .anfrBtn { display: flex; width: 100%; align-items: center; gap: 11px; margin-top: 12px; padding: 11px 12px; border-radius: 14px; text-align: left; font-weight: 700; font-size: 13.5px; }
+  .anfrBtn .ic { font-size: 20px; } .anfrBtn .tx { flex: 1; } .anfrBtn small { display: block; font-weight: 400; font-size: 11.5px; color: #d6dbe2; margin-top: 2px; }
+  .anfrBtn .sw { flex: none; width: 40px; height: 24px; border-radius: 99px; background: rgba(255,255,255,.22); position: relative; transition: background .2s; }
+  .anfrBtn .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: left .2s; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+  .anfrBtn.on { background: linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,.08)); color: var(--txt); border-color: rgba(226,145,51,.7); }
+  .anfrBtn.on .sw { background: var(--acc); } .anfrBtn.on .sw::after { left: 19px; }
+  #anfrCard { display: none; left: 50%; transform: translateX(-50%); bottom: 64px; width: min(420px, calc(100% - 24px)); padding: 13px 15px; font-size: 12.5px; line-height: 1.5; z-index: 7; --bg: rgba(26,28,34,.6); }
+  #anfrCard.show { display: block; }
+  #anfrCard .h { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  #anfrCard .h b { font-size: 14.5px; flex: 1; }
+  #anfrCard .h button { width: 30px; height: 30px; padding: 0; border-radius: 50%; flex: none; }
+  #anfrCard .ops span { display: inline-block; padding: 1px 7px; border-radius: 6px; margin-right: 4px; font-weight: 700; font-size: 11.5px; color: #fff; text-shadow: none; }
+  #anfrCard .warn { margin-top: 8px; padding: 8px 10px; border-radius: 10px; background: rgba(255,190,60,.16); border: 1px solid rgba(255,190,60,.55); }
+  #anfrCard .mute { color: var(--mute); font-size: 11.5px; margin-top: 6px; }
+  #anfrCard a { color: var(--acc); font-weight: 600; text-decoration: none; }
+  #anfrSrc { display: none; left: 50%; transform: translateX(-50%); bottom: 34px; padding: 5px 12px; border-radius: 99px; font-size: 11px; color: #e6e8eb; z-index: 6; max-width: calc(100% - 24px); }
+  #anfrSrc.show { display: block; } #anfrSrc a { color: var(--acc); }
+  @media (max-width: 700px) { #anfrCard { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); } #anfrSrc { top: 108px; bottom: auto; left: 10px; right: 66px; transform: none; border-radius: 12px; } }
   #help { position: absolute; z-index: 5; }
+  #rstack { position: absolute; right: 16px; bottom: 96px; z-index: 5; display: flex; flex-direction: column; gap: 10px; }
+  .rb { width: 48px; height: 48px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; position: relative;
+        background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.08)), rgba(34,36,42,.34); backdrop-filter: blur(24px) saturate(190%); -webkit-backdrop-filter: blur(24px) saturate(190%);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 6px 18px rgba(0,0,0,.3); }
+  #compass .n { position: absolute; top: 2px; font-size: 9px; font-weight: 800; color: #fff; }
+  #needle { transition: transform .1s linear; }
   @media (max-width: 700px) { #intro .card { padding: 22px 18px 18px; } #intro h2 { font-size: 21px; } }
   #loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: #0d0f12;
              font-size: 14px; color: var(--mute); z-index: 10; text-align: center; padding: 20px; }
@@ -203,12 +228,13 @@
   .cesium-viewer-bottom { max-width: calc(100% - 24px); }
   #mbar, #mrot, #moreHint { display: none; }
   @media (max-width: 700px) {
-    #pad, #orbitBar, #sign, #disc, #capture, #toggle, #bHelp { display: none !important; }
+    #pad, #orbitBar, #sign, #disc, #capture, #toggle, #bHelp, #rPlay, #rHelp { display: none !important; }
+    #rstack { bottom: auto; top: 108px; right: 10px; }
     #tabs { top: max(8px, env(safe-area-inset-top)); left: 8px; right: 8px; transform: none; max-width: none; padding: 4px; justify-content: space-between; }
     #tabs button { flex: 1; justify-content: center; padding: 8px 6px; font-size: 12.5px; gap: 5px; }
     #tabs button .lg { display: none; }
     #pickHint { top: 58px; left: 8px; right: 8px; transform: none; text-align: center; }
-    #modeSeg { top: 58px; left: 10px; transform: none; }
+    #modeSeg { top: 58px; left: 10px; right: auto; transform: none; }
     #modeSeg a, #modeSeg b { padding: 7px 11px; font-size: 12.5px; }
     #mrot { display: flex; position: absolute; right: 10px; top: 58px; height: 38px; border-radius: 99px; align-items: center; gap: 6px; padding: 0 12px 0 10px; font-size: 12.5px; font-weight: 700; z-index: 4; }
     #mrot .cam { font-size: 16px; display: inline-block; }
@@ -272,11 +298,11 @@
       <div class="step"><span class="n">2</span><div class="c row"><button id="bHome" class="btnHome">📍 Placer notre maison</button><button id="bHomeDel" disabled title="Retirer l’épingle">✕</button></div></div>
       <div class="step"><span class="n">3</span><div class="c"><button id="bFrame" class="big" disabled>🎯 Cadrer maison + antenne</button></div></div>
       <div class="step"><span class="n">4</span><div class="c"><div class="slider"><span title="Éclairage des pylônes affichés">☀︎ Éclairage pylône(s)</span><input id="light" type="range" min="35" max="100" value="55"></div></div></div>
-      <div class="step"><span class="n">5</span><div class="c"><button id="bCap2" class="big cap">📷 Capturer l’image</button></div></div>
       <div id="homeInfo"></div>
     </div>
 
 
+    <button id="bAnfr" class="anfrBtn"><span class="ic">📡</span><span class="tx">Antennes autour du projet<small>Les 20 supports de téléphonie dans un rayon de 4 km (ANFR)</small></span><i class="sw"></i></button>
     <a class="morelink" href="dossier.html">📋 Où en est le dossier ?<small>Notre position, l’association de riverains, la réponse commune avant le 15 novembre.</small></a>
     <a class="morelink" href="en-savoir-plus.html">📖 Pour aller plus loin<small>Qui construit ce pylône, et pourquoi ? Nos droits de riverains.</small></a>
     <a class="morelink" href="a-propos.html" style="background:rgba(255,255,255,.06);border-color:var(--line)">✍︎ Qui a fait cette simulation ?<small>Un mot de Clovis Lalanne, l’auteur.</small></a>
@@ -306,7 +332,7 @@
 </div>
 
 <div id="tabs" class="panel"></div>
-<div id="modeSeg" class="panel"><a href="index.html">Vue rapide</a><b aria-current="page">Vue détaillée</b></div>
+<div id="modeSeg" class="panel"><a href="index.html#direct">Vue rapide</a><b aria-current="page">Vue détaillée</b></div>
 <div id="orbitBar" class="panel">
   <span class="orb"><span class="sp">⟳</span><span id="orbitName">Autour de…</span><button id="oPause">Pause</button><button id="oQuit">Navigation libre</button></span>
   <span class="free">🧭 Navigation libre<button id="oResume" class="resume">⟳ Tourner autour</button></span>
@@ -315,6 +341,11 @@
 
 <button id="capture" class="panel">📷 Capturer</button>
 
+<div id="rstack">
+  <button id="rPlay" class="rb" title="Rotation automatique" aria-label="Rotation automatique"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></button>
+  <button id="rHelp" class="rb" title="Comment se déplacer" aria-label="Comment se déplacer">?</button>
+  <button id="compass" class="rb" title="Remettre le nord en haut" aria-label="Remettre le nord en haut"><svg id="needle" viewBox="0 0 40 40" width="34" height="34"><path d="M20 4 L25 20 L20 17 L15 20 Z" fill="#ff5a4e"/><path d="M20 36 L15 20 L20 23 L25 20 Z" fill="#e8eaed"/><text x="20" y="13.5" text-anchor="middle" font-size="0" fill="#fff">N</text></svg><span class="n">N</span></button>
+</div>
 <div id="pad" class="panel">
   <div class="mode"><button id="mOrbit" class="on">Tourner</button><button id="mWalk">Avancer</button><button id="bCtrl" title="Comment se déplacer" style="flex:none;width:28px;padding:5px 0">?</button></div>
   <span></span><button class="k" data-k="up">▲</button><span></span>
@@ -332,8 +363,10 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v42</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html#direct" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v43</span></div>
 <div id="toast" class="panel"></div>
+<div id="anfrCard" class="panel"></div>
+<div id="anfrSrc" class="panel">📡 Données ANFR via <a href="https://www.cartoradio.fr" target="_blank" rel="noopener">Cartoradio</a>, situation au 31/10/2026 · inventaire administratif : ni mesure d’exposition, ni preuve de mise en service · touchez un support pour sa fiche</div>
 <div id="tip" class="panel"></div>
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
 <div id="mbar" class="panel">
@@ -360,7 +393,7 @@
     <div class="it"><span class="k">🖱 Molette</span><span>zoomer vers le curseur (double-clic : zoomer)</span></div>
     <div class="it"><span class="k">Clic droit + glisser</span><span>tourner et incliner (aussi Ctrl, Cmd ou Maj + glisser)</span></div>
     <div class="it"><span class="k">Trackpad</span><span>glisser à deux doigts pour déplacer, pincer pour zoomer, tourner deux doigts pour pivoter (Safari)</span></div>
-    <div class="it"><span class="k">← → ↑ ↓</span><span>flèches du clavier, comme le pavé</span></div>
+    <div class="it"><span class="k">← → ↑ ↓</span><span>flèches du clavier : déplacer · + et − : zoomer</span></div>
   </div>
   <div class="grp touch">
     <div class="it"><span class="k">☝︎ Glisser 1 doigt</span><span>déplacer la carte</span></div>
@@ -676,7 +709,7 @@
     $("homeInfo").innerHTML = `<b>${homeLabel()}</b><br>` + (lines.join("<br>") || "Aucune option affichée") +
       ``;
   }
-  $("homeName").addEventListener("input", () => { if (home) drawHome(); });
+  $("homeName").addEventListener("input", () => { if (home) drawHome(); try { localStorage.setItem("pyloneSimpleName", $("homeName").value.trim()); } catch (e) {} });
   $("bHomeDel").onclick = () => { home = null; drawHome(); try { localStorage.removeItem("pyloneHome"); } catch (e) {}
     $("homeInfo").textContent = ""; };
   $("bFrame").onclick = () => {
@@ -713,7 +746,8 @@
   new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
     const pos = scene.pickPosition(ev.position);
     if (!Cesium.defined(pos)) return;
-    if (picking === "home") { setPicking(null); home = pos; drawHome(); toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
+    if (picking === "home") { setPicking(null); home = pos; drawHome();
+      try { const c = Cesium.Cartographic.fromCartesian(pos); localStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon: Cesium.Math.toDegrees(c.longitude), lat: Cesium.Math.toDegrees(c.latitude), label: "Votre maison" })); } catch (e) {} toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
     if (picking) { setPicking(null); startOrbit(pos, "le point choisi", Math.min(400, Math.max(80, Cesium.Cartesian3.distance(cam.positionWC, pos))), -25); return; }
     if (!measuring) return;
     const vis = active.filter(s => s.visible); if (!vis.length) return;
@@ -936,6 +970,94 @@
   }
 
   viewer.screenSpaceEventHandler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK);
+  // Colonne de droite : rotation, aide, boussole
+  $("rPlay").onclick = () => $("pPlay").click();
+  $("rHelp").onclick = () => $("bCtrl").click();
+  $("compass").onclick = () => $("pNorth").click();
+  scene.postRender.addEventListener(() => { const n = $("needle"); if (n) n.style.transform = "rotate(" + (-Cesium.Math.toDegrees(cam.heading)) + "deg)"; });
+  setInterval(() => $("rPlay").classList.toggle("on", !!(orbit && orbit.auto)), 400);
+
+
+  // ---------- Antennes autour du projet (relevé ANFR / Cartoradio) ----------
+  const ANFR = [{"rep": "01", "id": "3332856", "lon": 3.84583333, "lat": 43.6825, "h": 15.0, "addr": "169 R DE LA MAIRIE / Chateau d'eau, Saint-Clément-de-Rivière", "type": "Château d'eau - réservoir", "dist": 1150, "ops": "B", "az": {"B": [100, 200, 330]}, "since": null, "accord": "24/07/2026", "g5": "5G NR 2100"}, {"rep": "02", "id": "2138220", "lon": 3.81666667, "lat": 43.67583333, "h": 11.4, "addr": "60 RUE DE LA TOUR, Saint-Gély-du-Fesc", "type": "Immeuble", "dist": 1396, "ops": "F", "az": {"F": [20, 140]}, "since": "17/03/2020", "accord": "03/05/2019", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "03", "id": "464499", "lon": 3.81638889, "lat": 43.67638889, "h": 8.0, "addr": "53 Allée de Lauzard, Saint-Gély-du-Fesc", "type": "Bâtiment", "dist": 1415, "ops": "O", "az": {"O": [0, 90]}, "since": "09/04/2014", "accord": "11/07/2008", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "04", "id": "2435751", "lon": 3.81333333, "lat": 43.68083333, "h": 25.0, "addr": "LA PINEDE / ALLEE DES ECUREUILS, Saint-Gély-du-Fesc", "type": "Pylône tubulaire", "dist": 1723, "ops": "B", "az": {"B": [150, 250, 340]}, "since": "30/11/2021", "accord": "09/04/2021", "g5": "5G NR 2100, 5G NR 3500"}, {"rep": "05", "id": "437316", "lon": 3.81722222, "lat": 43.68888889, "h": 34.0, "addr": "PUECH DU MAS DU JUGE / CHEM DU CALVAIRE, Saint-Gély-du-Fesc", "type": "Pylône autostable", "dist": 1911, "ops": "BFOS", "az": {"B": [70, 180, 310], "F": [115, 230, 320], "O": [0, 100, 180, 270], "S": [20, 140, 260]}, "since": "28/06/1996", "accord": "06/09/2011", "g5": "5G NR 2100, 5G NR 3500, 5G NR 700"}, {"rep": "06", "id": "2692449", "lon": 3.84666667, "lat": 43.66111111, "h": 21.0, "addr": "BRAGOUS / Boulevard de la Lironde, Montferrier-sur-Lez", "type": "Pylône autostable", "dist": 2012, "ops": "F", "az": {"F": [0, 120, 240]}, "since": "20/12/2024", "accord": "02/09/2022", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "07", "id": "3041353", "lon": 3.86472222, "lat": 43.67944444, "h": 24.6, "addr": "Le Savel / Route de Mende / Route Départementale 17, Montferrier-sur-Lez", "type": "Pylône autostable", "dist": 2491, "ops": "F", "az": {"F": [50, 170, 290]}, "since": "29/08/2025", "accord": "29/11/2024", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "08", "id": "2934152", "lon": 3.82666667, "lat": 43.6525, "h": 19.8, "addr": "4 Place Alphonse Beau de Rochas, Grabels", "type": "pylône arbre", "dist": 2755, "ops": "F", "az": {"F": [10, 120, 250]}, "since": "20/04/2026", "accord": "02/02/2024", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "09", "id": "295834", "lon": 3.84472222, "lat": 43.70194444, "h": 12.0, "addr": "r du rond du biou, Saint-Clément-de-Rivière", "type": "Pylône tubulaire", "dist": 2936, "ops": "O", "az": {"O": [140, 290]}, "since": "02/04/2014", "accord": "02/12/2005", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "10", "id": "780652", "lon": 3.87138889, "lat": 43.67, "h": 34.0, "addr": "PIOCH RIOUX / Station réémetteur T.D.F, Montferrier-sur-Lez", "type": "Pylône autostable", "dist": 3100, "ops": "BFOS", "az": {"B": [60, 180, 310], "F": [240, 340], "O": [230, 310], "S": [270]}, "since": "22/12/1998", "accord": "27/07/2018", "g5": "5G NR 2100, 5G NR 3500, 5G NR 700"}, {"rep": "11", "id": "2685688", "lon": 3.8275, "lat": 43.64888889, "h": 17.8, "addr": "831 R FRANCOIS RANCHIN RESIDENCE LUNA ROSSA, Grabels", "type": "Immeuble", "dist": 3137, "ops": "B", "az": {"B": [50, 180, 280]}, "since": "24/08/2023", "accord": "19/08/2022", "g5": "5G NR 2100"}, {"rep": "12", "id": "3342464", "lon": 3.81277778, "lat": 43.70222222, "h": 24.0, "addr": "LE ROUERGAS / Rue de la Mine, Saint-Gély-du-Fesc", "type": "Pylône autostable", "dist": 3310, "ops": "BO", "az": {"B": [50, 170, 290], "O": [0, 120, 240]}, "since": "15/07/2026", "accord": "21/08/2026", "g5": "5G NR 2100, 5G NR 3500, 5G NR 700"}, {"rep": "13", "id": "3135914", "lon": 3.87138889, "lat": 43.69055556, "h": 12.4, "addr": "385 AVENUE LES BARONNES, Prades-le-Lez", "type": "Immeuble", "dist": 3379, "ops": "B", "az": {"B": [10, 120, 240]}, "since": "30/07/2026", "accord": "25/07/2025", "g5": "5G NR 2100, 5G NR 3500"}, {"rep": "14", "id": "1855591", "lon": 3.8675, "lat": 43.69555556, "h": 18.8, "addr": "Montauban / Près du réservoir, Prades-le-Lez", "type": "Pylône tubulaire", "dist": 3414, "ops": "BF", "az": {"B": [0, 180, 270], "F": [0, 140, 250]}, "since": "22/09/2000", "accord": "24/02/2012", "g5": "5G NR 2100, 5G NR 3500, 5G NR 700"}, {"rep": "15", "id": "573891", "lon": 3.86805556, "lat": 43.69555556, "h": 20.0, "addr": "Côte Rousse - Montauban / imp du château d'eau, Prades-le-Lez", "type": "Château d'eau - réservoir", "dist": 3450, "ops": "O", "az": {"O": [90, 190, 320]}, "since": "02/04/2014", "accord": "16/05/1997", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "16", "id": "725971", "lon": 3.86805556, "lat": 43.69583333, "h": 6.7, "addr": "chem du château d'eau, Prades-le-Lez", "type": "Mât", "dist": 3469, "ops": "S", "az": {"S": [80, 315]}, "since": "03/07/2012", "accord": "27/06/1997", "g5": "5G NR 3500"}, {"rep": "18", "id": "3050506", "lon": 3.78777778, "lat": 43.67138889, "h": 36.0, "addr": "Puech de Las Fourques / En face de la D1270, Combaillaux", "type": "Pylône autostable", "dist": 3763, "ops": "O", "az": {"O": [25, 190, 280]}, "since": "08/12/2025", "accord": "20/12/2024", "g5": "5G NR 2100"}, {"rep": "19", "id": "2930234", "lon": 3.87111111, "lat": 43.655, "h": 43.0, "addr": "921 BD SZ LAURIOL / CHEMIN DE LA PISSIERASSE, Clapiers", "type": "Pylône autostable", "dist": 3840, "ops": "F", "az": {"F": [100, 200, 320]}, "since": "30/09/2024", "accord": "19/01/2024", "g5": "5G NR 3500, 5G NR 700"}, {"rep": "20", "id": "3003687", "lon": 3.87111111, "lat": 43.655, "h": 43.3, "addr": "ROND POINT DE GIRAC / 921 BD SZ LAURIOL, Clapiers", "type": "Pylône tubulaire", "dist": 3840, "ops": "B", "az": {"B": [90, 190, 320]}, "since": "17/04/2025", "accord": "09/08/2024", "g5": "5G NR 2100, 5G NR 3500"}, {"rep": "22", "id": "3054045", "lon": 3.79777778, "lat": 43.6525, "h": 30.0, "addr": "Predimeau / Chemin de la colline / Réservoir « Montalet », Grabels", "type": "Pylône autostable", "dist": 3966, "ops": "BOS", "az": {"B": [0, 170, 260], "O": [165, 255, 345], "S": [0, 150, 240]}, "since": "01/02/2021", "accord": "14/11/2025", "g5": "5G NR 2100, 5G NR 3500, 5G NR 700"}];
+  const OPC = { B: "#2f7de1", F: "#2b2b2b", O: "#ff7900", S: "#e2001a" }, OPN = { B: "Bouygues Telecom", F: "Free", O: "Orange", S: "SFR" };
+  const REF = { lon: 3.833979, lat: 43.67671 };
+  let anfrOn = false, anfrEnts = [], anfrDir = [], anfrReady = null, anfrSel = null;
+  async function anfrBuild() {
+    if (anfrReady) return anfrReady;
+    anfrReady = (async () => {
+      let hs = ANFR.map(() => 0);
+      try { terrainP = terrainP || Cesium.createWorldTerrainAsync(); const tp = await terrainP;
+        hs = (await Cesium.sampleTerrainMostDetailed(tp, ANFR.map(a => Cesium.Cartographic.fromDegrees(a.lon, a.lat)))).map(c => c.height); } catch (e) {}
+      ANFR.forEach((a, i) => {
+        a.g = Number.isFinite(hs[i]) ? hs[i] : 0;
+        const multi = a.ops.length > 1, col = Cesium.Color.fromCssColorString(multi ? "#7b55d8" : OPC[a.ops]);
+        const base = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, a.g), top = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, a.g + a.h);
+        const pend = !a.since;
+        { const e = viewer.entities.add({ polyline: { positions: [base, top], width: 3, material: col.withAlpha(.9) } }); e.anfrData = a; anfrEnts.push(e); }
+        anfrEnts.push(viewer.entities.add({ position: top,
+          point: { pixelSize: 9, color: col, outlineColor: pend ? Cesium.Color.fromCssColorString("#ffbe3c") : Cesium.Color.WHITE, outlineWidth: pend ? 3 : 1.5, disableDepthTestDistance: Number.POSITIVE_INFINITY },
+          label: { text: a.rep + " · " + a.ops.split("").join("/") + (pend ? "  !" : "") + "\n" + Math.round(a.h) + " m", font: "700 12px Inter, sans-serif", fillColor: Cesium.Color.WHITE,
+                   showBackground: true, backgroundColor: (pend ? Cesium.Color.fromCssColorString("#b8860b") : col).withAlpha(.88), backgroundPadding: new Cesium.Cartesian2(6, 4),
+                   pixelOffset: new Cesium.Cartesian2(0, -14), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                   scaleByDistance: new Cesium.NearFarScalar(800, 1.05, 9000, .8) } }));
+        anfrEnts[anfrEnts.length - 1].anfrData = a;
+      });
+      // Cercle de 4 km autour du point de référence
+      const ring = [];
+      for (let k = 0; k <= 128; k++) { const t = k / 128 * 2 * Math.PI; ring.push(Cesium.Cartesian3.fromDegrees(REF.lon + 4 / (111.32 * Math.cos(REF.lat * Math.PI / 180)) * Math.sin(t), REF.lat + 4 / 110.57 * Math.cos(t))); }
+      anfrEnts.push(viewer.entities.add({ polyline: { positions: ring, width: 2, clampToGround: true, material: new Cesium.PolylineDashMaterialProperty({ color: Cesium.Color.WHITE.withAlpha(.7), dashLength: 20 }) } }));
+      anfrEnts.push(viewer.entities.add({ position: Cesium.Cartesian3.fromDegrees(REF.lon, REF.lat + 4 / 110.57, 60),
+        label: { text: "4 km", font: "700 12px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true, backgroundColor: Cesium.Color.BLACK.withAlpha(.5), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      anfrEnts.forEach(e => e.show = anfrOn);
+    })();
+    return anfrReady;
+  }
+  function anfrClearDir() { anfrDir.forEach(e => viewer.entities.remove(e)); anfrDir = []; }
+  function anfrShowDir(a) {
+    anfrClearDir();
+    Object.entries(a.az).forEach(([op, list], j) => list.forEach(deg => {
+      const r = Cesium.Math.toRadians(deg), L = 420, dx = L * Math.sin(r), dy = L * Math.cos(r);
+      const k = 1 / (111320 * Math.cos(a.lat * Math.PI / 180)), q = 1 / 110570, z = a.g + a.h - 1 + j * 0.6;
+      const p0 = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, z), p1 = Cesium.Cartesian3.fromDegrees(a.lon + dx * k, a.lat + dy * q, z);
+      anfrDir.push(viewer.entities.add({ polyline: { positions: [p0, p1], width: 7, material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85)) } }));
+      anfrDir.push(viewer.entities.add({ position: p1, label: { text: deg + "°", font: "600 11px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
+        backgroundColor: Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85), backgroundPadding: new Cesium.Cartesian2(4, 2), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+    }));
+  }
+  function anfrCard(a) {
+    anfrSel = a;
+    const nearest = active.reduce((m, s) => { const d = Math.round(Cesium.Cartesian3.distance(Cesium.Cartesian3.fromDegrees(a.lon, a.lat, 0), Cesium.Cartesian3.fromDegrees(s.lon, s.lat, 0))); return d < m ? d : m; }, 1e9);
+    const fmt = d => d >= 1000 ? (d / 1000).toFixed(2).replace(".", ",") + " km" : d + " m";
+    $("anfrCard").innerHTML = `<div class="h"><b>Support ${a.rep} · ${a.type} · ${a.h.toString().replace(".", ",")} m</b><button id="anfrX" aria-label="Fermer">✕</button></div>
+      <div>${a.addr}</div>
+      <div class="ops" style="margin-top:6px">${a.ops.split("").map(o => `<span style="background:${OPC[o]}">${OPN[o]}</span>`).join("")}</div>
+      <div style="margin-top:6px">À <b>${fmt(nearest)}</b> de l’emplacement proposé le plus proche${a.g5 ? " · 5G déclarée : " + a.g5.replace(/5G NR /g, "").replace(/, /g, " / ") + " MHz" : ""}</div>
+      <div>Orientations déclarées : ${Object.entries(a.az).map(([o, l]) => OPN[o].split(" ")[0] + " " + l.join("°, ") + "°").join(" · ")}</div>
+      ${a.since ? `<div>Première mise en service déclarée : ${a.since}</div>`
+        : `<div class="warn"><b>Accord d’implantation ANFR le ${a.accord}</b>, aucune mise en service publiée à ce jour. L’absence de date ne prouve pas que le site est inactif, ni qu’il est déjà construit.</div>`}
+      <div class="mute">Support ANFR ${a.id} · <a href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/${a.lon}/${a.lat}" target="_blank" rel="noopener">Voir sur Cartoradio ›</a> · Les flèches indiquent des directions déclarées, pas une portée ni une exposition.</div>`;
+    $("anfrCard").classList.add("show");
+    $("anfrX").onclick = () => { $("anfrCard").classList.remove("show"); anfrClearDir(); anfrSel = null; };
+    anfrShowDir(a);
+  }
+  async function setAnfr(on) {
+    anfrOn = on; $("bAnfr").classList.toggle("on", on); $("anfrSrc").classList.toggle("show", on);
+    if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); return; }
+    toast("Chargement des antennes…", 1500);
+    await anfrBuild(); anfrEnts.forEach(e => e.show = true);
+    if (typeof stopOrbit === "function" && orbit) stopOrbit(true);
+    cam.flyTo({ destination: Cesium.Cartesian3.fromDegrees(REF.lon, REF.lat - 0.072, 6200), orientation: { heading: 0, pitch: Cesium.Math.toRadians(-52), roll: 0 }, duration: 2 });
+    if (isPhone()) sheet(false);
+    toast("20 supports dans un rayon de 4 km · touchez-en un pour sa fiche", 4500);
+  }
+  $("bAnfr").onclick = () => setAnfr(!anfrOn);
+  new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
+    if (!anfrOn) return;
+    const p = scene.pick(ev.position);
+    const a = p && p.id && p.id.anfrData;
+    if (a) anfrCard(a);
+  }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
   // ---------- Capture d'écran téléchargeable ----------
   $("capture").onclick = () => {
@@ -1006,10 +1128,24 @@
   $("bCtrl").onclick = () => { clearTimeout(showCtrl.t); showCtrl(!$("ctrl").classList.contains("show")); };
   $("ctrlX").onclick = () => { clearTimeout(showCtrl.t); showCtrl(false); };
   $("iGo").onclick = () => enter("all");
+  // Arrivée depuis la vue rapide : pas de page d'accueil, et on reprend la maison déjà placée
+  if (location.hash === "#antennes") { $("intro").classList.add("hide"); selectOption("all"); setTimeout(() => setAnfr(true), 400); }
+  if (location.hash === "#direct") {
+    $("intro").classList.add("hide"); selectOption("all");
+    try {
+      const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null"), nm = localStorage.getItem("pyloneSimpleName") || "";
+      if (sv && Number.isFinite(sv.lon)) {
+        if (nm) $("homeName").value = nm;
+        scene.sampleHeightMostDetailed([Cesium.Cartographic.fromDegrees(sv.lon, sv.lat)]).then(r => {
+          const h = Number.isFinite(r[0].height) ? r[0].height : active[0].ground;
+          home = Cesium.Cartesian3.fromDegrees(sv.lon, sv.lat, h + 0.5); drawHome(); setTimeout(() => $("bFrame").click(), 600);
+        }).catch(() => {});
+      }
+    } catch (e) {}
+  }
   active.forEach(s => { const b = makeBtn(s.name, s.color, "pylône " + s.height + " m"); b.onclick = () => enter(s.id); $("iChoices").appendChild(b); });
   $("intro").classList.add("ready");
   $("discMore").onclick = e => { e.preventDefault(); const f = $("discFull"), o = f.style.display === "none"; f.style.display = o ? "block" : "none"; $("discMore").textContent = o ? "Réduire ▴" : "ⓘ Méthode"; };
-  $("bCap2").onclick = () => $("capture").click();
   document.addEventListener("click", e => {
     const b = e.target.closest(".q"), tip = $("tip");
     if (!b) { if (!e.target.closest("#tip")) tip.classList.remove("show"); return; }
