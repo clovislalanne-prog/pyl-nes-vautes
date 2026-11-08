@@ -70,7 +70,9 @@
   #bottom .who { margin-top: 8px; text-align: center; font-size: 12px; color: var(--mute); }
   #bottom .who a { color: var(--acc); text-decoration: none; font-weight: 600; }
   /* ---------- Panneau Affichage ---------- */
-  #setBtn { position: absolute; z-index: 6; right: 10px; padding: 10px 14px; font-size: 15px; font-weight: 700; color: var(--txt);
+  #play { position: absolute; z-index: 6; right: 10px; width: 46px; height: 46px; border-radius: 50%; font-size: 17px; color: #fff;
+          background: rgba(20,22,27,.45); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 0; }
+  #setBtn { position: absolute; z-index: 6; right: 64px; padding: 10px 14px; font-size: 15px; font-weight: 700; color: var(--txt);
             background: var(--card); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
   #setBtn::before { content: "☰  "; }
   #setPanel { position: absolute; z-index: 7; right: 10px; width: 260px; background: var(--card); border: 1px solid rgba(255,255,255,.16);
@@ -148,6 +150,7 @@
   <div class="who">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · <a href="a-propos.html">Qui suis-je ? ›</a></div>
 </div>
 
+<button id="play" class="hide" aria-label="Lancer la rotation">▶</button>
 <button id="setBtn" class="hide" aria-label="Options d’affichage">Affichage</button>
 <div id="setPanel" class="hide">
   <div class="sp-h"><b>Affichage</b><button id="setX" aria-label="Fermer">✕</button></div>
@@ -308,7 +311,7 @@
   const clampPitch = p => Math.max(Cesium.Math.toRadians(-80), Math.min(Cesium.Math.toRadians(-4), p));
   function applyOrb() { cam.lookAt(orb.center, new Cesium.HeadingPitchRange(orb.heading, orb.pitch, orb.range)); }
   function goTo(target, ms) {
-    cancelAnimationFrame(anim);
+    cancelAnimationFrame(anim); if (typeof setSpin === "function") setSpin(false);
     if (!orb || !ms) { orb = target; applyOrb(); return; }
     const a = { ...orb }, t0 = performance.now();
     let dh = target.heading - a.heading; dh = Math.atan2(Math.sin(dh), Math.cos(dh));
@@ -320,33 +323,64 @@
     };
     anim = requestAnimationFrame(stepFn);
   }
+  // Rotation automatique (bouton lecture / pause)
+  let spin = false, spinT = 0;
+  function setSpin(on) { spin = on; const b = document.getElementById("play"); if (b) { b.textContent = on ? "❚❚" : "▶"; b.setAttribute("aria-label", on ? "Arrêter la rotation" : "Lancer la rotation"); } spinT = 0; }
+  scene.preRender.addEventListener(() => {
+    if (!spin || !orb) return;
+    const now = performance.now(); if (spinT) { orb.heading += (now - spinT) / 1000 * (2 * Math.PI / 70); applyOrb(); } spinT = now;
+  });
   // Point de départ : vue d'ensemble des 3 emplacements
   const allSphere = () => Cesium.BoundingSphere.fromPoints(SITES.flatMap(s => [s.base, s.top]));
   { const b = allSphere(); orb = { center: b.center, heading: Cesium.Math.toRadians(8), pitch: Cesium.Math.toRadians(-32), range: 420 }; applyOrb(); }
 
+  // Un doigt : tourner et incliner. Deux doigts : déplacer le plan, zoomer (pincer), pivoter.
+  // Souris : clic gauche = tourner, clic droit ou Maj + clic = déplacer, molette = zoom.
   const cv = scene.canvas, ptrs = new Map();
-  let lastPinch = null, down = null;
+  let two = null, down = null, mousePan = false;
+  cv.addEventListener("contextmenu", e => e.preventDefault());
+  function pan(dx, dy) {
+    const k = 2 * orb.range * Math.tan(cam.frustum.fovy / 2) / cv.clientHeight;
+    const E = Cesium.Transforms.eastNorthUpToFixedFrame(orb.center);
+    const east = Cesium.Matrix4.multiplyByPointAsVector(E, Cesium.Cartesian3.UNIT_X, new Cesium.Cartesian3());
+    const north = Cesium.Matrix4.multiplyByPointAsVector(E, Cesium.Cartesian3.UNIT_Y, new Cesium.Cartesian3());
+    const h = orb.heading, fwdK = 1 / Math.max(.35, Math.sin(-orb.pitch));
+    const mvRight = -dx * k, mvFwd = dy * k * fwdK;
+    const off = new Cesium.Cartesian3();
+    Cesium.Cartesian3.add(Cesium.Cartesian3.multiplyByScalar(east, mvRight * Math.cos(h) + mvFwd * Math.sin(h), new Cesium.Cartesian3()),
+                          Cesium.Cartesian3.multiplyByScalar(north, -mvRight * Math.sin(h) + mvFwd * Math.cos(h), new Cesium.Cartesian3()), off);
+    orb.center = Cesium.Cartesian3.add(orb.center, off, new Cesium.Cartesian3());
+  }
+  function twoState() { const [a, b] = [...ptrs.values()]; return { mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2, d: Math.hypot(a.x - b.x, a.y - b.y), ang: Math.atan2(b.y - a.y, b.x - a.x) }; }
   cv.addEventListener("pointerdown", e => {
     cv.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
-    cancelAnimationFrame(anim); hideHint();
+    cancelAnimationFrame(anim); hideHint(); setSpin(false);
+    mousePan = e.pointerType === "mouse" && (e.button === 2 || e.shiftKey);
     if (ptrs.size === 1) down = { x: e.clientX, y: e.clientY, t: performance.now() }; else down = null;
-    lastPinch = null;
+    two = ptrs.size === 2 ? twoState() : null;
   });
   cv.addEventListener("pointermove", e => {
     if (!ptrs.has(e.pointerId) || !orb) return;
     const p = ptrs.get(e.pointerId), dx = e.clientX - p.x, dy = e.clientY - p.y;
     p.x = e.clientX; p.y = e.clientY;
     if (ptrs.size === 1) {
-      orb.heading -= dx * 0.006; orb.pitch = clampPitch(orb.pitch - dy * 0.004); applyOrb();
+      if (mousePan) pan(dx, dy);
+      else { orb.heading -= dx * 0.006; orb.pitch = clampPitch(orb.pitch - dy * 0.004); }
+      applyOrb();
     } else if (ptrs.size === 2) {
-      const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (lastPinch) { orb.range = Math.max(25, Math.min(1500, orb.range * lastPinch / d)); applyOrb(); }
-      lastPinch = d;
+      const n = twoState();
+      if (two) {
+        pan(n.mx - two.mx, n.my - two.my);
+        if (two.d > 0 && n.d > 0) orb.range = Math.max(25, Math.min(1500, orb.range * two.d / n.d));
+        let da = n.ang - two.ang; da = Math.atan2(Math.sin(da), Math.cos(da)); orb.heading -= da;
+        applyOrb();
+      }
+      two = n;
     }
   });
   const up = e => {
     if (!ptrs.has(e.pointerId)) return;
-    ptrs.delete(e.pointerId); lastPinch = null;
+    ptrs.delete(e.pointerId); two = ptrs.size === 2 ? twoState() : null; mousePan = false;
     if (down && ptrs.size === 0 && Math.hypot(e.clientX - down.x, e.clientY - down.y) < 10 && performance.now() - down.t < 500) tap(e);
     down = null;
   };
@@ -378,10 +412,10 @@
     try { localStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon, lat, label: homeLabel })); } catch (e) {}
     $("welcome").classList.add("hide"); $("pickBar").classList.add("hide");
     $("top").classList.remove("hide"); $("bottom").classList.remove("hide");
-    openSet(innerWidth >= 900);
+    openSet(innerWidth >= 900); $("play").classList.remove("hide");
     $("where").textContent = "📍 " + homeLabel;
     drawHome(); frame(true);
-    if (!setHome.once) { setHome.once = true; showHint(TOUCH ? "Glissez un doigt pour tourner autour<br>Pincez avec deux doigts pour zoomer" : "Cliquez-glissez pour tourner autour<br>Molette pour zoomer", 4500); }
+    if (!setHome.once) { setHome.once = true; showHint(TOUCH ? "Un doigt : tourner<br>Deux doigts : déplacer et zoomer" : "Clic gauche : tourner<br>Clic droit : déplacer · Molette : zoom", 4500); }
   }
   function drawHome() {
     homeEnts.forEach(e => viewer.entities.remove(e)); homeEnts = [];
@@ -445,27 +479,28 @@
   // ---------- Panneau Affichage ----------
   const openSet = on => { $("setPanel").classList.toggle("hide", !on); $("setBtn").classList.toggle("hide", on || !home || picking); placeSide(); };
   $("setBtn").onclick = () => openSet(true);
+  $("play").onclick = () => setSpin(!spin);
   $("setX").onclick = () => openSet(false);
   $("oDist").onchange = e => { opt.dist = e.target.checked; drawHome(); };
   $("oAxis").onchange = e => { opt.axis = e.target.checked; drawHome(); };
   $("oLight").oninput = e => { opt.light = +e.target.value; applyLight(); };
   function placeSide() {
     const t = $("top"), y = (t.classList.contains("hide") ? 10 : t.getBoundingClientRect().bottom + 10);
-    $("setBtn").style.top = y + "px"; $("setPanel").style.top = y + "px";
+    $("setBtn").style.top = y + "px"; $("play").style.top = y + "px"; $("setPanel").style.top = (y + 56) + "px";
   }
   addEventListener("resize", placeSide);
 
   // ---------- Changer d'adresse / choisir sur la carte ----------
-  $("change").onclick = () => { $("welcome").classList.remove("hide"); $("setPanel").classList.add("hide"); $("setBtn").classList.add("hide"); $("addr").value = ""; sugg.innerHTML = ""; setStatus("La 3D est prête.", 100); };
+  $("change").onclick = () => { $("welcome").classList.remove("hide"); $("setPanel").classList.add("hide"); $("setBtn").classList.add("hide"); $("play").classList.add("hide"); setSpin(false); $("addr").value = ""; sugg.innerHTML = ""; setStatus("La 3D est prête.", 100); };
   function startPick() {
-    picking = true; $("setBtn").classList.add("hide"); $("setPanel").classList.add("hide");
+    picking = true; $("play").classList.add("hide"); $("setBtn").classList.add("hide"); $("setPanel").classList.add("hide");
     $("welcome").classList.add("hide"); $("top").classList.add("hide"); $("bottom").classList.add("hide"); $("pickBar").classList.remove("hide");
     const b = allSphere();
     goTo({ center: home || b.center, heading: 0, pitch: Cesium.Math.toRadians(-78), range: 520 }, 1400);
   }
   $("pickCancel").onclick = () => {
     picking = false; $("pickBar").classList.add("hide");
-    if (home) { $("top").classList.remove("hide"); $("bottom").classList.remove("hide"); openSet(false); frame(true); } else $("welcome").classList.remove("hide");
+    if (home) { $("top").classList.remove("hide"); $("bottom").classList.remove("hide"); $("play").classList.remove("hide"); openSet(false); frame(true); } else $("welcome").classList.remove("hide");
   };
   function tap(e) {
     if (!picking) return;
