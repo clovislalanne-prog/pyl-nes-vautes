@@ -534,7 +534,8 @@
   function local(s, p) { return Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.inverse(enu(s), new Cesium.Matrix4()), p, new Cesium.Cartesian3()); }
   const distTo = s => Math.round(Math.hypot(local(s, home).x, local(s, home).y));
   const shown = () => !sel || sel === "all" ? SITES : SITES.filter(s => s.id === sel);
-  function showSites() { const all = sel === "all"; SITES.forEach((s, i) => { const v = !!sel && (all || s.id === sel);   // aucun pylône tant que la maison n'est pas placée s.models.forEach(m => m.show = v);
+  // Aucun pylône tant que la maison n'est pas placée, puis seulement l'option choisie (ou les 3 si « Les 3 »)
+  function showSites() { const all = sel === "all"; SITES.forEach((s, i) => { const v = !!sel && (all || s.id === sel); s.models.forEach(m => m.show = v);
     if (s.label) { s.label.show = v; s.label.label.pixelOffset = new Cesium.Cartesian2(0, all ? -i * 30 : 0); } }); }
 
   async function setHome(lon, lat, label) {
