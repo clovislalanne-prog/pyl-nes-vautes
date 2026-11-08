@@ -4,8 +4,9 @@ Simulation 3D et dossier d'information sur le projet de pylône de téléphonie 
 
 **Voir le site : https://clovislalanne-prog.github.io/pyl-nes-vautes/**
 
-- `index.html` : accueil et vue rapide (adresse, vue depuis chez soi, photo pour le courrier).
-- `detaillee.html` : vue détaillée (3 options, mesures, vues au sol, antennes existantes autour du projet).
+- `index.html` : accueil de l'association et recherche d'adresse.
+- `detaillee.html` : la simulation 3D (3 options, votre maison et ses distances, capture pour le courrier, antennes existantes autour du projet).
+- `simple.html` : ancien lien, redirige vers l'accueil.
 - `dossier.html` : où en est le dossier, notre position, ce que nous pouvons faire.
 - `en-savoir-plus.html` : qui construit ce pylône, et pourquoi (Cellnex, modèle économique, droits des riverains).
 - `a-propos.html` : un mot de l'auteur.
