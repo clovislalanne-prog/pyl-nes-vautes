@@ -76,6 +76,43 @@
   }
   figure.map { margin: 16px 0; } figure.map img { width: 100%; border-radius: 14px; border: 1px solid rgba(255,255,255,.15); display: block; }
   figure.map figcaption { font-size: 12.5px; color: #a3a9b3; margin-top: 6px; }
+
+  /* ================= Thème clair (comme la simulation 3D) ================= */
+  :root { --bg: #f2f2f7; --card: #fff; --line: rgba(0,0,0,.08); --txt: #1d1d1f; --mute: #6e6e73; --acc: #0a7aff; }
+  html, body { background: var(--bg); color: var(--txt); }
+  body { background: var(--bg); }
+  .topbar { background: rgba(255,255,255,.85); border-bottom: 1px solid var(--line); }
+  .back { background: #fff; color: var(--txt); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .back:hover { background: #f7f7fa; }
+  .tag { color: #c46a12; border-color: rgba(240,138,36,.5); }
+  h1, h2, h3 { color: var(--txt); }
+  h2 .n { color: #f08a24; }
+  p, li { color: #3a3a3c; }
+  .lead, strong, .tl b { color: var(--txt); }
+  a, .src a, p a, li a { color: var(--acc); }
+  .card, .opt, .tool, .kpi, .chart, .prop li, .q li { background: #fff; border: 1px solid rgba(0,0,0,.05); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .card.acc { background: #fff6ec; border-color: rgba(240,138,36,.4); }
+  .card.green { background: #effaf3; border-color: rgba(52,168,83,.35); }
+  .deadline { background: #fff6ec; border-color: rgba(240,138,36,.5); }
+  .deadline .d { background: #f08a24; color: #fff; }
+  .tl { border-left-color: rgba(0,0,0,.12); }
+  .tl div::before { background: #f08a24; }
+  .tl div.now::before { background: var(--acc); box-shadow: 0 0 0 4px rgba(10,122,255,.2); }
+  .prop li::before, .q li::before { background: var(--acc); color: #fff; }
+  .opt .row { border-top-color: var(--line); }
+  .tool select { background: #f2f2f7; color: var(--txt); border-color: var(--line); }
+  .r.best { outline-color: #1d1d1f; }
+  .kpi b { color: #d9730f; }
+  .bar .b { background: #f08a24; color: #fff; }
+  .bar .b.goal { color: var(--txt); }
+  a.ext, .cta .s { background: #fff; color: var(--txt); border-color: var(--line); }
+  .cta .p { background: var(--acc); color: #fff; }
+  .quote span { color: #f08a24; }
+  .sig .av { background: #e5e5ea; border-color: var(--line); }
+  .sig a { color: var(--acc); }
+  figure.map img { border-color: var(--line); }
+  figure.map figcaption { color: var(--mute); }
+  .note, .foot { color: var(--mute); }
 </style>
 </head>
 <body>
@@ -130,9 +167,9 @@
   </div>
   <div class="card" style="border-color:rgba(255,190,60,.6);background:rgba(255,190,60,.08)">
     <h3>Une question à poser : le nouveau site de Saint-Clément-de-Rivière</h3>
-    <p>Le <strong>24 juillet 2026</strong>, l’ANFR a donné son accord à <strong>Bouygues Telecom</strong> pour un nouveau site sur le château d’eau de Saint-Clément-de-Rivière (169 rue de la Mairie), à <strong>environ 1 km</strong> des emplacements proposés. Ses trois antennes sont déclarées orientées à 100°, 200° et 330° ; celle à 200° regarde vers le sud-sud-ouest. Aucune mise en service n’est encore publiée.</p>
+    <p>D’après les données publiques de l’ANFR (mise à jour d’octobre 2026), <strong>Bouygues Telecom</strong> a déclaré un projet de nouveau site sur le château d’eau de Saint-Clément-de-Rivière (169 rue de la Mairie), à <strong>environ 1 km</strong> des emplacements proposés. Ses trois antennes sont déclarées orientées à 100°, 200° et 330° ; celle à 200° regarde vers le sud-sud-ouest. Aucune mise en service n’est encore publiée.</p>
     <p><strong>Ce nouveau site a-t-il été pris en compte dans le projet du pylône des Vautes ? S’il dessert notre secteur, ce pylône reste-t-il nécessaire ?</strong> C’est une question que nous poserons à la mairie et à l’opérateur.</p>
-    <p class="note">Un accord d’implantation ne veut pas dire que les équipements sont installés, et une orientation ne dit pas jusqu’où porte une antenne : cela dépend du relief et des fréquences. C’est pourquoi nous posons la question plutôt que de tirer une conclusion.</p>
+    <p class="note">Un projet déclaré ne veut pas dire que les équipements sont installés, et une orientation ne dit pas jusqu’où porte une antenne : cela dépend du relief et des fréquences. C’est pourquoi nous posons la question plutôt que de tirer une conclusion.</p>
   </div>
   <p style="margin:14px 0 4px"><a class="back" href="detaillee.html#antennes">📡 Voir les 20 supports en 3D, avec leurs orientations ›</a></p>
   <p class="note">Sources : ANFR, export national du 31/10/2026 publié le 06/11/2026, consultable sur <a href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/3.8349/43.6779" target="_blank" rel="noopener">Cartoradio</a> ; relevé et carte établis par l’association (novembre 2026), fond Plan IGN ; ordonnance du tribunal administratif de Montpellier n° 2301108 du 16 mars 2023. Ces données recensent les supports déclarés : elles ne mesurent pas l’exposition et ne disent pas si la couverture est suffisante dans chaque rue.</p>
@@ -141,7 +178,7 @@
   <div class="card" style="border-color:rgba(229,72,77,.5);background:rgba(229,72,77,.08)">
     <h3>📍 Placez votre maison dans la simulation 3D</h3>
     <p>Dans la simulation, touchez « Notre maison », puis votre toit. Vous obtenez la distance exacte entre votre maison et chaque option, l’axe qui relie les antennes à votre toit, et une vue en 3D à capturer pour votre courrier. Les pylônes y sont placés à leurs coordonnées exactes.</p>
-    <p style="margin-top:12px"><a class="back" href="index.html" style="background:#e5484d;border-color:#e5484d">Ouvrir la simulation 3D ›</a></p>
+    <p style="margin-top:12px"><a class="back" href="index.html" style="background:#0a7aff;border-color:#0a7aff;color:#fff">Ouvrir la simulation 3D ›</a></p>
   </div>
 
   <h2><span class="n">5</span>Ce que ça coûte, ce que ça rapporte</h2>

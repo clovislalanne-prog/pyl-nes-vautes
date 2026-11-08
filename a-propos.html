@@ -81,6 +81,43 @@
   .sig b { display: block; font-size: 15px; }
   .sig span { display: block; color: var(--mute); font-size: 13px; }
   .sig a { display: inline-block; margin-right: 14px; color: var(--acc); font-size: 13.5px; text-decoration: none; }
+
+  /* ================= Thème clair (comme la simulation 3D) ================= */
+  :root { --bg: #f2f2f7; --card: #fff; --line: rgba(0,0,0,.08); --txt: #1d1d1f; --mute: #6e6e73; --acc: #0a7aff; }
+  html, body { background: var(--bg); color: var(--txt); }
+  body { background: var(--bg); }
+  .topbar { background: rgba(255,255,255,.85); border-bottom: 1px solid var(--line); }
+  .back { background: #fff; color: var(--txt); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .back:hover { background: #f7f7fa; }
+  .tag { color: #c46a12; border-color: rgba(240,138,36,.5); }
+  h1, h2, h3 { color: var(--txt); }
+  h2 .n { color: #f08a24; }
+  p, li { color: #3a3a3c; }
+  .lead, strong, .tl b { color: var(--txt); }
+  a, .src a, p a, li a { color: var(--acc); }
+  .card, .opt, .tool, .kpi, .chart, .prop li, .q li { background: #fff; border: 1px solid rgba(0,0,0,.05); box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .card.acc { background: #fff6ec; border-color: rgba(240,138,36,.4); }
+  .card.green { background: #effaf3; border-color: rgba(52,168,83,.35); }
+  .deadline { background: #fff6ec; border-color: rgba(240,138,36,.5); }
+  .deadline .d { background: #f08a24; color: #fff; }
+  .tl { border-left-color: rgba(0,0,0,.12); }
+  .tl div::before { background: #f08a24; }
+  .tl div.now::before { background: var(--acc); box-shadow: 0 0 0 4px rgba(10,122,255,.2); }
+  .prop li::before, .q li::before { background: var(--acc); color: #fff; }
+  .opt .row { border-top-color: var(--line); }
+  .tool select { background: #f2f2f7; color: var(--txt); border-color: var(--line); }
+  .r.best { outline-color: #1d1d1f; }
+  .kpi b { color: #d9730f; }
+  .bar .b { background: #f08a24; color: #fff; }
+  .bar .b.goal { color: var(--txt); }
+  a.ext, .cta .s { background: #fff; color: var(--txt); border-color: var(--line); }
+  .cta .p { background: var(--acc); color: #fff; }
+  .quote span { color: #f08a24; }
+  .sig .av { background: #e5e5ea; border-color: var(--line); }
+  .sig a { color: var(--acc); }
+  figure.map img { border-color: var(--line); }
+  figure.map figcaption { color: var(--mute); }
+  .note, .foot { color: var(--mute); }
 </style>
 </head>
 <body>

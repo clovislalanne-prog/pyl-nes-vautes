@@ -174,6 +174,69 @@
     #opts button { font-size: 14px; } #opts button small { font-size: 12px; }
     #welcome h1 { font-size: 26px; }
   }
+
+  /* ================= Thème clair, comme la Vue détaillée ================= */
+  :root { --acc: #0a7aff; --txt: #1d1d1f; --mute: #6e6e73; --card: rgba(255,255,255,.94); --soft: #f2f2f7; --line: rgba(0,0,0,.08); }
+  html, body { background: #e9e9ee; color: var(--txt); }
+  #top, #bottom, #setPanel, #pickBar { backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); background-image: none !important; text-shadow: none; }
+  #top, #bottom, #setPanel, #pickBar, #shot .card { background: var(--card); border: 1px solid rgba(255,255,255,.8); box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.08); color: var(--txt); }
+  #top { border-radius: 22px; }
+  #top .seg { background: var(--soft); border-radius: 99px; padding: 4px; }
+  #top .seg b, #top .seg a { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border-radius: 99px; color: var(--txt); padding: 8px 10px; font-size: 14px; }
+  #top .seg b { background: var(--acc); color: #fff; box-shadow: 0 3px 10px rgba(10,122,255,.3); }
+  #top .l1 button { color: var(--acc); }
+  #dist { color: #3a3a3c; } #dist b { color: var(--txt); } #dist .sub { color: var(--mute); }
+  #bottom { border-radius: 24px; }
+  #opts button { background: var(--soft); color: var(--txt); box-shadow: none; border: 2px solid transparent; border-radius: 16px; }
+  #opts button small { color: var(--mute); }
+  #opts button.on { background: var(--acc); border-color: var(--acc); color: #fff; box-shadow: 0 3px 10px rgba(10,122,255,.3); }
+  #opts button.on small { color: rgba(255,255,255,.9); }
+  #opts button.on .sw { box-shadow: 0 0 0 2px #fff; }
+  @media (max-width: 600px) { #opts button { font-size: 14px; padding: 10px 2px; white-space: nowrap; } #opts button .sw { width: 8px; height: 8px; margin-right: 4px; } }
+  #bottom .who { color: var(--mute); }
+  #side button { background: rgba(255,255,255,.95); border: none; backdrop-filter: none; -webkit-backdrop-filter: none; color: #1d1d1f; box-shadow: 0 6px 18px rgba(0,0,0,.2); width: 50px; height: 50px; }
+  #side button.on { background: #fff; color: var(--acc); }
+  #side #play { background: var(--acc); }
+  #photo { width: auto; height: 50px; padding: 0 20px; gap: 9px; border-radius: 99px; background: var(--acc); color: #fff; border: none; font: 600 15px Inter, sans-serif; box-shadow: 0 6px 18px rgba(10,122,255,.35); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  @media (min-width: 900px) { #photo { top: 16px !important; right: 16px; } }
+  .tip { background: rgba(29,29,31,.88); }
+  #setPanel .sp-h button { background: var(--soft); color: var(--txt); }
+  #setPanel .row { border-top-color: var(--line); }
+  #setPanel .row small { color: var(--mute); }
+  #setPanel .row i { background: #e5e5ea; }
+  #setPanel input:checked + i { background: var(--acc); }
+  #setPanel input[type=text] { background: var(--soft); border: none; color: var(--txt); }
+  #pickBar { border: none; }
+  #pickBar button { background: var(--soft); color: var(--txt); border: none; }
+  #veil { background: rgba(255,255,255,.92); color: var(--txt); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
+  #veil span { border-color: rgba(0,0,0,.15); border-top-color: var(--acc); }
+  #hint { background: rgba(255,255,255,.95); color: var(--txt); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+  #shot { background: rgba(20,22,26,.45); }
+  #shot .sh button { background: var(--soft); color: var(--txt); }
+  #shot img { background: var(--soft); }
+  #shot .steps b { color: var(--txt); } #shot .steps .n { background: var(--acc); color: #fff; }
+  #shotBtn { background: var(--acc); color: #fff; }
+  #shot .cta { color: var(--mute); }
+
+  /* Accueil en clair */
+  #welcome { background: #f2f2f7; color: var(--txt); }
+  #welcome h1 { color: var(--txt); }
+  #welcome p.lead { color: #3a3a3c; } #welcome p.lead2 { color: var(--mute); }
+  #welcome .tag { color: #c46a12; border-color: rgba(240,138,36,.5); }
+  #welcome .menu { border: none; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  #welcome .menu a { background: #fff; color: var(--txt); border-top: 1px solid var(--line); }
+  #welcome .menu i { color: #c7c7cc; }
+  #welcome .tile { box-shadow: 0 1px 3px rgba(0,0,0,.06); color: var(--txt); background: #fff !important; }
+  #welcome .tile small { color: var(--mute); }
+  #welcome .tile.rap { border-color: #f08a24; } #welcome .tile.rap b, #welcome .tile.rap .go { color: #d9730f; }
+  #welcome .tile.det { border-color: var(--acc); } #welcome .tile.det b, #welcome .tile.det .go { color: var(--acc); }
+  #welcome .mode.main { background: #fff; border: 2px solid #f08a24; }
+  #addr { border: 2px solid var(--line); background: var(--soft); }
+  #addr:focus { border-color: var(--acc); background: #fff; }
+  #sugg li { background: #fff; border-top-color: var(--line); } #sugg li:active { background: #e8f1ff; }
+  #onMap { background: var(--acc); color: #fff; border: none; }
+  #status { color: var(--mute); } #status .bar { background: #e5e5ea; } #status .bar i { background: var(--acc); }
+  #welcome .foot { border-top-color: var(--line); color: var(--mute); } #welcome .foot a { color: var(--acc); }
 </style>
 </head>
 <body>
@@ -211,7 +274,7 @@
 <div id="veil" class="hide"><span></span>Chargement de la 3D…</div>
 
 <div id="top" class="hide">
-  <div class="seg" aria-label="Version"><b aria-current="page">Vue rapide</b><a href="detaillee.html#direct">Vue détaillée</a></div>
+  <div class="seg" aria-label="Version"><b aria-current="page"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Vue rapide</b><a href="detaillee.html#direct"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Vue détaillée</a></div>
   <div class="l1"><span id="where">📍 Chez vous</span><button id="adjust">Ajuster l’épingle</button><button id="change">Changer</button></div>
   <div id="dist"></div>
 </div>
@@ -221,8 +284,8 @@
   <div class="who">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · <a href="a-propos.html">Qui suis-je ? ›</a> · <a href="detaillee.html#direct">Vue détaillée ›</a></div>
 </div>
 
-<div id="side" class="hide"><button id="play" aria-label="Lancer la rotation"><span class="tip">Faire le tour</span><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></button><button id="recBtn" aria-label="Recentrer la vue"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.8" fill="#fff"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg><span class="tip">Recentrer</span></button><button id="setBtn" aria-label="Options d’affichage"><span class="tip">Réglages</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.3"/><circle cx="9" cy="17" r="2.3"/></svg></button></div>
-<button id="photo" class="hide" aria-label="Prendre une photo"><span class="tip">Photo</span><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#111" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3.2l1.6-2.5h6.4L16.8 8H20v11H4z"/><circle cx="12" cy="13.2" r="3.6"/></svg></button>
+<div id="side" class="hide"><button id="play" aria-label="Lancer la rotation"><span class="tip">Faire le tour</span><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></button><button id="recBtn" aria-label="Recentrer la vue"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="6.5"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg><span class="tip">Recentrer</span></button><button id="setBtn" aria-label="Options d’affichage"><span class="tip">Réglages</span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.3"/><circle cx="9" cy="17" r="2.3"/></svg></button></div>
+<button id="photo" class="hide" aria-label="Capturer l’image"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3Z"/><circle cx="12" cy="13" r="3.6"/></svg>Capturer</button>
 <div id="setPanel" class="hide">
   <div class="sp-h"><b>Affichage</b><button id="setX" aria-label="Fermer">✕</button></div>
   <div class="row col"><span>Nom sur l’épingle</span><input type="text" id="oName" maxlength="28" placeholder="Chez vous" autocomplete="off"></div>
@@ -668,7 +731,7 @@
   $("adjust").onclick = () => startPick(true);
   function startPick(adj) {
     picking = true; adjusting = !!adj;
-    $("pickTxt").textContent = adj ? "Touchez l’endroit exact : toit, terrasse, balcon…" : "Touchez votre maison sur la carte"; $("side").classList.add("hide"); $("photo").classList.add("hide"); $("setPanel").classList.add("hide");
+    $("pickTxt").textContent = adj ? "Touchez le nouvel emplacement" : "Touchez votre maison sur la carte"; $("side").classList.add("hide"); $("photo").classList.add("hide"); $("setPanel").classList.add("hide");
     $("welcome").classList.add("hide"); $("top").classList.add("hide"); $("bottom").classList.add("hide"); $("pickBar").classList.remove("hide");
     const b = allSphere();
     goTo(adj && home ? { center: home, heading: orb ? orb.heading : 0, pitch: Cesium.Math.toRadians(-62), range: 110 }
