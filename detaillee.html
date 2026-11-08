@@ -153,7 +153,7 @@
   #modeSeg a, #modeSeg b { font: 600 13px Inter, sans-serif; padding: 6px 14px; border-radius: 9px; text-decoration: none; color: #e8eaed; white-space: nowrap; text-shadow: none; }
   #modeSeg b { background: #fff; color: #111; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
   #modeSeg a:hover { background: rgba(255,255,255,.14); }
-  #sign { bottom: 34px; right: 16px; padding: 9px 14px; font-size: 12px; text-align: right; }
+  #sign { bottom: 34px; right: 16px; padding: 7px 12px; font-size: 10.5px; text-align: right; }
   #sign span { color: var(--mute); }
   #sign .who { display: inline-block; margin-top: 4px; padding: 3px 10px; border-radius: 99px; background: var(--acc); color: #111; font-weight: 700; text-decoration: none; text-shadow: none; }
   #sign .who:hover { filter: brightness(1.1); }
@@ -190,7 +190,7 @@
   #intro .more-link:hover { background: rgba(255,255,255,.1); }
   .morelink { display: block; margin-top: 10px; padding: 11px 12px; border-radius: 14px; text-decoration: none; color: var(--txt); font-weight: 700; font-size: 13.5px; background: rgba(226,145,51,.14); border: 1px solid rgba(226,145,51,.45); }
   .morelink small { display: block; font-weight: 400; font-size: 11.5px; color: #d6dbe2; margin-top: 2px; }
-  #intro .foot { margin-top: 14px; font-size: 11.5px; color: var(--mute); text-align: center; line-height: 1.5; }
+  #intro .foot { margin-top: 14px; font-size: 10.5px; opacity: .85; color: var(--mute); text-align: center; line-height: 1.5; }
   .anfrBtn { display: flex; width: 100%; align-items: center; gap: 11px; margin-top: 12px; padding: 11px 12px; border-radius: 14px; text-align: left; font-weight: 700; font-size: 13.5px; }
   .anfrBtn .ic { font-size: 20px; } .anfrBtn .tx { flex: 1; } .anfrBtn small { display: block; font-weight: 400; font-size: 11.5px; color: #d6dbe2; margin-top: 2px; }
   .anfrBtn .sw { flex: none; width: 40px; height: 24px; border-radius: 99px; background: rgba(255,255,255,.22); position: relative; transition: background .2s; }
@@ -365,7 +365,7 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html#direct" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v43</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html#direct" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· © 2026 · v44</span></div>
 <div id="toast" class="panel"></div>
 <div id="anfrCard" class="panel"></div>
 
@@ -575,9 +575,9 @@
     b.dataset.id = s.id; if (s.lon == null) { b.disabled = true; b.title = "Coordonnées à venir"; }
     $("tabs").appendChild(b);
   });
-  $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => selectOption(b.dataset.id));
+  $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { if (anfrOn) { anfrOn = false; $("bAnfr").classList.remove("on"); anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); } selectOption(b.dataset.id); });
   function selectOption(id) {
-    selected = id;
+    selected = id; try { sessionStorage.setItem("pyloneSel", id); } catch (e) {}
     active.forEach(s => s.visible = (id === "all" || s.id === id));
     refresh();
     $("tabs").querySelectorAll("button").forEach(b => b.classList.toggle("sel", b.dataset.id === id));
@@ -712,7 +712,7 @@
     $("homeInfo").innerHTML = `<b>${homeLabel()}</b><br>` + (lines.join("<br>") || "Aucune option affichée") +
       ``;
   }
-  $("homeName").addEventListener("input", () => { if (home) drawHome(); try { localStorage.setItem("pyloneSimpleName", $("homeName").value.trim()); } catch (e) {} });
+  $("homeName").addEventListener("input", () => { if (home) drawHome(); try { sessionStorage.setItem("pyloneSimpleName", $("homeName").value.trim()); } catch (e) {} });
   $("bHomeDel").onclick = () => { home = null; drawHome(); try { localStorage.removeItem("pyloneHome"); } catch (e) {}
     $("homeInfo").textContent = ""; };
   $("bFrame").onclick = () => {
@@ -750,7 +750,7 @@
     const pos = scene.pickPosition(ev.position);
     if (!Cesium.defined(pos)) return;
     if (picking === "home") { setPicking(null); home = pos; drawHome();
-      try { const c = Cesium.Cartographic.fromCartesian(pos); localStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon: Cesium.Math.toDegrees(c.longitude), lat: Cesium.Math.toDegrees(c.latitude), label: "Votre maison" })); } catch (e) {} toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
+      try { const c = Cesium.Cartographic.fromCartesian(pos), old = JSON.parse(sessionStorage.getItem("pyloneSimpleHome") || "null"); sessionStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon: Cesium.Math.toDegrees(c.longitude), lat: Cesium.Math.toDegrees(c.latitude), h: c.height, label: (old && old.label) || "Votre maison" })); } catch (e) {} toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
     if (picking) { setPicking(null); startOrbit(pos, "le point choisi", Math.min(400, Math.max(80, Cesium.Cartesian3.distance(cam.positionWC, pos))), -25); return; }
     if (!measuring) return;
     const vis = active.filter(s => s.visible); if (!vis.length) return;
@@ -1049,11 +1049,17 @@
   }
   async function setAnfr(on) {
     anfrOn = on; $("bAnfr").classList.toggle("on", on);
-    if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); return; }
+    if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); selectOption(selected); return; }
+    // Les options du projet s'effacent : on ne regarde que les antennes existantes
+    active.forEach(s => s.visible = false); refresh();
+    $("tabs").querySelectorAll("button").forEach(b => b.classList.remove("sel"));
     toast("Chargement des antennes…", 1500);
     await anfrBuild(); anfrEnts.forEach(e => e.show = true);
     if (typeof stopOrbit === "function" && orbit) stopOrbit(true);
-    cam.flyTo({ destination: Cesium.Cartesian3.fromDegrees(REF.lon - (innerWidth >= 700 ? 0.018 : 0), REF.lat - 0.085, 7600), orientation: { heading: 0, pitch: Cesium.Math.toRadians(-55), roll: 0 }, duration: 2 });
+    // Cercle de 4 km centré à l'écran (décalé vers la gauche sur ordinateur, à cause du menu)
+    const cLon = REF.lon - (innerWidth >= 700 ? 0.012 : 0);
+    cam.flyToBoundingSphere(new Cesium.BoundingSphere(Cesium.Cartesian3.fromDegrees(cLon, REF.lat, 130), 4300),
+      { offset: new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-60), 11500), duration: 2, complete: () => cam.lookAtTransform(Cesium.Matrix4.IDENTITY) });
     if (isPhone()) sheet(false);
     toast("20 supports dans un rayon de 4 km (ANFR) · touchez-en un pour sa fiche", 4500);
   }
@@ -1137,15 +1143,14 @@
   // Arrivée depuis la vue rapide : pas de page d'accueil, et on reprend la maison déjà placée
   if (location.hash === "#antennes") { $("intro").classList.add("hide"); selectOption("all"); setTimeout(() => setAnfr(true), 400); }
   if (location.hash === "#direct") {
-    $("intro").classList.add("hide"); selectOption("all");
+    $("intro").classList.add("hide");
     try {
-      const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null"), nm = localStorage.getItem("pyloneSimpleName") || "";
+      const sv = JSON.parse(sessionStorage.getItem("pyloneSimpleHome") || "null"), nm = sessionStorage.getItem("pyloneSimpleName") || "";
       if (sv && Number.isFinite(sv.lon)) {
         if (nm) $("homeName").value = nm;
-        scene.sampleHeightMostDetailed([Cesium.Cartographic.fromDegrees(sv.lon, sv.lat)]).then(r => {
-          const h = Number.isFinite(r[0].height) ? r[0].height : active[0].ground;
-          home = Cesium.Cartesian3.fromDegrees(sv.lon, sv.lat, h + 0.5); drawHome(); setTimeout(() => $("bFrame").click(), 600);
-        }).catch(() => {});
+        const place = h => { home = Cesium.Cartesian3.fromDegrees(sv.lon, sv.lat, h); drawHome(); setTimeout(() => $("bFrame").click(), 900); };
+        if (Number.isFinite(sv.h)) place(sv.h);   // hauteur exacte choisie (toit, terrasse, balcon)
+        else scene.sampleHeightMostDetailed([Cesium.Cartographic.fromDegrees(sv.lon, sv.lat)]).then(r => place((Number.isFinite(r[0].height) ? r[0].height : active[0].ground) + 0.5)).catch(() => {});
       }
     } catch (e) {}
   }
@@ -1204,7 +1209,10 @@
   $("shotSave").addEventListener("click", () => setTimeout(() => { $("shot").classList.remove("show"); toast("Image enregistrée dans vos téléchargements"); }, 300));
   $("bHelp").onclick = () => $("intro").classList.remove("hide");
   applyLight();
-  selectOption("all");
+  // Même option que dans la vue rapide, si l'on vient de là
+  let startSel = "all";
+  try { const s0 = sessionStorage.getItem("pyloneSel"); if (location.hash === "#direct" && ["all", "o1", "o2", "o3"].includes(s0)) startSel = s0; } catch (e) {}
+  selectOption(startSel);
   setTimeout(refineGrounds, 300);
 })();
 </script>

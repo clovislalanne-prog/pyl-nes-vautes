@@ -37,7 +37,7 @@
   #sugg li:active { background: #ffe7c9; }
   #sugg li small { display: block; color: #666; font-size: 14px; margin-top: 2px; }
   #sugg li.msg { color: #444; cursor: default; font-size: 16px; }
-  #resume { display: block; width: 100%; margin-top: 10px; padding: 6px 2px; font-size: 15px; font-weight: 600; color: var(--acc); background: none; border: none; text-align: left; }
+  #resume { display: none; width: 100%; margin-top: 10px; padding: 6px 2px; font-size: 15px; font-weight: 600; color: var(--acc); background: none; border: none; text-align: left; }
   #onMap { display: block; width: 100%; margin-top: 18px; padding: 15px; font-size: 17px; font-weight: 600; color: var(--txt);
            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); border-radius: 14px; }
   #detCard { display: block; margin-top: 10px; padding: 13px 15px; font-size: 17px; font-weight: 600; color: var(--txt); text-align: center; text-decoration: none;
@@ -46,7 +46,7 @@
   #status { margin-top: 16px; font-size: 15px; color: var(--mute); display: flex; align-items: center; gap: 10px; }
   #status .bar { flex: 1; height: 6px; border-radius: 9px; background: rgba(255,255,255,.12); overflow: hidden; }
   #status .bar i { display: block; height: 100%; width: 5%; background: var(--acc); transition: width .3s; }
-  #welcome .foot { margin-top: 26px; font-size: 13.5px; color: var(--mute); line-height: 1.6; }
+  #welcome .foot { margin-top: 30px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.08); font-size: 11px; color: var(--mute); opacity: .8; line-height: 1.55; }
   #welcome .foot a { color: var(--acc); text-decoration: none; }
 
   #welcome .tag { display: inline-block; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--acc);
@@ -59,6 +59,18 @@
   #welcome .menu b { flex: 1; font-size: 16px; font-weight: 600; }
   #welcome .menu i { font-style: normal; color: var(--mute); font-size: 20px; }
   #welcome .choose { font-size: 21px; font-weight: 800; margin-bottom: 12px; }
+  #welcome .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  #welcome .tile { display: flex; flex-direction: column; padding: 13px 12px; border-radius: 16px; text-decoration: none; color: var(--txt); min-height: 150px;
+                   box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 6px 18px rgba(0,0,0,.25); }
+  #welcome .tile .ti { font-size: 22px; margin-bottom: 6px; }
+  #welcome .tile b { font-size: 17px; margin-bottom: 4px; }
+  #welcome .tile small { font-size: 13px; line-height: 1.4; color: #d3d7dd; flex: 1; }
+  #welcome .tile .go { margin-top: 10px; font-size: 13.5px; font-weight: 700; }
+  #welcome .tile.rap { border: 2px solid var(--acc); background: linear-gradient(180deg, rgba(226,145,51,.22), rgba(226,145,51,.06)); }
+  #welcome .tile.rap b, #welcome .tile.rap .go { color: var(--acc); }
+  #welcome .tile.det { border: 2px solid #4aa3ff; background: linear-gradient(180deg, rgba(74,163,255,.22), rgba(74,163,255,.06)); }
+  #welcome .tile.det b, #welcome .tile.det .go { color: #6db6ff; }
+  #welcome .tile.det:active { transform: scale(.98); }
   #welcome .mode { display: block; border-radius: 16px; padding: 14px; text-decoration: none; color: var(--txt); }
   #welcome .mode.main { background: rgba(226,145,51,.1); border: 2px solid var(--acc); }
   #welcome .mode.alt { margin-top: 12px; background: rgba(74,163,255,.09); border: 2px solid #4aa3ff; }
@@ -82,7 +94,7 @@
   #top .l1 { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; }
   #top .l1 span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #top .l1 button { flex: none; font-size: 14px; font-weight: 600; color: var(--acc); background: none; border: none; padding: 4px 2px; }
-  #top .l1 button { margin-left: auto; }
+  #top .l1 #adjust { margin-left: auto; }
   #top .seg { display: flex; padding: 2px; margin-bottom: 10px; border-radius: 10px; background: rgba(255,255,255,.12); }
   #top .seg b, #top .seg a { flex: 1; text-align: center; font: 600 13.5px Inter, sans-serif; padding: 6px 8px; border-radius: 8px; text-decoration: none; color: #e8eaed; white-space: nowrap; }
   #top .seg b { background: #fff; color: #111; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
@@ -102,7 +114,7 @@
   #opts button.on small { color: #fff; }
   #opts button .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--c); margin-right: 5px; }
 
-  #bottom .who { margin-top: 8px; text-align: center; font-size: 12px; color: var(--mute); }
+  #bottom .who { margin-top: 7px; text-align: center; font-size: 10.5px; color: var(--mute); opacity: .85; }
   #bottom .who a { color: var(--acc); text-decoration: none; font-weight: 600; }
   /* ---------- Panneau Affichage ---------- */
   #side { position: absolute; z-index: 6; right: 10px; display: flex; flex-direction: column; gap: 10px; }
@@ -180,26 +192,19 @@
       <a href="dossier.html#antennes"><span>📡</span><b>Les antennes déjà autour de nous</b><i>›</i></a>
       <a href="a-propos.html"><span>✍︎</span><b>Qui a fait cette simulation ?</b><i>›</i></a>
     </div>
-    <div class="choose">Voir le projet en 3D</div>
+    <div class="choose">Choisissez votre vue en 3D</div>
+    <div class="tiles">
+      <div class="tile rap on"><span class="ti">⚡</span><b>Vue rapide</b><small>Depuis chez vous, en 2 gestes · idéale sur téléphone</small><span class="go">Juste en dessous ↓</span></div>
+      <a class="tile det" href="detaillee.html#direct"><span class="ti">🧭</span><b>Vue détaillée</b><small>Tous les outils : 3 options, mesures, antennes autour · idéale sur ordinateur</small><span class="go">Ouvrir ›</span></a>
+    </div>
     <div class="mode main">
-      <div class="mh"><b>Vue rapide</b><small>depuis chez vous · idéale sur téléphone</small></div>
       <label for="addr">Votre adresse :</label>
       <input id="addr" type="text" inputmode="search" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Ex. : 12 rue Paul Valéry">
       <ul id="sugg"></ul>
-      <button id="resume" class="hide"></button>
-      <button id="onMap">Je préfère montrer ma maison sur la carte</button>
+      <button id="onMap">📍 Indiquer ma maison sur la carte</button>
     </div>
-    <a class="mode alt" href="detaillee.html#direct">
-      <div class="mh"><b>Vue détaillée</b><small>pour tout explorer · idéale sur ordinateur et tablette</small></div>
-      <ul class="perks">
-        <li><span>⚖︎</span>Comparer les 3 emplacements côte à côte</li>
-        <li><span>🚶</span>Se placer à hauteur d’yeux, dans la rue</li>
-        <li><span>📏</span>Mesurer, afficher les cercles de distance</li>
-      </ul>
-      <span class="go2">Explorer la vue détaillée ›</span>
-    </a>
     <div id="status"><span id="stTxt">Préparation de la 3D…</span><span class="bar"><i id="stBar"></i></span></div>
-    <div class="foot">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · simulation non contractuelle.</div>
+    <div class="foot">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · simulation non contractuelle.<br>© 2026 Clovis Lalanne : conception, textes et modèles 3D. Tous droits réservés. Images 3D © Google · CesiumJS · IGN · ANFR.</div>
   </div>
 </div>
 
@@ -207,7 +212,7 @@
 
 <div id="top" class="hide">
   <div class="seg" aria-label="Version"><b aria-current="page">Vue rapide</b><a href="detaillee.html#direct">Vue détaillée</a></div>
-  <div class="l1"><span id="where">📍 Chez vous</span><button id="change">Changer</button></div>
+  <div class="l1"><span id="where">📍 Chez vous</span><button id="adjust">Ajuster l’épingle</button><button id="change">Changer</button></div>
   <div id="dist"></div>
 </div>
 
@@ -224,7 +229,7 @@
   <label class="row"><span>Distance au sol</span><input type="checkbox" id="oDist" checked><i></i></label>
   <label class="row"><span>Axe des antennes<small>distance et angle vers votre toit</small></span><input type="checkbox" id="oAxis" checked><i></i></label>
 </div>
-<div id="pickBar" class="hide">Touchez votre maison sur la carte<br><button id="pickCancel">Annuler</button></div>
+<div id="pickBar" class="hide"><span id="pickTxt">Touchez votre maison sur la carte</span><br><button id="pickCancel">Annuler</button></div>
 <div id="hint" class="hide"></div>
 
 <div id="shot">
@@ -298,9 +303,6 @@
     if (!viewerReady) { pending = { lon, lat, label }; setStatus("Encore un instant, la 3D se termine…"); return; }
     setHome(lon, lat, label);
   }
-  try { const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null");
-    if (sv && Number.isFinite(sv.lon)) { $("resume").textContent = "↺ Reprendre votre dernière visite (" + (sv.label === "Votre maison" ? "maison placée sur la carte" : sv.label) + ")"; $("resume").classList.remove("hide");
-      $("resume").onclick = () => chooseAddress(sv.lon, sv.lat, sv.label); } } catch (e) {}
   $("onMap").onclick = () => { if (!viewerReady) { pending = "map"; setStatus("Encore un instant, la 3D se termine…"); return; } startPick(); };
 
   // ---------- 3D ----------
@@ -559,15 +561,20 @@
   function showSites() { const all = sel === "all"; SITES.forEach((s, i) => { const v = !!sel && (all || s.id === sel); s.models.forEach(m => m.show = v);
     if (s.label) { s.label.show = v; s.label.label.pixelOffset = new Cesium.Cartesian2(0, all ? -i * 30 : 0); } }); }
 
-  async function setHome(lon, lat, label) {
-    let h = null;
-    try { h = (await scene.sampleHeightMostDetailed([Cesium.Cartographic.fromDegrees(lon, lat)]))[0].height; } catch (e) {}
-    if (!Number.isFinite(h)) h = await terrainAt(lon, lat);
-    home = Cesium.Cartesian3.fromDegrees(lon, lat, h + 1);
+  async function setHome(lon, lat, label, hExact) {
+    let h = null, hs;
+    if (Number.isFinite(hExact)) hs = hExact;   // point touché précisément (toit, terrasse, balcon)
+    else {
+      try { h = (await scene.sampleHeightMostDetailed([Cesium.Cartographic.fromDegrees(lon, lat)]))[0].height; } catch (e) {}
+      if (!Number.isFinite(h)) h = await terrainAt(lon, lat);
+      hs = h + 1;
+    }
+    home = Cesium.Cartesian3.fromDegrees(lon, lat, hs);
     homeLabel = label || "Votre maison";
     // Au départ, une seule option : la plus proche de la maison
+    if (!sel) { try { const s0 = sessionStorage.getItem("pyloneSel"); if (["all", "o1", "o2", "o3"].includes(s0)) { sel = s0; markOpt(); showSites(); } } catch (e) {} }
     if (!sel) { let best = 1e12; SITES.forEach(s => { const d = distTo(s); if (d < best) { best = d; sel = s.id; } }); markOpt(); showSites(); }
-    try { localStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon, lat, label: homeLabel })); } catch (e) {}
+    try { sessionStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon, lat, h: hs, label: homeLabel })); sessionStorage.setItem("pyloneSel", sel); } catch (e) {}
     $("welcome").classList.add("hide"); $("pickBar").classList.add("hide");
     $("top").classList.remove("hide"); $("bottom").classList.remove("hide");
     $("side").classList.remove("hide"); $("photo").classList.remove("hide"); openSet(innerWidth >= 900);
@@ -633,7 +640,7 @@
   [...SITES.map(s => ({ id: s.id, html: `<span class="sw"></span>${s.name.replace("Option ", "Option&nbsp;")}<small>${s.height} m</small>`, c: s.color })),
    { id: "all", html: "Les 3<small>ensemble</small>", c: "#ffffff" }].forEach(o => {
     const b = document.createElement("button"); b.innerHTML = o.html; b.style.setProperty("--c", o.c); b.dataset.id = o.id;
-    b.onclick = () => { sel = o.id; markOpt(); showSites(); drawHome(); frame(true); };
+    b.onclick = () => { sel = o.id; try { sessionStorage.setItem("pyloneSel", sel); } catch (e) {} markOpt(); showSites(); drawHome(); frame(true); };
     opts.appendChild(b);
   });
   function markOpt() { [...opts.children].forEach(x => x.classList.toggle("on", x.dataset.id === sel)); }
@@ -641,8 +648,8 @@
   // ---------- Panneau Affichage ----------
   const openSet = on => { $("setPanel").classList.toggle("hide", !on); $("setBtn").classList.toggle("on", on); placeSide(); };
   $("setBtn").onclick = () => openSet($("setPanel").classList.contains("hide"));
-  $("oName").oninput = e => { pinName = e.target.value.trim(); try { localStorage.setItem("pyloneSimpleName", pinName); } catch (x) {} drawHome(); };
-  try { pinName = localStorage.getItem("pyloneSimpleName") || ""; $("oName").value = pinName; } catch (x) {}
+  $("oName").oninput = e => { pinName = e.target.value.trim(); try { sessionStorage.setItem("pyloneSimpleName", pinName); } catch (x) {} drawHome(); };
+  try { pinName = sessionStorage.getItem("pyloneSimpleName") || ""; $("oName").value = pinName; } catch (x) {}
   $("play").onclick = () => setSpin(!spin);
   $("setX").onclick = () => openSet(false);
   $("oDist").onchange = e => { opt.dist = e.target.checked; drawHome(); };
@@ -657,11 +664,15 @@
 
   // ---------- Changer d'adresse / choisir sur la carte ----------
   $("change").onclick = () => { $("welcome").classList.remove("hide"); $("setPanel").classList.add("hide"); $("side").classList.add("hide"); $("photo").classList.add("hide"); setSpin(false); $("addr").value = ""; sugg.innerHTML = ""; setStatus("La 3D est prête.", 100); };
-  function startPick() {
-    picking = true; $("side").classList.add("hide"); $("photo").classList.add("hide"); $("setPanel").classList.add("hide");
+  let adjusting = false;
+  $("adjust").onclick = () => startPick(true);
+  function startPick(adj) {
+    picking = true; adjusting = !!adj;
+    $("pickTxt").textContent = adj ? "Touchez l’endroit exact : toit, terrasse, balcon…" : "Touchez votre maison sur la carte"; $("side").classList.add("hide"); $("photo").classList.add("hide"); $("setPanel").classList.add("hide");
     $("welcome").classList.add("hide"); $("top").classList.add("hide"); $("bottom").classList.add("hide"); $("pickBar").classList.remove("hide");
     const b = allSphere();
-    goTo({ center: home || b.center, heading: 0, pitch: Cesium.Math.toRadians(-78), range: 520 }, 1400);
+    goTo(adj && home ? { center: home, heading: orb ? orb.heading : 0, pitch: Cesium.Math.toRadians(-62), range: 110 }
+                     : { center: home || b.center, heading: 0, pitch: Cesium.Math.toRadians(-78), range: 520 }, 1400);
   }
   $("pickCancel").onclick = () => {
     picking = false; $("pickBar").classList.add("hide");
@@ -673,17 +684,18 @@
     const p = scene.pickPosition(new Cesium.Cartesian2(e.clientX - r.left, e.clientY - r.top));
     if (!p) return;
     const c = Cesium.Cartographic.fromCartesian(p);
-    picking = false;
-    setHome(Cesium.Math.toDegrees(c.longitude), Cesium.Math.toDegrees(c.latitude), "Votre maison");
+    const keep = adjusting && homeLabel ? homeLabel : "Votre maison";
+    picking = false; adjusting = false;
+    setHome(Cesium.Math.toDegrees(c.longitude), Cesium.Math.toDegrees(c.latitude), keep, c.height + 0.3);
   }
 
   // Adresse déjà choisie lors d'une visite précédente, ou choisie pendant le chargement
   if (DIRECT && !pending) {
     $("veil").classList.add("hide");
-    try { const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null"); pending = sv && Number.isFinite(sv.lon) ? { lon: sv.lon, lat: sv.lat, label: sv.label } : "map"; } catch (e) { pending = "map"; }
+    try { const sv = JSON.parse(sessionStorage.getItem("pyloneSimpleHome") || "null"); pending = sv && Number.isFinite(sv.lon) ? { lon: sv.lon, lat: sv.lat, h: sv.h, label: sv.label } : "map"; } catch (e) { pending = "map"; }
   }
   if (pending === "map") startPick();
-  else if (pending) setHome(pending.lon, pending.lat, pending.label);
+  else if (pending) setHome(pending.lon, pending.lat, pending.label, pending.h);
 
   // ---------- Photo ----------
   $("photo").onclick = () => {
