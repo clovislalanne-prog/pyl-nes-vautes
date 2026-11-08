@@ -261,6 +261,196 @@
     #shot { padding: 10px; }
   }
   #info .hd .close { display: none; padding: 4px 9px; border-radius: 99px; }
+
+  /* ================= v45 : thème clair, panneaux blancs ================= */
+  :root { --bg: rgba(255,255,255,.9); --line: rgba(0,0,0,.08); --txt: #1d1d1f; --mute: #6e6e73; --acc: #0a7aff; --soft: #f2f2f7; }
+  body { color: var(--txt); }
+  .panel { background: rgba(255,255,255,.92) !important; backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+           border: 1px solid rgba(255,255,255,.7); box-shadow: 0 10px 30px rgba(0,0,0,.18), 0 1px 3px rgba(0,0,0,.08); text-shadow: none; color: var(--txt); border-radius: 22px; }
+  button { color: var(--txt); background: #fff; border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(0,0,0,.06); text-shadow: none; border-radius: 12px; }
+  button:hover { background: #f7f7fa; }
+  button.on { background: var(--acc); border-color: var(--acc); color: #fff; box-shadow: 0 3px 10px rgba(10,122,255,.3); }
+  .hidden { display: none !important; }
+  a { color: var(--acc); }
+
+  /* Panneau gauche */
+  #info.panel { background: rgba(242,242,247,.94) !important; }
+  #info { top: 16px; left: 16px; width: 330px; max-height: calc(100% - 32px); padding: 0; transition: transform .35s cubic-bezier(.3,.8,.3,1), opacity .25s; }
+  #info .hd { background: transparent; border: none; backdrop-filter: none; -webkit-backdrop-filter: none; padding: 16px 16px 10px 18px; margin: 0; gap: 12px; position: static; }
+  #info .hd .logo { flex: none; display: flex; }
+  #info h1 { font-size: 17px; font-weight: 700; line-height: 1.2; }
+  #info h1 small { display: block; font-size: 12.5px; font-weight: 500; color: var(--mute); margin-top: 2px; }
+  .circ { width: 32px; height: 32px; padding: 0; border-radius: 50%; font-weight: 700; font-size: 14px; flex: none; background: var(--soft); border: none; box-shadow: none; }
+  #toggle { display: none; }
+  #info .body { padding: 4px 12px 12px; display: grid; gap: 12px; }
+  #info .card { background: #fff; border-radius: 18px; padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.06); border: 1px solid rgba(0,0,0,.04); }
+  #info .ct { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  #info .ct svg { flex: none; }
+  #info .ct b { font-size: 15.5px; } #info .ct b.big { font-size: 17px; }
+  #info .ct small { display: block; font-size: 12px; color: var(--mute); margin-top: 1px; }
+  .field { display: flex; align-items: center; gap: 8px; background: var(--soft); border-radius: 99px; padding: 0 14px; color: var(--mute); }
+  .field input { flex: 1; min-width: 0; border: none; background: transparent; font: 500 14px Inter, sans-serif; color: var(--txt); padding: 11px 0; outline: none; }
+  .field input::placeholder { color: #8e8e93; font-style: italic; }
+  .place { width: 100%; margin-top: 8px; padding: 10px; font-weight: 600; font-size: 13.5px; background: var(--acc); color: #fff; border: none; }
+  .place.on { background: #fff; color: var(--acc); border: 1px solid var(--acc); }
+  .pinhint { display: none; font-size: 11.5px; color: var(--mute); margin: 7px 4px 0; line-height: 1.4; }
+  body.hasHome .place { display: none; } body.hasHome .pinhint { display: block; }
+  .lightrow { display: flex; align-items: center; gap: 12px; margin: 14px 2px 4px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .lightrow .lt { font-size: 22px; } .lightrow div { flex: 1; } .lightrow b { display: block; font-size: 14px; margin-bottom: 4px; }
+  input[type=range] { accent-color: var(--acc); }
+  .anfrBtn { margin: 0; padding: 10px 2px; background: transparent; border: none; box-shadow: none; border-bottom: 1px solid var(--line); border-radius: 0; font-size: 14px; color: var(--txt); }
+  .anfrBtn:hover, .anfrBtn.on { background: transparent; border-color: var(--line); }
+  .anfrBtn small { color: var(--mute); font-size: 11.5px; }
+  .anfrBtn .sw { width: 46px; height: 28px; background: #e5e5ea; }
+  .anfrBtn .sw::after { width: 24px; height: 24px; top: 2px; left: 2px; }
+  .anfrBtn.on .sw { background: var(--acc); } .anfrBtn.on .sw::after { left: 20px; }
+  details.more { margin: 0; }
+  details.more summary { background: transparent; border: none; box-shadow: none; padding: 12px 2px 2px; border-radius: 0; color: var(--txt); }
+  details.more summary .tx { font-size: 14px; } details.more summary .tx small { color: var(--mute); }
+  details.more summary .ch { color: #c7c7cc; font-size: 22px; }
+  details.more summary:hover { filter: none; opacity: .8; }
+  .lbl { color: var(--mute); }
+  .q { background: var(--soft); border: none; box-shadow: none; }
+  .rowlink { display: flex; align-items: center; gap: 12px; padding: 12px 12px; margin-top: 8px; border-radius: 14px; background: var(--soft); text-decoration: none; color: var(--txt); font-weight: 600; font-size: 14px; }
+  .rowlink:first-of-type { margin-top: 0; }
+  .rowlink i { margin-left: auto; font-style: normal; font-size: 20px; color: #8e8e93; }
+  .rowlink:hover { background: #e9e9ef; }
+  #measure, #homeInfo { color: var(--mute); } #measure b { color: var(--txt); }
+  #tuck { position: absolute; z-index: 6; top: 50%; left: 346px; transform: translateY(-50%); width: 30px; height: 56px; padding: 0; border-radius: 0 14px 14px 0; font-size: 22px; font-weight: 600; color: #3a3a3c;
+          background: rgba(255,255,255,.92); border: none; box-shadow: 4px 2px 12px rgba(0,0,0,.14); transition: left .35s cubic-bezier(.3,.8,.3,1); }
+  body.tucked #info { transform: translateX(calc(-100% - 24px)); opacity: 0; pointer-events: none; }
+  body.tucked #tuck { left: 0; }
+
+  /* Barre du haut */
+  #topbar { position: absolute; z-index: 4; top: 16px; left: 380px; right: 16px; display: flex; align-items: flex-start; justify-content: center; gap: 10px; pointer-events: none; transition: left .35s; }
+  body.tucked #topbar { left: 46px; }
+  #topbar > * { pointer-events: auto; position: static !important; transform: none !important; }
+  #tabs { max-width: none; padding: 5px; border-radius: 25px; align-items: stretch; gap: 2px; cursor: pointer; }
+
+  #tabs button { color: var(--txt); padding: 9px 14px; }
+  #tabs button:hover { background: var(--soft); }
+  #tabs button.sel { background: var(--acc); color: #fff; box-shadow: 0 3px 10px rgba(10,122,255,.3); }
+  .tb { height: 50px; display: inline-flex; align-items: center; gap: 9px; padding: 0 16px 0 8px; font-size: 13.5px; font-weight: 600; border-radius: 99px; white-space: nowrap; }
+  #tOpts { padding: 0 16px; }
+  #tPlay .pl, #tPlay .pa { width: 32px; height: 32px; border-radius: 50%; background: var(--acc); display: inline-flex; align-items: center; justify-content: center; }
+  #tPlay .pa, #tPlay.on .pl { display: none; } #tPlay.on .pa { display: inline-flex; }
+  #tPlay.on { background: var(--bg) !important; color: var(--txt); border-color: rgba(255,255,255,.7); box-shadow: 0 10px 30px rgba(0,0,0,.18); }
+  #modeSeg { padding: 5px; gap: 4px; border-radius: 99px; }
+  #modeSeg a, #modeSeg b { display: inline-flex; align-items: center; gap: 7px; color: var(--txt); padding: 9px 15px; border-radius: 99px; font-size: 13.5px; }
+  #modeSeg b { background: var(--acc); color: #fff; box-shadow: 0 3px 10px rgba(10,122,255,.3); }
+  #modeSeg a:hover { background: var(--soft); }
+  #capture { display: inline-flex; align-items: center; gap: 9px; height: 50px; padding: 0 20px; border-radius: 99px; background: var(--acc) !important; color: #fff; font-size: 14.5px; border: none; box-shadow: 0 6px 18px rgba(10,122,255,.35); }
+  @media (max-width: 1250px) { .tb .lab2, #modeSeg svg, #capture svg { } #tOpts { display: none; } }
+  @media (max-width: 1080px) { #tPlay { display: none; } }
+  #orbitBar { top: 80px; left: calc(50% + 182px); } body.tucked #orbitBar { left: calc(50% + 15px); }
+  #orbitBar button { background: var(--soft); border: none; box-shadow: none; }
+  #orbitBar .resume { background: var(--acc); color: #fff; }
+  #pickHint { top: 80px; left: calc(50% + 182px); font-weight: 600; } body.tucked #pickHint { left: calc(50% + 15px); }
+
+  /* Boutons de carte, à droite */
+  #rstack { top: 50%; bottom: auto; transform: translateY(-50%); gap: 12px; align-items: center; }
+  .rb { width: 52px; height: 52px; background: rgba(255,255,255,.92) !important; color: #1d1d1f; border: none; box-shadow: 0 6px 18px rgba(0,0,0,.2); font-size: 18px; }
+  .rb:hover { background: #fff !important; }
+  .zgrp { display: flex; flex-direction: column; border-radius: 26px; background: #fff; box-shadow: 0 6px 18px rgba(0,0,0,.2); overflow: hidden; }
+  .zgrp .rb { box-shadow: none; border-radius: 0; font-size: 26px; font-weight: 400; background: transparent !important; }
+  .zgrp .rb + .rb { border-top: 1px solid var(--line); }
+  #compass .n { color: #1d1d1f; top: 3px; }
+  #rHelp { width: 40px; height: 40px; font-size: 15px; }
+
+  /* Signature, méthode, divers */
+  #sign { bottom: 30px; padding: 10px 16px; font-size: 11px; color: var(--mute); }
+  #sign b { color: var(--txt); font-size: 13px; }
+  #sign .who { background: var(--soft); color: var(--acc); }
+  #disc { bottom: 30px; left: 16px; color: var(--mute); transition: left .35s; }
+  #disc b { color: var(--txt) !important; }
+  #toast, #pickHint, #tip, #ctrl { color: var(--txt); }
+  #ctrl .it { border-top-color: var(--line); } #ctrl .it span:last-child { color: #3a3a3c; } #ctrl .it .k { color: var(--txt); }
+  #ctrl .ch button, #anfrCard .h button { background: var(--soft); border: none; box-shadow: none; }
+  .cesium-viewer-bottom { background: rgba(255,255,255,.75); border-color: rgba(255,255,255,.8); }
+  .cesium-credit-textContainer, .cesium-credit-textContainer a, .cesium-credit-expand-link { color: #3a3a3c !important; }
+
+  /* Fiche d'un support ANFR : dans le coin, refermable, relisible avec « ? » */
+  #anfrCard { left: auto; right: 84px; transform: none; bottom: 96px; width: 360px; color: var(--txt); font-size: 12.5px; }
+  #anfrCard .mute { color: var(--mute); }
+  #anfrCard .warn { background: #fff7e0; border-color: #f5c451; }
+  #anfrQ { display: none; position: absolute; right: 84px; bottom: 96px; z-index: 7; height: 44px; padding: 0 16px 0 6px; border-radius: 99px; align-items: center; gap: 8px; font-weight: 600; font-size: 13px; }
+  #anfrQ .qq { width: 32px; height: 32px; border-radius: 50%; background: var(--acc); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 15px; }
+  #anfrQ.show { display: inline-flex; }
+
+  /* Écran d'accueil et capture, en clair */
+  #intro { background: rgba(20,22,26,.45); }
+  #intro .card { background: #fff; color: var(--txt); border: none; }
+  #intro p { color: #3a3a3c; }
+  #intro .st { background: var(--soft); border: none; } #intro .st span { color: var(--mute); }
+  #intro .st .ic { background: #fff; }
+  #intro .tag { color: #c46a12; border-color: rgba(240,138,36,.5); }
+  #intro .go { background: var(--acc); color: #fff; } #intro .go:disabled { background: #d1d1d6; color: #fff; }
+  #intro .ibar { background: var(--soft); }
+  #intro .more-link { background: var(--soft); border: none; color: var(--txt); }
+  #intro .who { background: var(--soft); border: none; color: var(--acc); }
+  #shot .card { color: var(--txt); } #shot img { background: #f2f2f7; }
+  #shot .note b, #shot .steps b { color: var(--txt); } #shot .steps { color: #3a3a3c; }
+  #shot .btn.cap, #shot .sb button.btn.cap { background: var(--acc); color: #fff; }
+
+  @media (max-width: 700px) {
+    #topbar { display: contents; }
+    #tPlay, #tOpts, #tuck, #rHelp { display: none !important; }
+    #tabs { position: absolute !important; }
+    #modeSeg { position: absolute !important; }
+    #modeSeg a, #modeSeg b { padding: 7px 11px; font-size: 12.5px; } #modeSeg svg { display: none; }
+    #rstack { top: 108px; transform: none; gap: 8px; } .rb { width: 44px; height: 44px; }
+    #info { transform: translateY(calc(100% + 120px)); opacity: 1; }
+    #info.open { transform: none; }
+    #info .hd .close { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; padding: 0; border-radius: 50%; background: var(--soft); border: none; }
+    #mbar button { color: var(--txt); } #mbar button.cap { background: var(--acc); color: #fff; } #mbar button.sel { background: var(--soft); }
+    #mrot.on { background: var(--acc) !important; color: #fff; }
+    #anfrCard { left: 8px; right: 8px; width: auto; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); }
+    #anfrQ { right: 10px; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); }
+    #orbitBar, #pickHint:not(.follow) { left: 8px !important; right: 8px; }
+    /* Sur téléphone : la consigne s'affiche en entier, en bas, au-dessus de la barre (jamais coupée) */
+    #pickHint.follow { top: auto !important; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); left: 8px !important; right: 8px !important;
+      transform: none !important; white-space: normal; text-align: center !important; font-size: 15px; padding: 12px 14px; }
+    #pickHint.follow::before { display: none; }
+    #pickHint.follow { pointer-events: auto; } #pickHint .pc { color: var(--acc); font-weight: 700; }
+    body:has(#pickHint.follow) #anfrQ { display: none !important; }
+  }
+
+  /* v45b : sélecteur d'options en bas, épingle sélectionnée, signature à gauche */
+  #tabs { position: absolute; z-index: 5; top: auto; bottom: 36px; left: calc(50% + 182px); transform: translateX(-50%); display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 99px; max-width: none; overflow: visible; transition: left .35s; }
+  body.tucked #tabs { left: calc(50% + 15px); }
+  #tabs .tq { font: 700 13px Inter, sans-serif; color: var(--mute); padding: 0 8px 0 12px; white-space: nowrap; }
+  #tabs button { display: inline-flex; align-items: center; gap: 8px; padding: 12px 18px; font-size: 15px; font-weight: 600; border-radius: 99px; background: transparent; border: none; box-shadow: none; color: var(--txt); white-space: nowrap; }
+  #tabs button .d { width: 11px; height: 11px; border-radius: 50%; }
+  #tabs button i { font-style: normal; }
+  #tabs button .hm { font-weight: 500; margin-left: -5px; }
+  #tabs button.all .hm { display: none; }
+  #tabs button.sel { background: var(--acc); color: #fff; box-shadow: 0 3px 10px rgba(10,122,255,.3); }
+  #tabs button.sel .d { box-shadow: 0 0 0 2px #fff; }
+  #tPlay { width: 50px; padding: 0; justify-content: center; }
+  #disc { bottom: 36px; max-width: 300px; font-size: 11px; line-height: 1.45; border-radius: 16px; }
+  #anfrCard { bottom: 112px; }
+  #anfrQ { right: 16px; bottom: 36px; width: 44px; height: 44px; padding: 0; border-radius: 50%; justify-content: center; }
+  #anfrQ .qq { font-family: Georgia, serif; font-style: italic; font-size: 17px; }
+  .cesium-viewer-bottom { bottom: 6px !important; }
+  #pickHint.follow { white-space: nowrap; top: 0; transform: translateX(-50%); border-radius: 14px; padding: 9px 13px; pointer-events: none; text-align: left; }
+  #pickHint.follow::before { content: ""; position: absolute; top: -6px; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top: 0; border-bottom-color: #fff; }
+  #pickHint small { display: block; font-weight: 500; color: var(--mute); font-size: 11.5px; margin-top: 2px; }
+  @media (max-width: 1180px) { #tabs .tq { display: none; } #tabs button { padding: 11px 14px; font-size: 14px; } }
+  @media (max-width: 700px) {
+    #tabs { top: max(8px, env(safe-area-inset-top)) !important; bottom: auto; left: 8px !important; right: 8px; transform: none; flex-wrap: wrap; justify-content: space-between; padding: 6px; border-radius: 20px; gap: 4px; }
+    #tabs .tq { display: block !important; width: 100%; text-align: center; padding: 2px 0 2px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px; }
+    #tabs button { flex: 1; flex-direction: column; gap: 1px; padding: 7px 2px; font-size: 14px; border-radius: 14px; min-width: 0; }
+    #tabs button .d { display: none; }
+    #tabs button .on1 { font-weight: 700; display: inline-flex; align-items: center; gap: 5px; }
+    #tabs button .hm { font-size: 12px; margin-left: 0; } #tabs button .hm i { display: none; }
+    #tabs button.all .hm { display: block; }
+    #tabs button:not(.all) .on1::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+    #tabs button.sel .on1::before { box-shadow: 0 0 0 1.5px #fff; }
+    #modeSeg, #mrot, #pickHint:not(.follow) { top: 104px !important; }
+    #rstack { top: 156px !important; }
+    #anfrQ { right: 10px; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); }
+    #anfrCard { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); }
+  }
 </style>
 </head>
 <body>
@@ -276,8 +466,8 @@
     <p id="iText2"></p>
     <p>Au départ, les riverains se sont exprimés contre toute implantation d’antenne. Aujourd’hui, plusieurs emplacements nous sont présentés. Nous ne voulons pas que ce choix entre options nous oppose les uns aux autres : quelle que soit l’option, nous restons solidaires, et chaque foyer concerné compte.</p>
     <div class="steps">
-      <div class="st"><div class="ic">📍</div><div><b>1. Placez votre maison</b><span>Tapez votre nom, cliquez sur « Placer notre maison » puis sur votre toit. La distance jusqu’au pylône s’affiche.</span></div></div>
-      <div class="st"><div class="ic">🎯</div><div><b>2. Cadrez la vue</b><span>« Cadrer maison + antenne » prépare une vue en 3/4 où l’on voit votre maison et le pylône ensemble.</span></div></div>
+      <div class="st"><div class="ic">📍</div><div><b>1. Placez votre maison</b><span>Tapez un nom, cliquez sur « Placer ma maison sur la carte » puis sur votre toit. La distance jusqu’au pylône s’affiche.</span></div></div>
+      <div class="st"><div class="ic">🎯</div><div><b>2. Cadrez la vue</b><span>Déplacez la vue avec la souris ou les doigts pour voir votre maison et le pylône ensemble. Touchez l’épingle pour la déplacer sur le toit, la terrasse ou le balcon.</span></div></div>
       <div class="st"><div class="ic">📷</div><div><b>3. Capturez et joignez l’image à votre courrier</b><span>Le bouton « Capturer » enregistre l’image, avec la distance, dans vos téléchargements. Seule la vue 3D y figure, sans les menus.</span></div></div>
     </div>
     <div class="ask">Quelle option voulez-vous voir ?</div>
@@ -292,26 +482,21 @@
 </div>
 
 <div id="info" class="panel">
-  <div class="hd"><h1>Projet de pylône 5G</h1><button id="bHelp" title="Revoir l’explication">?</button><button id="toggle">Réduire</button><button class="close" id="mClose">✕</button></div>
+  <div class="hd">
+    <span class="logo"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="#f08a24" stroke-width="2.4" stroke-linecap="round"><circle cx="16" cy="16" r="3" fill="#f08a24" stroke="none"/><path d="M10.5 10.5a8 8 0 0 0 0 11M21.5 10.5a8 8 0 0 1 0 11M6.5 6.5a13.5 13.5 0 0 0 0 19M25.5 6.5a13.5 13.5 0 0 1 0 19"/></svg></span>
+    <h1>Projet de pylône 5G<small>Simulation &amp; impact local</small></h1>
+    <button id="bHelp" class="circ" title="Revoir l’explication">?</button><button id="toggle">Réduire</button><button class="close" id="mClose">✕</button>
+  </div>
   <div class="body">
-    <div class="lbl" style="margin-top:4px">Votre image pour le courrier <button class="q" data-tip="Suivez les étapes dans l’ordre : votre nom, votre maison sur la carte, le cadrage, l’éclairage, puis la capture. Seule la vue 3D est enregistrée : les menus et panneaux n’apparaissent pas sur l’image. Elle comporte votre nom, la distance au pylône et la signature de la simulation.">?</button></div>
-    <div class="steps2">
-      <div class="step"><span class="n">1</span><div class="c"><input id="homeName" maxlength="40" placeholder="Votre nom, ex. : Famille Martin" value=""></div></div>
-      <div class="step"><span class="n">2</span><div class="c row"><button id="bHome" class="btnHome">📍 Placer notre maison</button><button id="bHomeDel" disabled title="Retirer l’épingle">✕</button></div></div>
-      <div class="step"><span class="n">3</span><div class="c"><button id="bFrame" class="big" disabled>🎯 Cadrer maison + antenne</button></div></div>
-      <div class="step"><span class="n">4</span><div class="c"><div class="slider"><span title="Éclairage des pylônes affichés">☀︎ Éclairage pylône(s)</span><input id="light" type="range" min="35" max="100" value="55"></div></div></div>
-      <div id="homeInfo"></div>
-    </div>
-
-
-    <button id="bAnfr" class="anfrBtn"><span class="ic">📡</span><span class="tx">Antennes autour du projet<small>Les 20 supports de téléphonie dans un rayon de 4 km · données ANFR via Cartoradio, au 31/10/2026</small></span><i class="sw"></i></button>
-    <a class="morelink" href="dossier.html">📋 Où en est le dossier ?<small>Notre position, l’association de riverains, la réponse commune avant le 15 novembre.</small></a>
-    <a class="morelink" href="en-savoir-plus.html">📖 Pour aller plus loin<small>Qui construit ce pylône, et pourquoi ? Nos droits de riverains.</small></a>
-    <a class="morelink" href="a-propos.html" style="background:rgba(255,255,255,.06);border-color:var(--line)">✍︎ Qui a fait cette simulation ?<small>Un mot de Clovis Lalanne, l’auteur.</small></a>
-
-    <button id="moreHint" class="hide">Plus d’options ↓</button>
+    <div class="card">
+      <div class="ct"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.2L3.6 17.2a1.6 1.6 0 0 0 2.3 2.3l5.7-5.7a4 4 0 0 0 5.2-5.4l-2.5 2.5-2.1-.6-.6-2.1 2.5-2.5Z"/></svg><div><b>Outils de simulation</b><small>Configurer et explorer la simulation</small></div></div>
+      <label class="field"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><input id="homeName" maxlength="40" placeholder="Nom du lieu (ex. : Bekara)" value=""></label>
+      <button id="bHome" class="place">📍 Placer ma maison sur la carte</button>
+      <div class="pinhint">Touchez l’épingle sur la carte pour la déplacer (toit, terrasse, balcon…).</div>
+      <div class="lightrow"><span class="lt">☀︎</span><div><b>Éclairage du pylône</b><input id="light" type="range" min="35" max="100" value="55"></div></div>
+      <button id="bAnfr" class="anfrBtn"><span class="ic"><svg viewBox="0 0 32 32" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="16" cy="13" r="2.4" fill="currentColor" stroke="none"/><path d="M16 15.5V27M11 8.5a7 7 0 0 0 0 9M21 8.5a7 7 0 0 1 0 9M7.2 5a12 12 0 0 0 0 16M24.8 5a12 12 0 0 1 0 16"/></svg></span><span class="tx">Antennes autour du projet<small>Supports de téléphonie (ANFR, 4 km)</small></span><i class="sw"></i></button>
     <details class="more">
-      <summary><span class="ic">🧭</span><span class="tx">Explorer davantage<small>Vue du dessus, à hauteur d’yeux, cercles de distance, mesure…</small></span><span class="ch">›</span></summary>
+      <summary><span class="ic"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg></span><span class="tx">Plus d’outils<small>Vues, mesures, distances, cercles…</small></span><span class="ch">›</span></summary>
       <div class="lbl">Vues <button class="q" data-tip="Vue d’ensemble : tous les emplacements. Vue du dessus : comme un plan. À hauteur d’yeux : comme depuis la rue. Tourner autour d’un point : cliquez ensuite sur la carte.">?</button></div>
       <div class="row">
         <button id="vAll">Vue d’ensemble</button>
@@ -330,23 +515,39 @@
       <div class="row" style="margin-bottom:8px"><button id="bMeasure">📏 Mesurer</button><button id="bMeasureDel" disabled>Effacer la mesure</button></div>
       <div id="measure"></div>
     </details>
+    </div>
+    <div class="card">
+      <div class="ct"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#0a7aff" stroke-width="1.7" stroke-linejoin="round"><path d="M3 5.5c3-1.3 6-1.3 9 .8 3-2.1 6-2.1 9-.8V19c-3-1.3-6-1.3-9 .8-3-2.1-6-2.1-9-.8V5.5Z"/><path d="M12 6.3v13.5"/></svg><div><b class="big">Informations &amp; lecture</b></div></div>
+      <a class="rowlink" href="dossier.html"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg>Où en est le dossier ?<i>›</i></a>
+      <a class="rowlink" href="en-savoir-plus.html"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3 5.5c3-1.3 6-1.3 9 .8 3-2.1 6-2.1 9-.8V19c-3-1.3-6-1.3-9 .8-3-2.1-6-2.1-9-.8V5.5Z"/><path d="M12 6.3v13.5"/></svg>Pour aller plus loin<i>›</i></a>
+      <a class="rowlink" href="a-propos.html"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></svg>Qui a fait cette simulation ?<i>›</i></a>
+    </div>
+    <div class="hidden"><button id="bHomeDel">✕</button><button id="bFrame">Cadrer</button><div id="homeInfo"></div></div>
+    <button id="moreHint" class="hide">Plus d’options ↓</button>
   </div>
 </div>
+<button id="tuck" aria-label="Ranger le panneau" title="Ranger le panneau">‹</button>
 
 <div id="tabs" class="panel"></div>
-<div id="modeSeg" class="panel"><a href="index.html#direct">Vue rapide</a><b aria-current="page">Vue détaillée</b></div>
+<div id="topbar">
+<button id="tPlay" class="panel tb" title="Rotation automatique" aria-label="Rotation automatique"><span class="pl"><svg viewBox="0 0 24 24" width="13" height="13"><path d="M7 4.5v15l12-7.5z" fill="#fff"/></svg></span><span class="pa"><svg viewBox="0 0 24 24" width="13" height="13"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="#fff"/></svg></span></button>
+<div id="modeSeg" class="panel"><a href="index.html#direct"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Vue rapide</a><b aria-current="page"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>Vue détaillée</b></div>
+
+
+<button id="capture" class="panel"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3Z"/><circle cx="12" cy="13" r="3.6"/></svg>Capturer</button>
+</div>
 <div id="orbitBar" class="panel">
   <span class="orb"><span class="sp">⟳</span><span id="orbitName">Autour de…</span><button id="oPause">Pause</button><button id="oQuit">Navigation libre</button></span>
   <span class="free">🧭 Navigation libre<button id="oResume" class="resume">⟳ Tourner autour</button></span>
 </div>
 <div id="pickHint" class="panel"></div>
 
-<button id="capture" class="panel">📷 Capturer</button>
-
 <div id="rstack">
-  <button id="rPlay" class="rb" title="Rotation automatique" aria-label="Rotation automatique"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M8 5.5v13l10.5-6.5z" fill="#fff"/></svg></button>
+  <button id="rPlay" class="rb hidden" aria-label="Rotation automatique"></button>
+  <button id="compass" class="rb" title="Remettre le nord en haut" aria-label="Remettre le nord en haut"><svg id="needle" viewBox="0 0 40 40" width="34" height="34"><path d="M20 4 L25 20 L20 17 L15 20 Z" fill="#ff3b30"/><path d="M20 36 L15 20 L20 23 L25 20 Z" fill="#c7c7cc"/></svg><span class="n">N</span></button>
+  <div class="zgrp"><button id="zIn" class="rb" aria-label="Zoomer">+</button><button id="zOut" class="rb" aria-label="Dézoomer">−</button></div>
+  <button id="rAll" class="rb" title="Vue d’ensemble" aria-label="Vue d’ensemble"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
   <button id="rHelp" class="rb" title="Comment se déplacer" aria-label="Comment se déplacer">?</button>
-  <button id="compass" class="rb" title="Remettre le nord en haut" aria-label="Remettre le nord en haut"><svg id="needle" viewBox="0 0 40 40" width="34" height="34"><path d="M20 4 L25 20 L20 17 L15 20 Z" fill="#ff5a4e"/><path d="M20 36 L15 20 L20 23 L25 20 Z" fill="#e8eaed"/><text x="20" y="13.5" text-anchor="middle" font-size="0" fill="#fff">N</text></svg><span class="n">N</span></button>
 </div>
 <div id="pad" class="panel">
   <div class="mode"><button id="mOrbit" class="on">Tourner</button><button id="mWalk">Avancer</button><button id="bCtrl" title="Comment se déplacer" style="flex:none;width:28px;padding:5px 0">?</button></div>
@@ -357,7 +558,7 @@
 </div>
 
 <div id="disc" class="panel">
-  <div><b style="color:var(--txt)">Simulation fidèle, non contractuelle</b> · <a href="#" id="discMore">ⓘ Méthode</a></div>
+  <div><b style="color:var(--txt)">Simulation fidèle, non contractuelle</b> · réalisée par <a href="a-propos.html" style="color:inherit">Clovis Lalanne</a> · © 2026 · <a href="#" id="discMore">ⓘ Méthode</a></div>
   <div id="discFull" style="display:none; margin-top:8px">
     <p style="margin:0 0 6px">Le pylône et ses antennes ont été modélisés à partir des photographies, des dimensions et des plans communiqués par Bouygues Telecom, complétés par les dimensions des fabricants de pylônes, qui sont normalisées. Le parc technique au sol ne nous a pas été communiqué en détail : il a été reconstitué d’après les configurations standard utilisées pour chaque hauteur de pylône (dalle, clôture, armoires techniques). Ses dimensions sont donc proches de la réalité ; son orientation exacte sur le terrain, en revanche, n’est pas connue et relève d’une interprétation de notre part. Les modèles ont ensuite été placés et mis à l’échelle sur le terrain réel grâce à Google Earth et au cadastre (cartes.gouv.fr), avec des hauteurs relevées au plus près.</p>
     <p style="margin:0 0 6px">Elle ne prétend pas à une exactitude parfaite, mais a été construite pour être la plus proche possible de la réalité, y compris le parc technique au sol, qui fait partie intégrante de l’installation.</p>
@@ -365,9 +566,10 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html#direct" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· © 2026 · v44</span></div>
+
 <div id="toast" class="panel"></div>
 <div id="anfrCard" class="panel"></div>
+<button id="anfrQ" class="panel" aria-label="Relire la fiche du support">?</button>
 
 <div id="tip" class="panel"></div>
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
@@ -566,16 +768,18 @@
   let selected = "all";
   function makeBtn(label, color, sub) {
     const b = document.createElement("button");
+    if (color) b.style.setProperty("--c", color);
     b.innerHTML = (color ? `<span class="d" style="background:${color}"></span>` : "") + label + (sub ? `<small>${sub}</small>` : "");
     return b;
   }
-  const tabAll = makeBtn("Toutes<span class=\"lg\"> les options</span>"); tabAll.dataset.id = "all"; $("tabs").appendChild(tabAll);
+  $("tabs").insertAdjacentHTML("beforeend", '<span class="tq">Quel pylône voir ?</span>');
   SITES.forEach(s => {
-    const b = makeBtn("<span class=\"lg\">" + s.name + " · </span>" + (s.height ? s.height + " m" : s.name), s.color);
+    const b = makeBtn('<span class="on1">' + s.name + '</span><span class="hm"><i> · </i>' + s.height + ' m</span>', s.color);
     b.dataset.id = s.id; if (s.lon == null) { b.disabled = true; b.title = "Coordonnées à venir"; }
     $("tabs").appendChild(b);
   });
-  $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { if (anfrOn) { anfrOn = false; $("bAnfr").classList.remove("on"); anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); } selectOption(b.dataset.id); });
+  const tabAll = makeBtn('<span class="on1">Toutes</span><span class="hm"><i> · </i>les 3</span>'); tabAll.dataset.id = "all"; tabAll.className = "all"; $("tabs").appendChild(tabAll);
+  $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { if (anfrOn) { anfrOn = false; $("bAnfr").classList.remove("on"); anfrEnts.forEach(e => e.show = false); anfrClearDir(); anfrSel = null; $("anfrCard").classList.remove("show"); $("anfrQ").classList.remove("show"); } selectOption(b.dataset.id); });
   function selectOption(id) {
     selected = id; try { sessionStorage.setItem("pyloneSel", id); } catch (e) {}
     active.forEach(s => s.visible = (id === "all" || s.id === id));
@@ -641,9 +845,11 @@
     $("bMeasureDel").disabled = true; $("measure").textContent = ""; };
   let picking = null; // null | "orbit" | "home"
   function setPicking(p) {
-    picking = p;
+    const wasHome = picking === "home"; picking = p;
+    if (home && (wasHome || p === "home")) drawHome();
     $("bPick").classList.toggle("on", p === "orbit"); $("bHome").classList.toggle("on", p === "home");
-    $("pickHint").textContent = p === "home" ? "📍 Cliquez sur le toit de votre maison" : "Cliquez sur la carte à l’endroit autour duquel vous voulez tourner";
+    $("pickHint").classList.toggle("follow", p === "home" && !!home);
+    $("pickHint").innerHTML = p === "home" ? (home ? "Touchez le nouvel emplacement<small>toit, terrasse, balcon…" + (TOUCH ? " · <a class=\"pc\">Annuler</a>" : " · Échap pour annuler") + "</small>" : "📍 Cliquez sur le toit de votre maison") : "Cliquez sur la carte à l’endroit autour duquel vous voulez tourner";
     $("pickHint").classList.toggle("show", !!p); $("map").classList.toggle("picking", !!p || measuring);
     if (p && orbit && orbit.auto) setAuto(false);
   }
@@ -658,17 +864,21 @@
     <circle cx="48" cy="44" r="25" fill="#fff"/>
     <path d="M48 28 L66 43 L61 43 L61 58 L52 58 L52 49 L44 49 L44 58 L35 58 L35 43 L30 43 Z" fill="#e5484d"/>
   </svg>`);
+  const PIN_SEL = PIN.replace(/%23e5484d/g, "%230a7aff");
   let home = null, homeEnts = [];
   function clearHomeEnts() { homeEnts.forEach(e => viewer.entities.remove(e)); homeEnts = []; }
   function homeLabel() { return ($("homeName").value.trim() || "Notre maison"); }
   function drawHome() {
-    clearHomeEnts();
-    if (!home) { $("bFrame").disabled = $("bHomeDel").disabled = true; $("bHome").textContent = "📍 Placer notre maison"; return; }
+    clearHomeEnts(); document.body.classList.toggle("hasHome", !!home);
+    if (!home) { $("bFrame").disabled = $("bHomeDel").disabled = true; $("bHome").textContent = "📍 Placer ma maison sur la carte"; return; }
     $("bFrame").disabled = $("bHomeDel").disabled = false; $("bHome").textContent = "📍 Déplacer l’épingle";
+    const pinSel = picking === "home";
+    if (pinSel) homeEnts.push(viewer.entities.add({ position: home, ellipse: { semiMajorAxis: 9, semiMinorAxis: 9, height: Cesium.Cartographic.fromCartesian(home).height,
+      material: Cesium.Color.fromCssColorString("#0a7aff").withAlpha(.25), outline: true, outlineColor: Cesium.Color.fromCssColorString("#0a7aff") } }));
     homeEnts.push(viewer.entities.add({ position: home,
-      billboard: { image: PIN, width: 28, height: 36, verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY },
+      billboard: { image: pinSel ? PIN_SEL : PIN, width: 28, height: 36, verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY },
       label: { text: homeLabel(), font: "700 12px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
-               backgroundColor: Cesium.Color.fromCssColorString("#e5484d").withAlpha(.95), backgroundPadding: new Cesium.Cartesian2(7, 4),
+               backgroundColor: Cesium.Color.fromCssColorString(pinSel ? "#0a7aff" : "#e5484d").withAlpha(.95), backgroundPadding: new Cesium.Cartesian2(7, 4),
                pixelOffset: new Cesium.Cartesian2(0, -42), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     const lines = [];
     active.filter(s => s.visible).forEach(s => {
@@ -747,10 +957,12 @@
   // ---------- Clic : choisir un point ou mesurer ----------
   let mLine, mPoint;
   new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
+    // L'épingle est cliquable : un clic dessus permet de la déplacer
+    if (!picking && !measuring && homeEnts.length) { const pk = scene.pick(ev.position); if (pk && pk.id && pk.id.billboard && homeEnts.includes(pk.id)) { setPicking("home"); return; } }
     const pos = scene.pickPosition(ev.position);
     if (!Cesium.defined(pos)) return;
     if (picking === "home") { setPicking(null); home = pos; drawHome();
-      try { const c = Cesium.Cartographic.fromCartesian(pos), old = JSON.parse(sessionStorage.getItem("pyloneSimpleHome") || "null"); sessionStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon: Cesium.Math.toDegrees(c.longitude), lat: Cesium.Math.toDegrees(c.latitude), h: c.height, label: (old && old.label) || "Votre maison" })); } catch (e) {} toast("Épingle posée. Vous pouvez la déplacer à tout moment.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
+      try { const c = Cesium.Cartographic.fromCartesian(pos), old = JSON.parse(sessionStorage.getItem("pyloneSimpleHome") || "null"); sessionStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon: Cesium.Math.toDegrees(c.longitude), lat: Cesium.Math.toDegrees(c.latitude), h: c.height, label: (old && old.label) || "Votre maison" })); } catch (e) {} toast("Épingle posée. Touchez-la pour la déplacer.", 3000); if (innerWidth < 700) setTimeout(() => sheet(true, "home"), 900); return; }
     if (picking) { setPicking(null); startOrbit(pos, "le point choisi", Math.min(400, Math.max(80, Cesium.Cartesian3.distance(cam.positionWC, pos))), -25); return; }
     if (!measuring) return;
     const vis = active.filter(s => s.visible); if (!vis.length) return;
@@ -992,6 +1204,8 @@
       let hs = ANFR.map(() => 0);
       try { terrainP = terrainP || Cesium.createWorldTerrainAsync(); const tp = await terrainP;
         hs = (await Cesium.sampleTerrainMostDetailed(tp, ANFR.map(a => Cesium.Cartographic.fromDegrees(a.lon, a.lat)))).map(c => c.height); } catch (e) {}
+      // Supports très proches (même château d'eau, même pylône) : étiquettes décalées côte à côte
+      ANFR.forEach((a, i) => { const near = ANFR.filter(b => Math.hypot((b.lon - a.lon) * 80500, (b.lat - a.lat) * 111000) < 120); a.ox = (near.indexOf(a) - (near.length - 1) / 2) * 74; });
       ANFR.forEach((a, i) => {
         a.g = Number.isFinite(hs[i]) ? hs[i] : 0;
         const multi = a.ops.length > 1, col = Cesium.Color.fromCssColorString(multi ? "#7b55d8" : OPC[a.ops]);
@@ -1002,7 +1216,7 @@
           point: { pixelSize: 9, color: col, outlineColor: pend ? Cesium.Color.fromCssColorString("#ffbe3c") : Cesium.Color.WHITE, outlineWidth: pend ? 3 : 1.5, disableDepthTestDistance: Number.POSITIVE_INFINITY },
           label: { text: a.rep + " · " + a.ops.split("").join("/") + (pend ? "  !" : "") + "\n" + Math.round(a.h) + " m", font: "700 12px Inter, sans-serif", fillColor: Cesium.Color.WHITE,
                    showBackground: true, backgroundColor: (pend ? Cesium.Color.fromCssColorString("#b8860b") : col).withAlpha(.88), backgroundPadding: new Cesium.Cartesian2(6, 4),
-                   pixelOffset: new Cesium.Cartesian2(0, -14), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                   pixelOffset: new Cesium.Cartesian2(a.ox || 0, -14), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY,
                    scaleByDistance: new Cesium.NearFarScalar(800, 1.05, 9000, .8) } }));
         anfrEnts[anfrEnts.length - 1].anfrData = a;
       });
@@ -1028,8 +1242,10 @@
         backgroundColor: Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85), backgroundPadding: new Cesium.Cartesian2(4, 2), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     }));
   }
+  function anfrHide() { $("anfrCard").classList.remove("show"); $("anfrQ").classList.remove("show"); }
   function anfrCard(a) {
-    anfrSel = a;
+    if (anfrSel === a && anfrDir.length) { anfrHide(); anfrClearDir(); anfrSel = null; return; }   // recliquer l'antenne : tout s'efface
+    anfrSel = a; $("anfrQ").classList.remove("show");
     const nearest = active.reduce((m, s) => { const d = Math.round(Cesium.Cartesian3.distance(Cesium.Cartesian3.fromDegrees(a.lon, a.lat, 0), Cesium.Cartesian3.fromDegrees(s.lon, s.lat, 0))); return d < m ? d : m; }, 1e9);
     const fmt = d => d >= 1000 ? (d / 1000).toFixed(2).replace(".", ",") + " km" : d + " m";
     $("anfrCard").innerHTML = `<div class="h"><b>Support ${a.rep} · ${a.type} · ${a.h.toString().replace(".", ",")} m</b><button id="anfrX" aria-label="Fermer">✕</button></div>
@@ -1041,7 +1257,8 @@
         : `<div class="warn"><b>Accord d’implantation ANFR le ${a.accord}</b>, aucune mise en service publiée à ce jour. L’absence de date ne prouve pas que le site est inactif, ni qu’il est déjà construit.</div>`}
       <div class="mute">Données ANFR (Cartoradio), situation au 31/10/2026, inventaire administratif · support ${a.id} · <a href="https://www.cartoradio.fr/index.html#/cartographie/lonlat/${a.lon}/${a.lat}" target="_blank" rel="noopener">Voir sur Cartoradio ›</a> · Les flèches indiquent des directions déclarées, pas une portée ni une exposition.</div>`;
     $("anfrCard").classList.add("show");
-    $("anfrX").onclick = () => { $("anfrCard").classList.remove("show"); anfrClearDir(); anfrSel = null; };
+    $("anfrX").onclick = () => { $("anfrCard").classList.remove("show");
+      $("anfrQ").innerHTML = `<span class="qq">i</span>`; $("anfrQ").title = `Relire la fiche du support ${a.rep}`; $("anfrQ").classList.add("show"); };
     anfrShowDir(a);
     if (orbit) stopOrbit(true);
     const c = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, a.g + a.h);
@@ -1049,7 +1266,7 @@
   }
   async function setAnfr(on) {
     anfrOn = on; $("bAnfr").classList.toggle("on", on);
-    if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); $("anfrCard").classList.remove("show"); selectOption(selected); return; }
+    if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); anfrHide(); anfrSel = null; selectOption(selected); return; }
     // Les options du projet s'effacent : on ne regarde que les antennes existantes
     active.forEach(s => s.visible = false); refresh();
     $("tabs").querySelectorAll("button").forEach(b => b.classList.remove("sel"));
@@ -1064,6 +1281,31 @@
     toast("20 supports dans un rayon de 4 km (ANFR) · touchez-en un pour sa fiche", 4500);
   }
   $("bAnfr").onclick = () => setAnfr(!anfrOn);
+  // Bulle sous l'épingle sélectionnée
+  const w2w = Cesium.SceneTransforms.worldToWindowCoordinates || Cesium.SceneTransforms.wgs84ToWindowCoordinates;
+  scene.postRender.addEventListener(() => {
+    const h = $("pickHint"); if (!h.classList.contains("follow") || !home) return;
+    const p = w2w(scene, home); if (!p) return;
+    if (isPhone()) return; const hw = h.offsetWidth / 2 + 8; h.style.left = Math.max(hw, Math.min(innerWidth - hw, p.x)) + "px"; h.style.top = (p.y + 22) + "px";
+  });
+  addEventListener("keydown", e => { if (e.key === "Escape" && picking) setPicking(null); });
+  $("pickHint").addEventListener("click", e => { if (e.target.closest(".pc")) setPicking(null); });
+  $("anfrQ").onclick = () => { $("anfrQ").classList.remove("show"); $("anfrCard").classList.add("show"); };
+
+  // ---------- v45 : panneau rangeable, barre du haut, zoom ----------
+  function setTuck(on) { document.body.classList.toggle("tucked", on); $("tuck").textContent = on ? "›" : "‹"; $("tuck").title = on ? "Afficher le panneau" : "Ranger le panneau"; }
+  $("tuck").onclick = () => setTuck(!document.body.classList.contains("tucked"));
+  $("tPlay").onclick = () => $("pPlay").click();
+  setInterval(() => $("tPlay").classList.toggle("on", !!(orbit && orbit.auto)), 400);
+  function zoomBtn(f) {
+    if (orbit) { if (orbit.auto) setAuto(false); orbit.range = Math.max(15, Math.min(3000, orbit.range * f)); applyOrbit(); return; }
+    const p = centerPoint(), d = Cesium.Cartesian3.distance(cam.positionWC, p), nd = Math.max(4, Math.min(6000, d * f));
+    const dir = Cesium.Cartesian3.normalize(Cesium.Cartesian3.subtract(p, cam.positionWC, new Cesium.Cartesian3()), new Cesium.Cartesian3());
+    const from = cam.positionWC.clone(), to = Cesium.Cartesian3.add(from, Cesium.Cartesian3.multiplyByScalar(dir, d - nd, new Cesium.Cartesian3()), new Cesium.Cartesian3());
+    cam.flyTo({ destination: to, orientation: { heading: cam.heading, pitch: cam.pitch, roll: 0 }, duration: .35 });
+  }
+  $("zIn").onclick = () => zoomBtn(.6); $("zOut").onclick = () => zoomBtn(1.65);
+  $("rAll").onclick = () => $("vAll").click();
   new Cesium.ScreenSpaceEventHandler(scene.canvas).setInputAction(ev => {
     if (!anfrOn) return;
     const p = scene.pick(ev.position);
@@ -1132,7 +1374,7 @@
     if (innerWidth >= 700 && $("info").classList.contains("closed")) $("toggle").click();
     if (innerWidth >= 700) {
       setTimeout(() => { $("homeName").scrollIntoView({ block: "center", behavior: "smooth" }); $("homeName").focus({ preventScroll: true }); }, 300);
-      toast("Étape 1 : tapez votre nom, puis 📍 Placer notre maison", 5000);
+      toast("Tapez un nom, puis placez votre maison sur la carte", 5000);
     } else toast("Touchez 📍 Notre maison en bas pour placer votre maison", 5000);
     setTimeout(() => showCtrl(true), 1800); }
   if (matchMedia("(pointer: coarse)").matches) document.body.classList.add("isTouch");
