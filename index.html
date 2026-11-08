@@ -72,6 +72,10 @@
   #welcome .mode.main .mh b { color: var(--acc); }
   #welcome .mh small { display: block; font-size: 14px; color: var(--mute); margin-top: 3px; line-height: 1.4; }
   #welcome label { font-size: 16.5px !important; }
+  #veil { position: absolute; z-index: 19; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 10px;
+          padding: 12px 18px; border-radius: 99px; font-size: 15px; font-weight: 600; background: rgba(30,32,38,.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+  #veil span { width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; animation: spin .8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
   /* ---------- Bandeau du haut ---------- */
   #top { position: absolute; z-index: 5; top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; margin: 0 auto; max-width: 620px;
          background: var(--card); border: 1px solid rgba(255,255,255,.14); border-radius: 18px; padding: 12px 14px; box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 10px 30px rgba(0,0,0,.3); }
@@ -199,6 +203,8 @@
   </div>
 </div>
 
+<div id="veil" class="hide"><span></span>Chargement de la 3D…</div>
+
 <div id="top" class="hide">
   <div class="seg" aria-label="Version"><b aria-current="page">Vue rapide</b><a href="detaillee.html#direct">Vue détaillée</a></div>
   <div class="l1"><span id="where">📍 Chez vous</span><button id="change">Changer</button></div>
@@ -243,6 +249,9 @@
   ];
   const CENTER = { lon: 3.8352, lat: 43.6778 };
   const $ = id => document.getElementById(id);
+  // Venue de la vue détaillée : on reste « dans la carte », sans repasser par l'accueil
+  const DIRECT = location.hash === "#direct";
+  if (DIRECT) { $("welcome").classList.add("hide"); $("veil").classList.remove("hide"); }
   const TOUCH = matchMedia("(pointer: coarse)").matches;
   let home = null, homeLabel = "", homeEnts = [], sel = null, picking = false, lastInfo = [], pinName = "";
   const opt = { dist: true, axis: true, light: .55 };
@@ -669,8 +678,9 @@
   }
 
   // Adresse déjà choisie lors d'une visite précédente, ou choisie pendant le chargement
-  if (location.hash === "#direct" && !pending) {
-    try { const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null"); if (sv && Number.isFinite(sv.lon)) pending = { lon: sv.lon, lat: sv.lat, label: sv.label }; } catch (e) {}
+  if (DIRECT && !pending) {
+    $("veil").classList.add("hide");
+    try { const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null"); pending = sv && Number.isFinite(sv.lon) ? { lon: sv.lon, lat: sv.lat, label: sv.label } : "map"; } catch (e) { pending = "map"; }
   }
   if (pending === "map") startPick();
   else if (pending) setHome(pending.lon, pending.lat, pending.label);
