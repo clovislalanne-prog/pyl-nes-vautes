@@ -40,10 +40,23 @@
   .foot { margin-top: 30px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 11px; color: var(--mute); line-height: 1.55; }
   .foot a { color: var(--acc); text-decoration: none; }
   @media (max-width: 380px) { h1 { font-size: 24px; } }
+  @media (min-width: 900px) {
+    .box { max-width: 1140px; padding: 56px 40px 40px; }
+    .cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: start; }
+    .c2 { position: sticky; top: 40px; }
+    .tag { font-size: 13px; }
+    h1 { font-size: 40px; margin-bottom: 16px; }
+    p.lead { font-size: 20px; } p.lead2 { font-size: 16.5px; }
+    .menu b { font-size: 17px; } .menu a { padding: 16px; }
+    .go3d { padding: 26px; } .go3d h2 { font-size: 25px; }
+    .foot { margin-top: 48px; }
+  }
+  @media (min-width: 1400px) { .box { max-width: 1240px; } h1 { font-size: 44px; } }
 </style>
 </head>
 <body>
 <div class="box">
+<div class="cols"><div class="c1">
     <div class="tag">Association de riverains · en cours de création</div>
     <h1>Un pylône 5G de 18 à 36 m est prévu près de chez nous</h1>
     <p class="lead">Trois emplacements sont à l’étude près de la rue Paul Valéry, à Saint-Gély-du-Fesc. Voyez-les en 3D depuis votre maison.</p>
@@ -54,6 +67,7 @@
       <a href="dossier.html#antennes"><span>📡</span><b>Les antennes déjà autour de nous</b><i>›</i></a>
       <a href="a-propos.html"><span>✍︎</span><b>Qui a fait cette simulation ?</b><i>›</i></a>
     </div>
+</div><div class="c2">
     <div class="go3d" id="adresse">
       <h2>Voyez le projet en 3D depuis chez vous</h2>
       <p class="sub">Tapez votre adresse : votre maison apparaît dans la 3D avec sa distance à chaque option. Vous pourrez ensuite déplacer l’épingle sur votre toit, votre terrasse ou votre balcon.</p>
@@ -65,6 +79,7 @@
       <a class="btn sec" href="detaillee.html#direct" id="noAddr">Voir les 3 options sans adresse ›</a>
       <div id="wait">Ouverture de la 3D…</div>
     </div>
+</div></div>
     <div class="foot">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · simulation non contractuelle.<br>© 2026 Clovis Lalanne : conception, textes et modèles 3D. Tous droits réservés. Images 3D © Google · CesiumJS · IGN · ANFR.</div>
 </div>
 <script>

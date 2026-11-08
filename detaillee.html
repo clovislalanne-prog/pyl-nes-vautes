@@ -96,7 +96,7 @@
   #ctrl .ft { margin-top: 8px; font-size: 11.5px; color: var(--mute); }
   #ctrl .touch { display: none; }
   body.isTouch #ctrl .touch { display: block; } body.isTouch #ctrl .mouse { display: none; }
-  @media (max-width: 700px) { #ctrl { right: 10px; left: 10px; width: auto; bottom: 270px; } }
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) { #ctrl { right: 10px; left: 10px; width: auto; bottom: 270px; } }
   #shot { position: fixed; inset: 0; z-index: 40; display: none; align-items: center; justify-content: center; padding: 20px; background: rgba(5,6,8,.6); }
   #shot.show { display: flex; }
   #shot .card { position: relative; max-width: 720px; width: 100%; padding: 14px; --bg: rgba(22,24,29,.85); }
@@ -208,7 +208,7 @@
   #anfrCard a { color: var(--acc); font-weight: 600; text-decoration: none; }
   #anfrSrc { display: none; left: 50%; transform: translateX(-50%); bottom: 34px; padding: 5px 12px; border-radius: 99px; font-size: 11px; color: #e6e8eb; z-index: 6; max-width: calc(100% - 24px); }
   #anfrSrc.show { display: block; } #anfrSrc a { color: var(--acc); }
-  @media (max-width: 700px) { #anfrCard { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); } #anfrSrc { top: 108px; bottom: auto; left: 10px; right: 66px; transform: none; border-radius: 12px; } }
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) { #anfrCard { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px); } #anfrSrc { top: 108px; bottom: auto; left: 10px; right: 66px; transform: none; border-radius: 12px; } }
   #help { position: absolute; z-index: 5; }
   #rstack { position: absolute; right: 16px; bottom: 96px; z-index: 5; display: flex; flex-direction: column; gap: 10px; }
   .rb { width: 48px; height: 48px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; position: relative;
@@ -216,7 +216,7 @@
         box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 6px 18px rgba(0,0,0,.3); }
   #compass .n { position: absolute; top: 2px; font-size: 9px; font-weight: 800; color: #fff; }
   #needle { transition: transform .1s linear; }
-  @media (max-width: 700px) { #intro .card { padding: 22px 18px 18px; } #intro h2 { font-size: 21px; } }
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) { #intro .card { padding: 22px 18px 18px; } #intro h2 { font-size: 21px; } }
   #loading { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 10px; z-index: 10;
              padding: 12px 18px; border-radius: 99px; font-size: 15px; font-weight: 600; color: #fff; background: rgba(30,32,38,.55); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
   #loading::before { content: ""; width: 16px; height: 16px; border-radius: 50%; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; animation: spin .8s linear infinite; }
@@ -229,7 +229,7 @@
   .cesium-credit-logoContainer img { height: 14px !important; vertical-align: middle; }
   .cesium-viewer-bottom { max-width: calc(100% - 24px); }
   #mbar, #mrot, #moreHint { display: none; }
-  @media (max-width: 700px) {
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
     #pad, #orbitBar, #sign, #disc, #capture, #toggle, #bHelp, #rPlay, #rHelp { display: none !important; }
     #rstack { bottom: auto; top: 108px; right: 10px; }
     #tabs { top: max(8px, env(safe-area-inset-top)); left: 8px; right: 8px; transform: none; max-width: none; padding: 4px; justify-content: space-between; }
@@ -391,7 +391,7 @@
   #shot .note b, #shot .steps b { color: var(--txt); } #shot .steps { color: #3a3a3c; }
   #shot .btn.cap, #shot .sb button.btn.cap { background: var(--acc); color: #fff; }
 
-  @media (max-width: 700px) {
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
     #topbar { display: contents; }
     #tPlay, #tOpts, #tuck, #rHelp { display: none !important; }
     #tabs { position: absolute !important; }
@@ -434,7 +434,7 @@
   #pickHint.follow::before { content: ""; position: absolute; top: -6px; left: 50%; margin-left: -6px; border: 6px solid transparent; border-top: 0; border-bottom-color: #fff; }
   #pickHint small { display: block; font-weight: 500; color: var(--mute); font-size: 11.5px; margin-top: 2px; }
   @media (max-width: 1180px) { #tabs .tq { display: none; } #tabs button { padding: 11px 14px; font-size: 14px; } }
-  @media (max-width: 700px) {
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
     #tabs { top: max(8px, env(safe-area-inset-top)) !important; bottom: auto; left: 8px !important; right: 8px; transform: none; flex-wrap: wrap; justify-content: space-between; padding: 6px; border-radius: 20px; gap: 4px; }
     #tabs .tq { display: block !important; width: 100%; text-align: center; padding: 2px 0 2px; font-size: 11.5px; text-transform: uppercase; letter-spacing: .8px; }
     #tabs button { flex: 1; flex-direction: column; gap: 1px; padding: 7px 2px; font-size: 14px; border-radius: 14px; min-width: 0; }
@@ -454,10 +454,67 @@
   .newaddr { display: none; margin: 8px 4px 0; font-size: 12.5px; font-weight: 600; color: var(--acc); text-decoration: none; }
   body.hasHome .newaddr { display: inline-block; }
   #mrot .pa, #mrot.on .pl { display: none; } #mrot.on .pa { display: block; }
-  @media (max-width: 700px) {
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
     #mrot { width: 50px; height: 50px; padding: 0 !important; border-radius: 50% !important; justify-content: center; background: var(--acc) !important; border: none; box-shadow: 0 6px 18px rgba(10,122,255,.35); top: 112px !important; }
     #mrot.on { background: var(--acc) !important; }
     #rstack { top: 176px !important; }
+  }
+
+  /* ===== v47 ===== */
+  /* Sélecteur d'options : en haut, plus grand, avec l'œil des infos */
+  #tabs { top: 16px !important; bottom: auto !important; left: 362px !important; right: 250px; margin: 0 auto; transform: none !important; padding: 7px; gap: 4px; }
+  @media (min-width: 701px) and (min-height: 501px), (min-width: 701px) and (orientation: portrait) { #tabs { width: max-content; max-width: calc(100% - 612px); } #tabs > * { flex: none; } #tabs .eye { width: auto !important; } #tabs .eye svg { flex: none; } }
+  #tabs .tq { font-size: 14.5px; }
+  #tabs button { font-size: 16.5px; padding: 13px 20px; }
+  #tabs button .d { width: 12px; height: 12px; }
+  #tabs .eye { margin-left: 6px; padding: 11px 14px !important; gap: 7px; font-size: 14px !important; font-weight: 600; color: var(--txt); border-left: 1px solid var(--line) !important; border-radius: 0 99px 99px 0 !important; }
+  #tabs .eye .el { white-space: nowrap; }
+  body.clean #tabs .eye { color: var(--acc); }
+  #topbar { top: 16px; }
+  #pickHint:not(.follow) { top: 96px !important; }
+  @media (min-width: 701px) and (max-width: 1520px) { #tabs .tq { display: none; } }
+  @media (max-width: 1320px) { #tabs .tq, #tabs .eye .el { display: none; } #tabs button { padding: 12px 15px; font-size: 15.5px; } }
+  @media (min-width: 701px) and (max-width: 1120px) { #tabs { left: auto !important; right: 16px; margin: 0; top: 82px !important; } }
+  /* Vue épurée : rien que la carte et les pylônes */
+  body.clean #anfrCard, body.clean #anfrQ { display: none !important; }
+
+  /* Téléphone */
+  @media (max-width: 700px), (max-height: 500px) and (orientation: landscape) {
+    #tabs { top: max(8px, env(safe-area-inset-top)) !important; left: 8px !important; right: 8px; width: auto; margin: 0; transform: none !important; padding: 6px 6px 6px; }
+    #tabs .tq { display: block !important; }
+    #tabs button { font-size: 14px; padding: 7px 2px; }
+    #tabs .eye { position: absolute; top: 4px; right: 6px; flex: none !important; width: 38px; height: 30px; padding: 0 !important; margin: 0; border: none !important; border-radius: 10px !important; justify-content: center; }
+    #tabs .eye .el { display: none !important; }
+    #tabs .eye svg { width: 20px; height: 20px; }
+    body.clean #tabs .eye { background: #e8f1ff; }
+    /* Crédits Google / Cesium au-dessus de la barre du bas */
+    .cesium-viewer-bottom { bottom: calc(max(8px, env(safe-area-inset-bottom)) + 76px) !important; transform: translateX(-50%) scale(.8) !important; transform-origin: bottom center; max-width: 118%; }
+    /* Panneau du bas : au-dessus de tout, croix toujours accessible */
+    #info { z-index: 9 !important; }
+    body.sheetOpen #rstack, body.sheetOpen #mrot, body.sheetOpen #anfrQ { display: none !important; }
+    #info .hd .close { position: relative; z-index: 2; width: 40px !important; height: 40px !important; font-size: 17px; }
+    /* « Notre maison » : seulement ce qui concerne la maison ; « Plus » : le reste */
+    body.sh-home #info .lightrow, body.sh-home #info .anfrBtn, body.sh-home #info details.more, body.sh-home #info .card + .card { display: none !important; }
+    body.sh-more #info .field, body.sh-more #info .place, body.sh-more #info .pinhint, body.sh-more #info .newaddr { display: none !important; }
+  }
+  /* iPhone en paysage : tout plus compact pour laisser la place à la carte */
+  @media (max-height: 500px) and (orientation: landscape) {
+    #tabs { top: max(6px, env(safe-area-inset-top)) !important; left: calc(max(8px, env(safe-area-inset-left)) + 0px) !important; right: auto !important; width: auto; flex-wrap: nowrap !important; padding: 4px !important; }
+    #tabs .tq { display: none !important; }
+    #tabs button { flex: none !important; flex-direction: row !important; gap: 5px !important; padding: 7px 12px !important; font-size: 13.5px !important; }
+    #tabs button .hm { font-size: 12.5px !important; }
+    #tabs .eye { position: static !important; width: 36px; height: 32px; }
+    #mrot { top: max(6px, env(safe-area-inset-top)) !important; right: calc(max(8px, env(safe-area-inset-right)) + 0px) !important; left: auto !important; width: 44px !important; height: 44px !important; }
+    #rstack { top: 58px !important; right: max(8px, env(safe-area-inset-right)) !important; transform: none !important; gap: 6px !important; }
+    #rstack .rb { width: 40px !important; height: 40px !important; }
+    #compass { display: none !important; }
+    #mbar { left: 50% !important; right: auto !important; transform: translateX(-50%); width: min(460px, 70vw); padding: 4px !important; bottom: max(6px, env(safe-area-inset-bottom)) !important; }
+    #mbar button { padding: 4px 6px !important; font-size: 12px !important; flex-direction: row !important; gap: 6px; white-space: nowrap; }
+    #mbar .i { font-size: 16px !important; }
+    .cesium-viewer-bottom { bottom: calc(max(6px, env(safe-area-inset-bottom)) + 52px) !important; }
+    #info { left: max(8px, env(safe-area-inset-left)) !important; right: auto !important; width: min(400px, 55vw) !important; top: 8px !important; bottom: 8px !important; max-height: none !important; border-radius: 20px !important; }
+    #disc { display: none !important; }
+    #pickHint.follow { bottom: calc(max(6px, env(safe-area-inset-bottom)) + 54px) !important; left: 50% !important; right: auto !important; transform: translateX(-50%) !important; width: auto; }
   }
 </style>
 </head>
@@ -493,7 +550,7 @@
   <div class="hd">
     <span class="logo"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="#f08a24" stroke-width="2.4" stroke-linecap="round"><circle cx="16" cy="16" r="3" fill="#f08a24" stroke="none"/><path d="M10.5 10.5a8 8 0 0 0 0 11M21.5 10.5a8 8 0 0 1 0 11M6.5 6.5a13.5 13.5 0 0 0 0 19M25.5 6.5a13.5 13.5 0 0 1 0 19"/></svg></span>
     <h1>Projet de pylône 5G<small>Simulation &amp; impact local</small></h1>
-    <button id="bHelp" class="circ" title="Revoir l’explication">?</button><button id="toggle">Réduire</button><button class="close" id="mClose">✕</button>
+    <button id="bHelp" class="circ" title="Revoir l’explication">?</button><button id="toggle">Réduire</button><button class="close" id="mClose" aria-label="Fermer">✕</button>
   </div>
   <div class="body">
     <div class="card">
@@ -696,7 +753,7 @@
 
   // ---------- Construction des emplacements (pylône + parc technique = un seul ensemble) ----------
   const active = SITES.filter(s => s.lon != null);
-  let showLabels = true, showRings = true;
+  let showLabels = true, showRings = true, infoOn = true;
   // Chargement rapide : relief simple d'abord (immédiat), calage fin sur le décor 3D ensuite, en arrière-plan
   const s0v = active[0];
   cam.setView({ destination: Cesium.Cartesian3.fromDegrees(s0v.lon - 0.0008, s0v.lat - 0.0035, 260), orientation: { heading: Cesium.Math.toRadians(10), pitch: Cesium.Math.toRadians(-30), roll: 0 } });
@@ -767,8 +824,9 @@
     if (typeof drawHome === "function" && home) setTimeout(drawHome);
     active.forEach(s => {
       s.models.forEach(m => m.show = s.visible);
-      s.label.show = s.visible && showLabels;
-      s.rings.forEach(r => r.show = s.visible && showRings);
+      s.label.show = s.visible && showLabels && infoOn;
+      // Cercles de distance : seulement pour l'option choisie (pas pour « Toutes »)
+      s.rings.forEach(r => r.show = s.visible && showRings && infoOn && selected !== "all");
     });
   }
 
@@ -787,7 +845,20 @@
     $("tabs").appendChild(b);
   });
   const tabAll = makeBtn('<span class="on1">Toutes</span><span class="hm"><i> · </i>les 3</span>'); tabAll.dataset.id = "all"; tabAll.className = "all"; $("tabs").appendChild(tabAll);
-  $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { if (anfrOn) { anfrOn = false; $("bAnfr").classList.remove("on"); anfrEnts.forEach(e => e.show = false); anfrClearDir(); anfrSel = null; $("anfrCard").classList.remove("show"); $("anfrQ").classList.remove("show"); } selectOption(b.dataset.id); });
+  $("tabs").querySelectorAll("button[data-id]").forEach(b => b.onclick = () => { if (anfrOn) { anfrOn = false; $("bAnfr").classList.remove("on"); anfrEnts.forEach(e => e.show = false); anfrClearDir(); anfrSel = null; $("anfrCard").classList.remove("show"); $("anfrQ").classList.remove("show"); } selectOption(b.dataset.id); });
+  // Œil : afficher / masquer toutes les informations sur la carte (comme un calque)
+  const EYE_ON = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>';
+  const EYE_OFF = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3 3l18 18M10.6 5.6A10 10 0 0 1 12 5.5c6.4 0 10 6.5 10 6.5a17 17 0 0 1-3.2 3.9M6.6 6.7C3.8 8.4 2 12 2 12s3.6 6.5 10 6.5c1.6 0 3-.4 4.2-1M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>';
+  $("tabs").insertAdjacentHTML("beforeend", '<button id="eye" class="eye" aria-pressed="true"></button>');
+  function setInfo(on) {
+    infoOn = on; document.body.classList.toggle("clean", !on);
+    $("eye").innerHTML = (on ? EYE_ON : EYE_OFF) + '<span class="el">' + (on ? "Infos" : "Infos masquées") + '</span>';
+    $("eye").title = on ? "Masquer les informations sur la carte" : "Afficher les informations sur la carte";
+    $("eye").setAttribute("aria-pressed", on);
+    anfrEnts.forEach(e => e.show = on && anfrOn); anfrDir.forEach(e => e.show = on);
+    refresh(); if (home) drawHome();
+  }
+  $("eye").onclick = () => setInfo(!infoOn);
   function selectOption(id) {
     selected = id; try { sessionStorage.setItem("pyloneSel", id); } catch (e) {}
     active.forEach(s => s.visible = (id === "all" || s.id === id));
@@ -889,7 +960,9 @@
                backgroundColor: Cesium.Color.fromCssColorString(pinSel ? "#0a7aff" : "#e5484d").withAlpha(.95), backgroundPadding: new Cesium.Cartesian2(7, 4),
                pixelOffset: new Cesium.Cartesian2(0, -42), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     const lines = [];
-    active.filter(s => s.visible).forEach(s => {
+    homeEnts.forEach(e => e.show = infoOn);
+    // Distances et axes : seulement pour l'option choisie, et si les infos sont affichées
+    active.filter(s => s.visible && selected !== "all" && infoOn).forEach(s => {
       const l = Cesium.Matrix4.multiplyByPoint(Cesium.Matrix4.inverse(s.enu, new Cesium.Matrix4()), home, new Cesium.Cartesian3());
       const d = Math.round(Math.hypot(l.x, l.y)), col = Cesium.Color.fromCssColorString(s.color);
       // Axe antennes -> maison
@@ -1245,9 +1318,16 @@
       const r = Cesium.Math.toRadians(deg), L = 650, dx = L * Math.sin(r), dy = L * Math.cos(r);
       const k = 1 / (111320 * Math.cos(a.lat * Math.PI / 180)), q = 1 / 110570, z = a.g + a.h - 1 + j * 0.6;
       const p0 = Cesium.Cartesian3.fromDegrees(a.lon, a.lat, z), p1 = Cesium.Cartesian3.fromDegrees(a.lon + dx * k, a.lat + dy * q, z);
-      anfrDir.push(viewer.entities.add({ polyline: { positions: [p0, p1], width: 9, material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85)) } }));
-      anfrDir.push(viewer.entities.add({ position: p1, label: { text: deg + "°", font: "600 11px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
-        backgroundColor: Cesium.Color.fromCssColorString(OPC[op]).withAlpha(.85), backgroundPadding: new Cesium.Cartesian2(4, 2), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      const col = Cesium.Color.fromCssColorString(OPC[op]);
+      const pAt = f => Cesium.Cartesian3.fromDegrees(a.lon + dx * k * f, a.lat + dy * q * f, z);
+      const body = new Cesium.PolylineOutlineMaterialProperty({ color: col, outlineColor: Cesium.Color.WHITE, outlineWidth: 2 });
+      // Corps épais, contour blanc, visible même derrière le relief
+      anfrDir.push(viewer.entities.add({ polyline: { positions: [p0, pAt(.84)], width: 8, material: body, depthFailMaterial: body } }));
+      // Vraie pointe de flèche
+      const head = new Cesium.PolylineArrowMaterialProperty(col);
+      anfrDir.push(viewer.entities.add({ polyline: { positions: [pAt(.80), p1], width: 34, material: head, depthFailMaterial: head } }));
+      anfrDir.push(viewer.entities.add({ position: pAt(1.13), label: { text: deg + "°", font: "800 16px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
+        backgroundColor: col.withAlpha(.95), backgroundPadding: new Cesium.Cartesian2(8, 5), outlineColor: Cesium.Color.BLACK, outlineWidth: 0, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     }));
   }
   function anfrHide() { $("anfrCard").classList.remove("show"); $("anfrQ").classList.remove("show"); }
@@ -1273,6 +1353,7 @@
     cam.flyToBoundingSphere(new Cesium.BoundingSphere(c, 700), { offset: new Cesium.HeadingPitchRange(cam.heading, Cesium.Math.toRadians(-50), 2300), duration: 1.4 });
   }
   async function setAnfr(on) {
+    if (on && !infoOn) setInfo(true);
     anfrOn = on; $("bAnfr").classList.toggle("on", on);
     if (!on) { anfrEnts.forEach(e => e.show = false); anfrClearDir(); anfrHide(); anfrSel = null; selectOption(selected); return; }
     // Les options du projet s'effacent : on ne regarde que les antennes existantes
@@ -1298,6 +1379,7 @@
   });
   addEventListener("keydown", e => { if (e.key === "Escape" && picking) setPicking(null); });
   $("pickHint").addEventListener("click", e => { if (e.target.closest(".pc")) setPicking(null); });
+  setInfo(true);
   $("anfrQ").onclick = () => { $("anfrQ").classList.remove("show"); $("anfrCard").classList.add("show"); };
 
   // ---------- v45 : panneau rangeable, barre du haut, zoom ----------
@@ -1346,9 +1428,11 @@
   };
 
   // ---------- Démarrage : rotation lente autour du premier emplacement ----------
-  const isPhone = () => innerWidth < 700;
+  const isPhone = () => innerWidth < 700 || (innerHeight < 500 && innerWidth > innerHeight);
   function sheet(open, section) {
     $("info").classList.toggle("open", open);
+    document.body.classList.toggle("sheetOpen", open);
+    document.body.classList.toggle("sh-home", open && section === "home"); document.body.classList.toggle("sh-more", open && section === "more");
     $("mHome").classList.toggle("sel", open && section === "home"); $("mMore").classList.toggle("sel", open && section === "more");
     if (!open) return;
     if (section === "more") document.querySelector("details.more").open = true;
