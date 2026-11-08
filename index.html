@@ -36,7 +36,7 @@
   #sugg li:active { background: #ffe7c9; }
   #sugg li small { display: block; color: #666; font-size: 14px; margin-top: 2px; }
   #sugg li.msg { color: #444; cursor: default; font-size: 16px; }
-  #resume { display: block; width: 100%; margin-top: 12px; padding: 15px; font-size: 17px; font-weight: 700; color: #111; background: var(--acc); border: none; border-radius: 14px; text-align: left; }
+  #resume { display: block; width: 100%; margin-top: 10px; padding: 6px 2px; font-size: 15px; font-weight: 600; color: var(--acc); background: none; border: none; text-align: left; }
   #onMap { display: block; width: 100%; margin-top: 18px; padding: 15px; font-size: 17px; font-weight: 600; color: var(--txt);
            background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); border-radius: 14px; }
   #detCard { display: block; margin-top: 10px; padding: 13px 15px; font-size: 17px; font-weight: 600; color: var(--txt); text-align: center; text-decoration: none;
@@ -288,7 +288,7 @@
     setHome(lon, lat, label);
   }
   try { const sv = JSON.parse(localStorage.getItem("pyloneSimpleHome") || "null");
-    if (sv && Number.isFinite(sv.lon)) { $("resume").textContent = "📍 Revoir depuis : " + sv.label; $("resume").classList.remove("hide");
+    if (sv && Number.isFinite(sv.lon)) { $("resume").textContent = "↺ Reprendre votre dernière visite (" + (sv.label === "Votre maison" ? "maison placée sur la carte" : sv.label) + ")"; $("resume").classList.remove("hide");
       $("resume").onclick = () => chooseAddress(sv.lon, sv.lat, sv.label); } } catch (e) {}
   $("onMap").onclick = () => { if (!viewerReady) { pending = "map"; setStatus("Encore un instant, la 3D se termine…"); return; } startPick(); };
 

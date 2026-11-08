@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<title>Version détaillée · Simulation 3D du pylône</title>
+<title>Vue détaillée · Simulation 3D du pylône</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://api.cesium.com" crossorigin>
 <link rel="preconnect" href="https://assets.ion.cesium.com" crossorigin>
@@ -148,6 +148,10 @@
   #pad .zoom { grid-column: 1 / 4; display: flex; gap: 6px; }
   #pad .k.on, #pad .mode button.on { background: var(--acc); }
   #pad .zoom button { flex: 1; font-size: 15px; height: 32px; padding: 0; border-radius: 16px; }
+  #modeSeg { top: 66px; left: 50%; transform: translateX(-50%); display: flex; padding: 3px; border-radius: 12px; z-index: 4; }
+  #modeSeg a, #modeSeg b { font: 600 13px Inter, sans-serif; padding: 6px 14px; border-radius: 9px; text-decoration: none; color: #e8eaed; white-space: nowrap; text-shadow: none; }
+  #modeSeg b { background: #fff; color: #111; box-shadow: 0 1px 3px rgba(0,0,0,.3); }
+  #modeSeg a:hover { background: rgba(255,255,255,.14); }
   #sign { bottom: 34px; right: 16px; padding: 9px 14px; font-size: 12px; text-align: right; }
   #sign span { color: var(--mute); }
   #sign .who { display: inline-block; margin-top: 4px; padding: 3px 10px; border-radius: 99px; background: var(--acc); color: #111; font-weight: 700; text-decoration: none; text-shadow: none; }
@@ -204,6 +208,8 @@
     #tabs button { flex: 1; justify-content: center; padding: 8px 6px; font-size: 12.5px; gap: 5px; }
     #tabs button .lg { display: none; }
     #pickHint { top: 58px; left: 8px; right: 8px; transform: none; text-align: center; }
+    #modeSeg { top: 58px; left: 10px; transform: none; }
+    #modeSeg a, #modeSeg b { padding: 7px 11px; font-size: 12.5px; }
     #mrot { display: flex; position: absolute; right: 10px; top: 58px; height: 38px; border-radius: 99px; align-items: center; gap: 6px; padding: 0 12px 0 10px; font-size: 12.5px; font-weight: 700; z-index: 4; }
     #mrot .cam { font-size: 16px; display: inline-block; }
     #mrot.on { background: var(--acc); color: #111; }
@@ -300,6 +306,7 @@
 </div>
 
 <div id="tabs" class="panel"></div>
+<div id="modeSeg" class="panel"><a href="index.html">Vue rapide</a><b aria-current="page">Vue détaillée</b></div>
 <div id="orbitBar" class="panel">
   <span class="orb"><span class="sp">⟳</span><span id="orbitName">Autour de…</span><button id="oPause">Pause</button><button id="oQuit">Navigation libre</button></span>
   <span class="free">🧭 Navigation libre<button id="oResume" class="resume">⟳ Tourner autour</button></span>
@@ -325,7 +332,7 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html" class="who">‹ Accueil</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v42</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="index.html" class="who">‹ Vue rapide</a> <a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v42</span></div>
 <div id="toast" class="panel"></div>
 <div id="tip" class="panel"></div>
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
@@ -387,7 +394,7 @@
   $("iText1").textContent = "Un projet d’antenne-relais, sur un pylône de 18 à 36 m selon l’option, avec son parc technique, est à l’étude à " + INTRO.commune +
     ". Plusieurs emplacements sont envisagés. Cette simulation en 3D permet à chacun de voir concrètement où il se situerait par rapport à son logement.";
   $("iText2").textContent = "Nous constituons une association de riverains. Pour que chaque foyer concerné puisse montrer qu’il est bien présent et comment il est touché, nous vous proposons de localiser votre maison, puis de joindre une capture de la vue à votre courrier.";
-  $("iFoot").innerHTML = "<a class=\"who\" href=\"index.html\">‹ Retour à l’accueil</a><br>Simulation réalisée par Clovis Lalanne, avec l’association de riverains <a class=\"who\" href=\"a-propos.html\">Qui suis-je ? ›</a><br>Novembre 2026 · simulation non contractuelle" + (INTRO.contact.startsWith("[") ? "" : "<br>Contact : " + INTRO.contact);
+  $("iFoot").innerHTML = "<a class=\"who\" href=\"index.html\">‹ Vue rapide</a><br>Simulation réalisée par Clovis Lalanne, avec l’association de riverains <a class=\"who\" href=\"a-propos.html\">Qui suis-je ? ›</a><br>Novembre 2026 · simulation non contractuelle" + (INTRO.contact.startsWith("[") ? "" : "<br>Contact : " + INTRO.contact);
 
   Cesium.Ion.defaultAccessToken = TOKEN;
   const viewer = new Cesium.Viewer("map", {
