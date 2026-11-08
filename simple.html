@@ -67,6 +67,25 @@
   #opts button .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--c); margin-right: 5px; }
   #photo { display: block; width: 100%; margin-top: 9px; padding: 15px; font-size: 19px; font-weight: 800; color: #111; background: var(--acc); border: none; border-radius: 14px; }
 
+  #bottom .who { margin-top: 8px; text-align: center; font-size: 12px; color: var(--mute); }
+  #bottom .who a { color: var(--acc); text-decoration: none; font-weight: 600; }
+  /* ---------- Panneau Affichage ---------- */
+  #setBtn { position: absolute; z-index: 6; right: 10px; padding: 10px 14px; font-size: 15px; font-weight: 700; color: var(--txt);
+            background: var(--card); border: 1px solid rgba(255,255,255,.2); border-radius: 14px; box-shadow: 0 6px 20px rgba(0,0,0,.35); }
+  #setBtn::before { content: "☰  "; }
+  #setPanel { position: absolute; z-index: 7; right: 10px; width: 260px; background: var(--card); border: 1px solid rgba(255,255,255,.16);
+              border-radius: 18px; padding: 12px 14px 8px; box-shadow: 0 10px 30px rgba(0,0,0,.4); }
+  #setPanel .sp-h { display: flex; justify-content: space-between; align-items: center; font-size: 16px; margin-bottom: 4px; }
+  #setPanel .sp-h button { color: var(--txt); background: rgba(255,255,255,.12); border: none; border-radius: 99px; width: 32px; height: 32px; font-size: 14px; }
+  #setPanel .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid rgba(255,255,255,.1); font-size: 15.5px; font-weight: 600; cursor: pointer; }
+  #setPanel .row small { display: block; font-size: 12.5px; font-weight: 400; color: var(--mute); margin-top: 2px; }
+  #setPanel .row.col { flex-direction: column; align-items: stretch; gap: 10px; cursor: default; }
+  #setPanel input[type=checkbox] { display: none; }
+  #setPanel .row i { flex: none; width: 48px; height: 28px; border-radius: 99px; background: rgba(255,255,255,.2); position: relative; transition: background .2s; }
+  #setPanel .row i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: left .2s; }
+  #setPanel input:checked + i { background: var(--acc); }
+  #setPanel input:checked + i::after { left: 23px; }
+  #setPanel input[type=range] { width: 100%; accent-color: var(--acc); height: 28px; }
   /* ---------- Choix sur la carte ---------- */
   #pickBar { position: absolute; z-index: 6; left: 10px; right: 10px; bottom: max(10px, env(safe-area-inset-bottom)); margin: 0 auto; max-width: 620px;
              background: var(--card); border: 2px solid var(--acc); border-radius: 20px; padding: 16px; text-align: center; font-size: 19px; font-weight: 700; }
@@ -75,7 +94,7 @@
   /* ---------- Aide gestes, crédits ---------- */
   #hint { position: absolute; z-index: 4; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: none; text-align: center;
           background: rgba(10,12,15,.78); border-radius: 18px; padding: 16px 20px; font-size: 17px; font-weight: 600; line-height: 1.5; transition: opacity .5s; width: min(90%, 340px); }
-  #credits { position: absolute; z-index: 3; right: 10px; font-size: 10px; color: #c9ced5; text-align: right; pointer-events: none; opacity: .85; }
+  #credits { position: absolute; z-index: 3; left: 12px; max-width: 55%; font-size: 10px; color: #c9ced5; text-align: left; pointer-events: none; opacity: .85; }
   #credits img { height: 12px; vertical-align: middle; }
   #credits a { pointer-events: auto; color: inherit; }
 
@@ -114,7 +133,7 @@
     <button id="onMap">Je préfère montrer ma maison sur la carte</button>
     <div id="status"><span id="stTxt">Préparation de la 3D…</span><span class="bar"><i id="stBar"></i></span></div>
     <div class="foot">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · simulation non contractuelle.<br>
-      <a href="index.html">Version complète, avec plus d’outils ›</a> · <a href="dossier.html">Où en est le dossier ? ›</a></div>
+      <a href="a-propos.html">Qui suis-je ? ›</a> · <a href="index.html">Version complète, avec plus d’outils ›</a> · <a href="dossier.html">Où en est le dossier ? ›</a></div>
   </div>
 </div>
 
@@ -126,8 +145,16 @@
 <div id="bottom" class="hide">
   <div id="opts"></div>
   <button id="photo">📷 Prendre une photo</button>
+  <div class="who">Simulation réalisée par Clovis Lalanne, avec l’association de riverains · <a href="a-propos.html">Qui suis-je ? ›</a></div>
 </div>
 
+<button id="setBtn" class="hide" aria-label="Options d’affichage">Affichage</button>
+<div id="setPanel" class="hide">
+  <div class="sp-h"><b>Affichage</b><button id="setX" aria-label="Fermer">✕</button></div>
+  <label class="row"><span>Distance au sol</span><input type="checkbox" id="oDist" checked><i></i></label>
+  <label class="row"><span>Axe des antennes<small>distance et angle vers votre toit</small></span><input type="checkbox" id="oAxis" checked><i></i></label>
+  <div class="row col"><span>Éclairage du pylône</span><input type="range" id="oLight" min="0" max="1" step="0.05" value="0.55"></div>
+</div>
 <div id="pickBar" class="hide">Touchez votre maison sur la carte<br><button id="pickCancel">Annuler</button></div>
 <div id="hint" class="hide"></div>
 
@@ -153,7 +180,8 @@
   const CENTER = { lon: 3.8352, lat: 43.6778 };
   const $ = id => document.getElementById(id);
   const TOUCH = matchMedia("(pointer: coarse)").matches;
-  let home = null, homeLabel = "", homeEnts = [], sel = "all", picking = false;
+  let home = null, homeLabel = "", homeEnts = [], sel = "all", picking = false, lastInfo = [];
+  const opt = { dist: true, axis: true, light: .55 };
   const setStatus = (txt, pct) => { $("stTxt").textContent = txt; if (pct != null) $("stBar").style.width = pct + "%"; };
 
   // ---------- Recherche d'adresse (Base Adresse Nationale, service public gratuit) ----------
@@ -253,8 +281,10 @@
   ]);
   setStatus("Préparation de la 3D…", 70);
   SITES.forEach((s, i) => { s.ground = grounds[i]; s.models = models[i]; s.models.forEach(m => {
-    scene.primitives.add(m); m.lightColor = new Cesium.Cartesian3(4.9, 4.9, 4.9);
-    m.color = Cesium.Color.WHITE; m.colorBlendMode = Cesium.ColorBlendMode.MIX; m.colorBlendAmount = .27; }); });
+    scene.primitives.add(m); }); });
+  function applyLight() { SITES.forEach(s => s.models.forEach(m => { const L = 1 + opt.light * 7; m.lightColor = new Cesium.Cartesian3(L, L, L);
+    m.color = Cesium.Color.WHITE; m.colorBlendMode = Cesium.ColorBlendMode.MIX; m.colorBlendAmount = opt.light * .5; })); }
+  applyLight();
   function placeSite(s) {
     if (s.label) viewer.entities.remove(s.label);
     s.models.forEach(m => m.modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
@@ -348,6 +378,7 @@
     try { localStorage.setItem("pyloneSimpleHome", JSON.stringify({ lon, lat, label: homeLabel })); } catch (e) {}
     $("welcome").classList.add("hide"); $("pickBar").classList.add("hide");
     $("top").classList.remove("hide"); $("bottom").classList.remove("hide");
+    openSet(innerWidth >= 900);
     $("where").textContent = "📍 " + homeLabel;
     drawHome(); frame(true);
     if (!setHome.once) { setHome.once = true; showHint(TOUCH ? "Glissez un doigt pour tourner autour<br>Pincez avec deux doigts pour zoomer" : "Cliquez-glissez pour tourner autour<br>Molette pour zoomer", 4500); }
@@ -356,21 +387,39 @@
     homeEnts.forEach(e => viewer.entities.remove(e)); homeEnts = [];
     if (!home) return;
     homeEnts.push(viewer.entities.add({ position: home,
-      billboard: { image: PIN, width: 34, height: 44, verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY },
-      label: { text: "CHEZ VOUS", font: "800 14px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
-               backgroundColor: Cesium.Color.fromCssColorString("#e5484d"), backgroundPadding: new Cesium.Cartesian2(8, 5),
-               pixelOffset: new Cesium.Cartesian2(0, -50), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      billboard: { image: PIN, width: 24, height: 31, verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY },
+      label: { text: "Chez vous", font: "600 12px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
+               backgroundColor: Cesium.Color.fromCssColorString("#e5484d").withAlpha(.9), backgroundPadding: new Cesium.Cartesian2(6, 3),
+               pixelOffset: new Cesium.Cartesian2(0, -35), verticalOrigin: Cesium.VerticalOrigin.BOTTOM, disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
     const hc = Cesium.Cartographic.fromCartesian(home);
+    const info = [];
     shown().forEach(s => {
       const col = Cesium.Color.fromCssColorString(s.color), d = distTo(s);
-      const a = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + 2), b = Cesium.Cartesian3.fromRadians(hc.longitude, hc.latitude, hc.height);
-      homeEnts.push(viewer.entities.add({ polyline: { positions: [b, a], width: 4, material: new Cesium.PolylineDashMaterialProperty({ color: Cesium.Color.WHITE, gapColor: col, dashLength: 18 }),
-        depthFailMaterial: new Cesium.PolylineDashMaterialProperty({ color: Cesium.Color.WHITE.withAlpha(.7), gapColor: col.withAlpha(.7), dashLength: 18 }) } }));
-      homeEnts.push(viewer.entities.add({ position: Cesium.Cartesian3.midpoint(a, b, new Cesium.Cartesian3()),
-        label: { text: d + " m", font: "800 17px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true, backgroundColor: col,
-                 backgroundPadding: new Cesium.Cartesian2(8, 5), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      // Axe antennes -> toit de la maison, avec son angle vers le bas
+      const ant = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + s.height - 1.5);
+      const roof = Cesium.Cartesian3.fromRadians(hc.longitude, hc.latitude, hc.height - 0.5);
+      const dAnt = Math.round(Cesium.Cartesian3.distance(ant, roof));
+      const angle = Math.round(Cesium.Math.toDegrees(Math.atan2((s.ground + s.height - 1.5) - (hc.height - 0.5), Math.max(1, d))));
+      info.push({ s, d, dAnt, angle });
+      if (opt.axis) {
+        homeEnts.push(viewer.entities.add({ polyline: { positions: [ant, roof], width: 5, material: new Cesium.PolylineArrowMaterialProperty(col),
+          depthFailMaterial: new Cesium.PolylineDashMaterialProperty({ color: col.withAlpha(.6), dashLength: 10 }) } }));
+        homeEnts.push(viewer.entities.add({ position: Cesium.Cartesian3.lerp(ant, roof, .3, new Cesium.Cartesian3()),
+          label: { text: "↘ " + dAnt + " m · " + angle + "°", font: "600 12.5px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true,
+                   backgroundColor: Cesium.Color.fromCssColorString("#1c1e24").withAlpha(.85), backgroundPadding: new Cesium.Cartesian2(6, 3),
+                   disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      }
+      if (opt.dist) {
+        const a = Cesium.Cartesian3.fromDegrees(s.lon, s.lat, s.ground + 1), b = Cesium.Cartesian3.fromRadians(hc.longitude, hc.latitude, hc.height - 0.5);
+        homeEnts.push(viewer.entities.add({ polyline: { positions: [b, a], width: 2, material: new Cesium.PolylineDashMaterialProperty({ color: Cesium.Color.WHITE, gapColor: col.withAlpha(.8), dashLength: 14 }),
+          depthFailMaterial: new Cesium.PolylineDashMaterialProperty({ color: Cesium.Color.WHITE.withAlpha(.55), dashLength: 14 }) } }));
+        homeEnts.push(viewer.entities.add({ position: Cesium.Cartesian3.midpoint(a, b, new Cesium.Cartesian3()),
+          label: { text: d + " m au sol", font: "600 12.5px Inter, sans-serif", fillColor: Cesium.Color.WHITE, showBackground: true, backgroundColor: col.withAlpha(.88),
+                   backgroundPadding: new Cesium.Cartesian2(6, 3), disableDepthTestDistance: Number.POSITIVE_INFINITY } }));
+      }
     });
-    $("dist").innerHTML = shown().map(s => `<span class="dot" style="background:${s.color}"></span>${s.name} (${s.height} m) : <b>à ${distTo(s)} m</b> de chez vous`).join("<br>");
+    lastInfo = info;
+    $("dist").innerHTML = info.map(x => `<span class="dot" style="background:${x.s.color}"></span>${x.s.name} (${x.s.height} m) : <b>à ${x.d} m</b> de chez vous`).join("<br>");
   }
   // Cadrage : on se place derrière la maison, en hauteur, en regardant vers le ou les pylônes
   function frame(animate) {
@@ -393,17 +442,30 @@
   });
   opts.querySelector('[data-id="all"]').classList.add("on");
 
+  // ---------- Panneau Affichage ----------
+  const openSet = on => { $("setPanel").classList.toggle("hide", !on); $("setBtn").classList.toggle("hide", on || !home || picking); placeSide(); };
+  $("setBtn").onclick = () => openSet(true);
+  $("setX").onclick = () => openSet(false);
+  $("oDist").onchange = e => { opt.dist = e.target.checked; drawHome(); };
+  $("oAxis").onchange = e => { opt.axis = e.target.checked; drawHome(); };
+  $("oLight").oninput = e => { opt.light = +e.target.value; applyLight(); };
+  function placeSide() {
+    const t = $("top"), y = (t.classList.contains("hide") ? 10 : t.getBoundingClientRect().bottom + 10);
+    $("setBtn").style.top = y + "px"; $("setPanel").style.top = y + "px";
+  }
+  addEventListener("resize", placeSide);
+
   // ---------- Changer d'adresse / choisir sur la carte ----------
-  $("change").onclick = () => { $("welcome").classList.remove("hide"); $("addr").value = ""; sugg.innerHTML = ""; setStatus("La 3D est prête.", 100); };
+  $("change").onclick = () => { $("welcome").classList.remove("hide"); $("setPanel").classList.add("hide"); $("setBtn").classList.add("hide"); $("addr").value = ""; sugg.innerHTML = ""; setStatus("La 3D est prête.", 100); };
   function startPick() {
-    picking = true;
+    picking = true; $("setBtn").classList.add("hide"); $("setPanel").classList.add("hide");
     $("welcome").classList.add("hide"); $("top").classList.add("hide"); $("bottom").classList.add("hide"); $("pickBar").classList.remove("hide");
     const b = allSphere();
     goTo({ center: home || b.center, heading: 0, pitch: Cesium.Math.toRadians(-78), range: 520 }, 1400);
   }
   $("pickCancel").onclick = () => {
     picking = false; $("pickBar").classList.add("hide");
-    if (home) { $("top").classList.remove("hide"); $("bottom").classList.remove("hide"); frame(true); } else $("welcome").classList.remove("hide");
+    if (home) { $("top").classList.remove("hide"); $("bottom").classList.remove("hide"); openSet(false); frame(true); } else $("welcome").classList.remove("hide");
   };
   function tap(e) {
     if (!picking) return;
@@ -426,7 +488,7 @@
       const src = scene.canvas, W = src.width, H = src.height, k = W / src.clientWidth;
       const c = document.createElement("canvas"); c.width = W; c.height = H;
       const g = c.getContext("2d"); g.drawImage(src, 0, 0);
-      const lines = shown().map(s => s.name + " (" + s.height + " m) à " + distTo(s) + " m de chez moi");
+      const lines = lastInfo.map(x => x.s.name + " (" + x.s.height + " m) : " + x.d + " m de chez moi au sol, " + x.dAnt + " m des antennes, angle " + x.angle + "°");
       const bh = (18 + 17 * (lines.length + 1)) * k;
       g.fillStyle = "rgba(10,12,15,.8)"; g.fillRect(0, H - bh, W, bh);
       g.fillStyle = "#fff"; g.font = `700 ${14 * k}px Inter, sans-serif`; g.textBaseline = "top";
