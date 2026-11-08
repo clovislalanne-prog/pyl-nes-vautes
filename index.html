@@ -190,7 +190,7 @@
   .cesium-credit-textContainer, .cesium-credit-textContainer a, .cesium-credit-expand-link { color: #d6dbe2 !important; font: 400 10.5px Inter, sans-serif !important; }
   .cesium-credit-logoContainer img { height: 14px !important; vertical-align: middle; }
   .cesium-viewer-bottom { max-width: calc(100% - 24px); }
-  #mbar, #mrot { display: none; }
+  #mbar, #mrot, #moreHint { display: none; }
   @media (max-width: 700px) {
     #pad, #orbitBar, #sign, #disc, #capture, #toggle, #bHelp { display: none !important; }
     #tabs { top: max(8px, env(safe-area-inset-top)); left: 8px; right: 8px; transform: none; max-width: none; padding: 4px; justify-content: space-between; }
@@ -199,8 +199,6 @@
     #pickHint { top: 58px; left: 8px; right: 8px; transform: none; text-align: center; }
     #mrot { display: flex; position: absolute; right: 10px; top: 58px; height: 38px; border-radius: 99px; align-items: center; gap: 6px; padding: 0 12px 0 10px; font-size: 12.5px; font-weight: 700; z-index: 4; }
     #mrot .cam { font-size: 16px; display: inline-block; }
-    #mrot.on .cam { animation: camspin 2.4s linear infinite; }
-    @keyframes camspin { 0% { transform: rotate(0) } 100% { transform: rotate(360deg) } }
     #mrot.on { background: var(--acc); color: #111; }
     #mbar { display: flex; position: absolute; left: 8px; right: 8px; bottom: max(8px, env(safe-area-inset-bottom)); padding: 6px; gap: 6px; border-radius: 22px; z-index: 6; }
     #mbar button { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 7px 4px; font-size: 11px; font-weight: 600; border-radius: 16px; background: transparent; border-color: transparent; box-shadow: none; }
@@ -211,6 +209,8 @@
     #info { top: auto !important; left: 8px !important; right: 8px !important; width: auto !important; bottom: calc(max(8px, env(safe-area-inset-bottom)) + 70px);
             max-height: 58vh !important; transform: translateY(calc(100% + 120px)); transition: transform .3s ease; z-index: 5; --bg: rgba(22,24,29,.78); }
     #info.open { transform: none; }
+    #moreHint { display: block; position: sticky; bottom: 8px; margin: 8px 0 0 auto; z-index: 3; padding: 9px 14px; border-radius: 99px; font-weight: 700; font-size: 12.5px; background: var(--acc); color: #111; border: none; box-shadow: 0 6px 18px rgba(0,0,0,.35); text-shadow: none; }
+    #moreHint.hide { display: none; }
     #info .hd { padding: 10px 14px 8px 16px; }
     #info .hd h1 { font-size: 14.5px; }
     #info .hd .close { display: inline-block; }
@@ -268,6 +268,7 @@
     <a class="morelink" href="en-savoir-plus.html">📖 Pour aller plus loin<small>Qui construit ce pylône, et pourquoi ? Nos droits de riverains.</small></a>
     <a class="morelink" href="a-propos.html" style="background:rgba(255,255,255,.06);border-color:var(--line)">✍︎ Qui a fait cette simulation ?<small>Un mot de Clovis Lalanne, l’auteur.</small></a>
 
+    <button id="moreHint" class="hide">Plus d’options ↓</button>
     <details class="more">
       <summary><span class="ic">🧭</span><span class="tx">Explorer davantage<small>Vue du dessus, à hauteur d’yeux, cercles de distance, mesure…</small></span><span class="ch">›</span></summary>
       <div class="lbl">Vues <button class="q" data-tip="Vue d’ensemble : tous les emplacements. Vue du dessus : comme un plan. À hauteur d’yeux : comme depuis la rue. Tourner autour d’un point : cliquez ensuite sur la carte.">?</button></div>
@@ -317,7 +318,7 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v36</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v37</span></div>
 <div id="toast" class="panel"></div>
 <div id="tip" class="panel"></div>
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
@@ -805,7 +806,15 @@
       cam.look(nrm, -(n.ang - g.ang));
       g = n;
     }, { passive: false, capture: true });
-    const end = e => { if (e.touches.length < 2) g = null; };
+    const end = e => {
+      if (e.touches.length < 2 && g) {
+        g = null;
+        // On revient en mode « tourner autour » du centre de l'écran, sans rotation automatique
+        const c = centerPoint();
+        orbit = { center: c, name: "ce point", heading: cam.heading, pitch: cam.pitch, range: Cesium.Cartesian3.distance(cam.positionWC, c), auto: false };
+        applyOrbit(); $("orbitName").textContent = "Autour de ce point"; $("orbitBar").classList.add("show"); $("orbitBar").classList.remove("isfree"); setAuto(false);
+      }
+    };
     cv.addEventListener("touchend", end, { capture: true });
     cv.addEventListener("touchcancel", end, { capture: true });
   }
@@ -840,10 +849,16 @@
     $("info").classList.toggle("open", open);
     $("mHome").classList.toggle("sel", open && section === "home"); $("mMore").classList.toggle("sel", open && section === "more");
     if (!open) return;
-    const sec = section === "more" ? document.querySelector("details.more") : document.querySelector(".steps2");
-    if (section === "more") sec.open = true;
-    setTimeout(() => sec.scrollIntoView({ block: "start", behavior: "smooth" }), 320);
+    if (section === "more") document.querySelector("details.more").open = true;
+    $("info").scrollTop = 0; updHint();
   }
+  function updHint() {
+    const i = $("info"), d = document.querySelector("details.more");
+    const near = i.scrollTop + i.clientHeight > d.offsetTop + 60;
+    $("moreHint").classList.toggle("hide", near || !$("info").classList.contains("open"));
+  }
+  $("info").addEventListener("scroll", updHint, { passive: true });
+  $("moreHint").onclick = () => { const d = document.querySelector("details.more"); d.open = true; $("info").scrollTo({ top: d.offsetTop - 10, behavior: "smooth" }); };
   $("mHome").onclick = () => sheet(!($("info").classList.contains("open") && $("mHome").classList.contains("sel")), "home");
   $("mMore").onclick = () => sheet(!($("info").classList.contains("open") && $("mMore").classList.contains("sel")), "more");
   $("mClose").onclick = () => sheet(false);
