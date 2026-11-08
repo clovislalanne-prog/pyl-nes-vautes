@@ -325,7 +325,7 @@
     <p style="margin:0">Elle ne représente pas les ondes émises (référence officielle : cartoradio.fr, ANFR).</p>
   </div>
 </div>
-<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v40</span></div>
+<div id="sign" class="panel"><b>Simulation réalisée par Clovis Lalanne</b><br><a href="a-propos.html" class="who">Qui suis-je ? ›</a> <span>· Novembre 2026 · v41</span></div>
 <div id="toast" class="panel"></div>
 <div id="tip" class="panel"></div>
 <button id="mrot" class="panel" aria-label="Rotation automatique de la caméra"><span class="cam">🎥</span><span class="lab">Rotation</span></button>
@@ -388,7 +388,7 @@
   $("iText1").textContent = "Un projet d’antenne-relais, sur un pylône de 18 à 36 m selon l’option, avec son parc technique, est à l’étude à " + INTRO.commune +
     ". Plusieurs emplacements sont envisagés. Cette simulation en 3D permet à chacun de voir concrètement où il se situerait par rapport à son logement.";
   $("iText2").textContent = "Nous constituons une association de riverains. Pour que chaque foyer concerné puisse montrer qu’il est bien présent et comment il est touché, nous vous proposons de localiser votre maison, puis de joindre une capture de la vue à votre courrier.";
-  $("iFoot").innerHTML = "Simulation réalisée par Clovis Lalanne <a class=\"who\" href=\"a-propos.html\">Qui suis-je ? ›</a><br>Novembre 2026 · simulation non contractuelle" + (INTRO.contact.startsWith("[") ? "" : "<br>Contact : " + INTRO.contact);
+  $("iFoot").innerHTML = "Simulation réalisée par Clovis Lalanne, avec l’association de riverains <a class=\"who\" href=\"a-propos.html\">Qui suis-je ? ›</a><br>Novembre 2026 · simulation non contractuelle" + (INTRO.contact.startsWith("[") ? "" : "<br>Contact : " + INTRO.contact);
 
   Cesium.Ion.defaultAccessToken = TOKEN;
   const viewer = new Cesium.Viewer("map", {
